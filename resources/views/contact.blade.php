@@ -194,7 +194,7 @@
                         <p style="font-size: 0.9rem; color: rgba(255,255,255,0.65); margin-bottom: 1.5rem; line-height: 1.7;">
                             Reserve directly through our website and enjoy exclusive perks and best rate guarantees.
                         </p>
-                        <a href="#reservations" class="btn btn-gold"><span>Book Now</span></a>
+                        <a href="/reservations" class="btn btn-gold"><span>Book Now</span></a>
                     </div>
                 </div>
 
@@ -254,7 +254,7 @@
                 Book directly and enjoy exclusive rates. We look forward to welcoming you.
             </p>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="#reservations" class="btn btn-gold"><span>Reserve Now</span></a>
+                <a href="/reservations" class="btn btn-gold"><span>Reserve Now</span></a>
                 <a href="/accommodations" class="btn btn-ghost">View Rooms</a>
             </div>
         </div>

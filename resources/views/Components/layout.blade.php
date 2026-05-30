@@ -278,20 +278,37 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.85rem;
+            text-decoration: none;
         }
         .logo-mark {
-            width: 44px;
-            height: 44px;
+            width: 58px;
+            height: 58px;
             background: var(--gold);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--navy);
             flex-shrink: 0;
+            padding: 6px 8px;
+        }
+        .logo-mark-monogram {
+            font-family: var(--font-display);
+            color: var(--navy);
+            line-height: 1;
+            display: flex;
+            align-items: baseline;
+            letter-spacing: 0;
+        }
+        .logo-mark-monogram .lm-R {
+            font-size: 2.1rem;
+            font-weight: 400;
+            line-height: 1;
+        }
+        .logo-mark-monogram .lm-H {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-left: -0.08em;
+            line-height: 1;
         }
         .logo-text {
             font-family: var(--font-display);
@@ -457,7 +474,11 @@
             <div class="header-inner">
                 {{-- Logo --}}
                 <a href="/" class="logo" aria-label="Radiant Hotel">
-                    <div class="logo-mark">R</div>
+                    <div class="logo-mark">
+                        <div class="logo-mark-monogram">
+                            <span class="lm-R">R</span><span class="lm-H">H</span>
+                        </div>
+                    </div>
                     <div class="logo-text">
                         Radiant Hotel
                         <span class="logo-sub">Lingayen, Pangasinan</span>
@@ -473,13 +494,15 @@
                         <x-nav-link href="/amenities" :active="request()->routeIs('amenities')">Amenities</x-nav-link>
                         <x-nav-link href="/offers" :active="request()->routeIs('offers')">Offers</x-nav-link>
                         <x-nav-link href="/contact" :active="request()->routeIs('contact')">Contact</x-nav-link>
+                        <li style="position: relative; margin-left: 0.75rem;">
+                            <a href="/reservations" class="btn btn-gold" style="font-size: 0.75rem; padding: 0.65rem 1.4rem;">
+                                <span>Book Now</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
 
                 <div class="flex" style="align-items: center; gap: 1.25rem;">
-                    <a href="#reservations" class="btn btn-gold" style="display: none;" id="header-cta">
-                        <span>Book Now</span>
-                    </a>
                     {{-- Hamburger --}}
                     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
                         <span></span><span></span><span></span>
@@ -502,7 +525,11 @@
                     {{-- Brand --}}
                     <div class="footer-brand">
                         <a href="/" class="logo" aria-label="Radiant Hotel">
-                            <div class="logo-mark">R</div>
+                            <div class="logo-mark">
+                                <div class="logo-mark-monogram">
+                                    <span class="lm-R">R</span><span class="lm-H">H</span>
+                                </div>
+                            </div>
                             <div class="logo-text">
                                 Radiant Hotel
                                 <span class="logo-sub">Lingayen, Pangasinan</span>
@@ -512,9 +539,9 @@
                             Set just minutes from Lingayen Gulf and the Lingayen city center — your perfect Pangasinan base for unforgettable adventures.
                         </p>
                         <div class="social-links" style="margin-top: 1.5rem;">
-                            <a href="#" class="social-link" aria-label="Facebook">f</a>
-                            <a href="#" class="social-link" aria-label="Instagram">ig</a>
-                            <a href="#" class="social-link" aria-label="TripAdvisor">ta</a>
+                            <a href="#" class="social-link" aria-label="Facebook">F</a>
+                            <a href="#" class="social-link" aria-label="Instagram">IG</a>
+                            <a href="#" class="social-link" aria-label="Twitter">T</a>
                         </div>
                     </div>
 
@@ -536,19 +563,19 @@
                         <h3 class="footer-heading">Contact</h3>
                         <ul class="footer-links">
                             <li> Lingayen, Pangasinan</li>
-                            <li style="margin-top: 0.5rem;"><a href="tel:+639XXXXXXXXX">+63 9XX XXX XXXX</a></li>
-                            <li><a href="mailto:info@radianthotellingayen.com">info@radianthotellingayen.com</a></li>
+                            <li style="margin-top: 0.5rem;"><a href="tel:+63905602635">+63 930 560 2635</a></li>
+                            <li><a href="mailto:info@radianthotellingayen.com">RadiantHotel@gmail.com</a></li>
                         </ul>
                     </div>
 
-                    {{-- Book --}}
+                    
                     <div>
                         <h3 class="footer-heading">Reservations</h3>
                         <p style="font-size: 0.875rem; color: rgba(255,255,255,0.5); margin-bottom: 1.25rem; line-height: 1.65;">
-                            Ready to experience Pangasinan? Reserve your stay directly for the best rates.
+                            Ready to experience Radiant Hotel? Reserve your stay directly for the best rates.
                         </p>
-                        <a href="#reservations" class="btn btn-gold">
-                            <span>Book Your Stay</span>
+                        <a href="/reservations" class="btn btn-gold">
+                            <span>Book Now</span>
                         </a>
                     </div>
                 </div>
@@ -571,8 +598,6 @@
         const header = document.getElementById('site-header');
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 60);
-            const cta = document.getElementById('header-cta');
-            if (cta) cta.style.display = window.scrollY > 200 ? 'inline-flex' : 'none';
         }, { passive: true });
 
         // Mobile nav toggle

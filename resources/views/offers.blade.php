@@ -94,7 +94,7 @@
                         <span class="offer-rate">₱2,999 <small>per night</small></span>
                         <span class="offer-note">*Non-refundable rate applies</span>
                     </div>
-                    <a href="#reservations" class="btn btn-gold" style="margin-top: 2rem;"><span>Book Now</span></a>
+                    <a href="/reservations" class="btn btn-gold" style="margin-top: 2rem;"><span>Book Now</span></a>
                 </div>
             </div>
         </div>
@@ -138,7 +138,7 @@
                     <div class="offer-meta">
                         <span class="offer-rate" style="color: var(--gold-light);">From ₱4,200 <small>per night</small></span>
                     </div>
-                    <a href="#reservations" class="btn btn-gold" style="margin-top: 2rem;"><span>Book Now</span></a>
+                    <a href="/reservations" class="btn btn-gold" style="margin-top: 2rem;"><span>Book Now</span></a>
                 </div>
                 <div class="offer-feature-img-wrap">
                     <img
@@ -203,7 +203,7 @@
                     <div class="offer-meta">
                         <span class="offer-rate">₱4,999 <small>per night</small></span>
                     </div>
-                    <a href="#reservations" class="btn btn-gold" style="margin-top: 2rem;"><span>Book Now</span></a>
+                    <a href="/reservations" class="btn btn-gold" style="margin-top: 2rem;"><span>Book Now</span></a>
                 </div>
             </div>
         </div>
@@ -302,7 +302,7 @@
                 Reserve directly through our website to access exclusive offers, guaranteed best rates, and complimentary perks available only to direct guests.
             </p>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="#reservations" class="btn btn-gold"><span>Reserve Now</span></a>
+                <a href="/reservations" class="btn btn-gold"><span>Reserve Now</span></a>
                 <a href="/contact" class="btn btn-ghost">Contact Us</a>
             </div>
         </div>

@@ -28,7 +28,7 @@
                         At Radiant Hotel, every stay is crafted to deliver the warmth of Pangasinense hospitality alongside modern comforts — minutes from Lingayen Gulf and the heart of the city.
                     </p>
                     <div class="hero-actions delay-4 animate-fade-up">
-                        <a href="#reservations" class="btn btn-gold"><span>Reserve Your Stay</span></a>
+                        <a href="/reservations" class="btn btn-gold"><span>Reserve Your Stay</span></a>
                         <a href="/accommodations" class="btn btn-ghost">Explore Rooms</a>
                     </div>
                 </div>
@@ -73,11 +73,11 @@
                     </div>
                     <h2 class="display-lg">
                         Radiant Hotel<br>
-                        <em>at Harbour Springs</em>
+                        <em>at Lingayen Pangasinan</em>
                     </h2>
                     <span class="gold-line"></span>
                     <p class="body-lg" style="margin-bottom: 1.25rem;">
-                        Set just a few minutes away from Lingayen Gulf and the city center, Radiant Hotel is the go-to destination in Lingayen for travelers and locals alike.
+                        Set just a few minutes away from Lingayen Gulf and the city center, Radiant Hotel is the destination in Lingayen for travelers and locals alike.
                     </p>
                     <p class="body-lg" style="margin-bottom: 2rem;">
                         Whether you're here to explore Pangasinan's breathtaking natural wonders or celebrate an important milestone, our stylish and contemporary amenities are sure to delight.
@@ -113,7 +113,7 @@
                 <h2 class="display-lg">Our Accommodations</h2>
                 <span class="gold-line" style="margin-inline: auto;"></span>
                 <p class="body-lg" style="max-width: 560px; margin-inline: auto;">
-                    Radiant Hotel boasts 82 beautifully appointed rooms that reflect the true essence of Pangasinense hospitality.
+                    Radiant Hotel has 82 beautifully appointed rooms that reflect the true essence of Pangasinense hospitality.
                 </p>
             </div>
 
@@ -139,7 +139,7 @@
             </div>
 
             <div style="text-align: center; margin-top: 3rem;">
-                <a href="#reservations" class="btn btn-gold"><span>Book a Room</span></a>
+                <a href="/reservations" class="btn btn-gold"><span>Book a Room</span></a>
             </div>
         </div>
     </section>
@@ -276,7 +276,7 @@
                 Book directly for the best available rates and enjoy exclusive perks available only through our website.
             </p>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="#reservations" class="btn btn-gold"><span>Reserve Now</span></a>
+                <a href="/reservations" class="btn btn-gold"><span>Reserve Now</span></a>
                 <a href="/contact" class="btn btn-ghost">Contact Us</a>
             </div>
         </div>

@@ -165,7 +165,7 @@
                         </div>
                         @endforeach
                     </div>
-                    <a href="#reservations" class="btn btn-gold" style="margin-top: 2rem;"><span>Book a Treatment</span></a>
+                    <a href="/reservations" class="btn btn-gold" style="margin-top: 2rem;"><span>Book a Treatment</span></a>
                 </div>
             </div>
         </div>
@@ -270,7 +270,7 @@
                 Reserve directly through our website and unlock exclusive perks, best-rate guarantees, and full access to all hotel amenities.
             </p>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="#reservations" class="btn btn-gold"><span>Reserve Now</span></a>
+                <a href="/reservations" class="btn btn-gold"><span>Reserve Now</span></a>
                 <a href="/contact" class="btn btn-ghost">Contact Us</a>
             </div>
         </div>

@@ -37,3 +37,8 @@ Route::get('/offers', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+// Reservations / Book Now
+Route::get('/reservations', function () {
+    return view('reservations');
+})->name('reservations');

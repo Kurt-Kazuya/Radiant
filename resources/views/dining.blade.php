@@ -114,7 +114,7 @@
                         </div>
                         @endforeach
                     </div>
-                    <a href="#reservations" class="btn btn-gold" style="margin-top: 2rem;"><span>Reserve a Room</span></a>
+                    <a href="/reservations" class="btn btn-gold" style="margin-top: 2rem;"><span>Reserve a Room</span></a>
                 </div>
                 <div class="dining-feature-img-wrap">
                     <img
@@ -184,7 +184,7 @@
                 Reserve your room directly and enjoy exclusive dining perks available only through our website.
             </p>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="#reservations" class="btn btn-gold"><span>Reserve Now</span></a>
+                <a href="/reservations" class="btn btn-gold"><span>Reserve Now</span></a>
                 <a href="/contact" class="btn btn-ghost">Contact Us</a>
             </div>
         </div>
