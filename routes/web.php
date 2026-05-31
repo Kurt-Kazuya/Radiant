@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,10 +50,35 @@ Route::get('/reservations', function () {
 
 
 //report
-use App\Http\Controllers\ReportController;
 
 Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 Route::get('/reports/export/pdf', [ReportController::class, 'exportPDF'])->name('reports.pdf');
 Route::get('/reports/export/excel', [ReportController::class, 'exportExcel'])->name('reports.excel');
 Route::get('/reports/export/csv', [ReportController::class, 'exportCSV'])->name('reports.csv');
 Route::post('/reports/import', [ReportController::class, 'import'])->name('reports.import');
+
+
+//admin
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminRoomController;
+use App\Http\Controllers\Admin\AdminReservationController;
+use App\Http\Controllers\Admin\AdminPaymentController;
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::resource('rooms', AdminRoomController::class);
+    Route::resource('reservations', AdminReservationController::class);
+    Route::resource('payments', AdminPaymentController::class);
+    Route::patch('/reservations/{id}/confirm', [AdminReservationController::class, 'confirm'])->name('reservations.confirm');
+    Route::patch('/reservations/{id}/cancel', [AdminReservationController::class, 'cancel'])->name('reservations.cancel');
+    Route::patch('/payments/{id}/mark-paid', [AdminPaymentController::class, 'markPaid'])->name('payments.markPaid');
+});
+
+
+
+// Auth routes
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
