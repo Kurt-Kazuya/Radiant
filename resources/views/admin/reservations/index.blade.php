@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reports</title>
+    <title>Manage Reservations</title>
 </head>
 <body>
-    <h2>Reports Dashboard</h2>
+    <h2>Manage Reservations</h2>
     <hr>
 
     <nav>
@@ -25,35 +25,6 @@
         <p style="color:green;">{{ session('success') }}</p>
     @endif
 
-    <h3>Summary</h3>
-    <p>Total Reservations: {{ $totalReservations }}</p>
-    <p>Confirmed: {{ $confirmed }}</p>
-    <p>Pending: {{ $pending }}</p>
-    <p>Cancelled: {{ $cancelled }}</p>
-    <p>Total Revenue: &#8369;{{ number_format($totalRevenue, 2) }}</p>
-    <p>Total Rooms: {{ $totalRooms }}</p>
-    <p>Available Rooms: {{ $availableRooms }}</p>
-    <hr>
-
-    <h3>Export Reports</h3>
-    <a href="{{ route('reports.pdf') }}">Export PDF</a> |
-    <a href="{{ route('reports.excel') }}">Export Excel</a> |
-    <a href="{{ route('reports.csv') }}">Export CSV</a>
-    <hr>
-
-    <h3>Import Data</h3>
-    <form action="{{ route('reports.import') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file" accept=".csv,.xlsx,.xls" required>
-        <button type="submit">Import</button>
-        <br>
-        @error('file')
-            <span style="color:red;">{{ $message }}</span>
-        @enderror
-    </form>
-    <hr>
-
-    <h3>Recent Reservations (Last 10)</h3>
     <table border="1" cellpadding="5" cellspacing="0">
         <thead>
             <tr>
@@ -65,6 +36,7 @@
                 <th>Nights</th>
                 <th>Total</th>
                 <th>Status</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -78,11 +50,30 @@
                 <td>{{ $r->total_nights }}</td>
                 <td>&#8369;{{ number_format($r->total_price, 2) }}</td>
                 <td>{{ ucfirst($r->status) }}</td>
+                <td>
+                    @if($r->status === 'pending')
+                        <form action="{{ route('admin.reservations.confirm', $r->id) }}" method="POST" style="display:inline;">
+                            @csrf @method('PATCH')
+                            <button type="submit">Confirm</button>
+                        </form> |
+                        <form action="{{ route('admin.reservations.cancel', $r->id) }}" method="POST" style="display:inline;">
+                            @csrf @method('PATCH')
+                            <button type="submit">Cancel</button>
+                        </form> |
+                    @endif
+                    <form action="{{ route('admin.reservations.destroy', $r) }}" method="POST" style="display:inline;"
+                          onsubmit="return confirm('Delete this reservation?')">
+                        @csrf @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
             @empty
-            <tr><td colspan="8">No reservations yet.</td></tr>
+            <tr><td colspan="9">No reservations found.</td></tr>
             @endforelse
         </tbody>
     </table>
+    <br>
+    {{ $reservations->links() }}
 </body>
 </html>
