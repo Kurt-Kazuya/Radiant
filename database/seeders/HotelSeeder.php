@@ -11,14 +11,15 @@ use App\Models\Payment;
 class HotelSeeder extends Seeder
 {
 
-    /////////////////////// FAKE DATA FOR TESTING PURPOSES/////////////////////
+    /////////////////////// FAKE DATA FOR TESTING PURPOSES /////////////////////
     public function run(): void
     {
         // Create users
         $user1 = User::create([
-            'name'     => 'Juan Dela Cruz',
-            'email'    => 'juan@email.com',
+            'name'     => 'Admin',
+            'email'    => 'admin@hotel.com',
             'password' => bcrypt('password'),
+            'role'     => 'admin',
         ]);
         $user2 = User::create([
             'name'     => 'Maria Santos',
