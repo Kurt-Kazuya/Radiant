@@ -6,8 +6,7 @@
     <section class="page-hero" aria-label="Offers hero">
         <div class="page-hero-bg">
             <img
-                src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1800&auto=format&fit=crop"
-                alt="Latest Offers at Radiant Hotel"
+                src=asset('images/hotel-pool-aerial.jpg')alt="Latest Offers at Radiant Hotel"
                 class="page-hero-img"
                 fetchpriority="high"
             >
@@ -54,8 +53,7 @@
             <div class="offer-feature-grid">
                 <div class="offer-feature-img-wrap">
                     <img
-                        src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&auto=format&fit=crop"
-                        alt="Flash Sale Offer"
+                        src=asset('images/hotel-lobby.jpg')alt="Flash Sale Offer"
                         class="offer-feature-img"
                         loading="lazy"
                     >
@@ -142,8 +140,7 @@
                 </div>
                 <div class="offer-feature-img-wrap">
                     <img
-                        src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&auto=format&fit=crop"
-                        alt="Mother's Day Escape"
+                        src=asset('images/hotel-hero-bg.jpg')alt="Mother's Day Escape"
                         class="offer-feature-img"
                         loading="lazy"
                     >
@@ -165,8 +162,7 @@
             <div class="offer-feature-grid">
                 <div class="offer-feature-img-wrap">
                     <img
-                        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&auto=format&fit=crop"
-                        alt="Island Summer Package"
+                        src=asset('images/beach-aerial.jpg')alt="Island Summer Package"
                         class="offer-feature-img"
                         loading="lazy"
                     >
@@ -232,37 +228,37 @@
                         'Signature Cocktails',
                         'From ₱380 per order',
                         'Expertly crafted cocktails using premium spirits and fresh local ingredients. The perfect way to unwind after a day of exploring Pangasinan.',
-                        'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&auto=format&fit=crop',
+                        asset('images/cocktail-drinks.jpg'),
                     ],
                     [
                         'Taste of Pangasinan',
                         'Curated local menu',
                         'A curated menu celebrating the bold and comforting flavors of Pangasinense cuisine — from bangus dishes to fresh Lingayen Gulf seafood.',
-                        'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop',
+                        asset('images/filipino-food.jpg'),
                     ],
                     [
                         'New Dessert Offerings',
                         'Available now',
                         'Dessert lovers rejoice! We are now serving Mango Sticky Rice, Churros, and Burnt Cheesecake. Sweeten your stay while it lasts.',
-                        'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&auto=format&fit=crop',
+                        asset('images/breakfast-pastry.jpg'),
                     ],
                     [
                         'Happy Hour Deal',
                         'Select hours daily',
                         'Enjoy our curated happy hour menu featuring discounted drinks and bar bites. The perfect way to kick off your evening at Radiant Hotel.',
-                        'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop',
+                        asset('images/cocktail-bar.jpg'),
                     ],
                     [
                         'Margarita Fiesta',
                         'Limited-time special',
                         'Celebrate with our festive Margarita selection — classic, frozen, and house-special variants crafted by our talented bartenders.',
-                        'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=600&auto=format&fit=crop',
+                        asset('images/seafood-platter.jpg'),
                     ],
                     [
                         'Rice Bowl Craze',
                         'Complete set available',
                         'Our Rice Bowl sets come complete with a choice of protein, fresh toppings, and a savory sauce — a satisfying and hearty meal any time of day.',
-                        'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&auto=format&fit=crop',
+                        asset('images/asian-noodles.jpg'),
                     ],
                 ] as $offer)
                 <article class="dining-offer-card card">
@@ -288,8 +284,7 @@
     <section class="cta-banner" aria-label="Book now">
         <div class="cta-overlay"></div>
         <img
-            src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&auto=format&fit=crop"
-            alt=""
+            src=asset('images/hotel-hero-bg.jpg')alt=""
             class="cta-bg"
             aria-hidden="true"
         >

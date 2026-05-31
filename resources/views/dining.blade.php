@@ -6,8 +6,7 @@
     <section class="page-hero" aria-label="Dining hero">
         <div class="page-hero-bg">
             <img
-                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&auto=format&fit=crop"
-                alt="Dining at Radiant Hotel"
+                src="{{ asset('images/Dining.png') }}" alt="Dining at Radiant Hotel"
                 class="page-hero-img"
                 fetchpriority="high"
             >
@@ -54,8 +53,7 @@
             <div class="dining-feature-grid">
                 <div class="dining-feature-img-wrap">
                     <img
-                        src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&auto=format&fit=crop"
-                        alt="In-House Restaurant"
+                        src="{{ asset('images/In-House-Restaurant.png') }}" alt="In-House Restaurant"
                         class="dining-feature-img"
                         loading="lazy"
                     >
@@ -118,8 +116,7 @@
                 </div>
                 <div class="dining-feature-img-wrap">
                     <img
-                        src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=900&auto=format&fit=crop"
-                        alt="Room Service"
+                        src="{{ asset('images/Room-Service.png') }}" alt="Room Service"
                         class="dining-feature-img"
                         loading="lazy"
                     >
@@ -143,10 +140,10 @@
             </div>
             <div class="cuisine-grid">
                 @foreach ([
-                    ['Filipino Cuisine',    'Classic Pangasinense dishes and beloved Filipino comfort food, prepared with local ingredients.', 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop'],
-                    ['Asian Selections',    'From savory stir-fries to steaming soups, our Asian menu draws from across the continent.', 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&auto=format&fit=crop'],
-                    ['American Favorites',  'Hearty burgers, grilled classics, and all-day breakfast staples for the international traveler.', 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop'],
-                    ['Fresh Seafood',       'Sourced from the Lingayen Gulf, our fresh seafood selection is a true taste of Pangasinan.', 'https://images.unsplash.com/photo-1615361200141-f45040f367be?w=600&auto=format&fit=crop'],
+                    ['Filipino Cuisine',    'Classic Pangasinense dishes and beloved Filipino comfort food, prepared with local ingredients.', asset('images/Filipino-Cuisine.png')],
+                    ['Asian Selections',    'From savory stir-fries to steaming soups, our Asian menu draws from across the continent.', asset('images/Asian-Selections.png')],
+                    ['American Favorites',  'Hearty burgers, grilled classics, and all-day breakfast staples for the international traveler.', asset('images/American-Favorites.png')],
+                    ['Fresh Seafood',       'Sourced from the Lingayen Gulf, our fresh seafood selection is a true taste of Pangasinan.', asset('images/Fresh-Seafood.png')],
                 ] as $cuisine)
                 <article class="cuisine-card card">
                     <div class="card-img-wrap">
@@ -170,8 +167,7 @@
     <section class="cta-banner" aria-label="Reserve your dining experience">
         <div class="cta-overlay"></div>
         <img
-            src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1600&auto=format&fit=crop"
-            alt=""
+            src="{{ asset('images/Dine-With-Us.png') }}" alt=""
             class="cta-bg"
             aria-hidden="true"
         >

@@ -9,7 +9,7 @@
             {{-- Background visual (replace src with actual asset) --}}
             <div class="hero-bg">
                 <img
-                    src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1800&auto=format&fit=crop"
+                    src="{{ asset('images/Front-Image-Home.jpg') }}"
                     alt="Radiant Hotel exterior"
                     class="hero-img"
                     fetchpriority="high"
@@ -86,10 +86,10 @@
                 </div>
                 <div class="about-imagery">
                     <div class="about-img-main">
-                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop" alt="Radiant Hotel lobby" loading="lazy">
+                        <img src="{{ asset('images/radiantHotelHome.png') }}" alt="Radiant Hotel lobby" loading="lazy">
                     </div>
                     <div class="about-img-accent">
-                        <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=500&auto=format&fit=crop" alt="Hotel room detail" loading="lazy">
+                        <img src="{{ asset('images/Hotel-Lobby.png') }}" alt="Radiant Hotel lobby" loading="lazy">
                         <div class="accent-badge">
                             <span class="eyebrow" style="color: var(--navy);">Est.</span>
                             <span style="font-family: var(--font-display); font-size: 2rem; color: var(--navy); font-weight: 300; line-height: 1;">2015</span>
@@ -119,9 +119,9 @@
 
             <div class="rooms-grid">
                 @foreach ([
-                    ['Deluxe Room', 'Comfortable and thoughtfully designed for the discerning traveler seeking relaxation.', 'deluxe', 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&auto=format&fit=crop'],
-                    ['Superior Room', 'Elevated amenities and generous space for a superior Pangasinan experience.', 'superior', 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=700&auto=format&fit=crop'],
-                    ['Suite', 'Expansive suites designed for those who desire the pinnacle of comfort and style.', 'suite', 'https://images.unsplash.com/photo-1591088398332-8a7791972843?w=700&auto=format&fit=crop'],
+                    ['Deluxe Room', 'Comfortable and thoughtfully designed for the discerning traveler seeking relaxation.', 'deluxe', asset('images/Delux-Rooms.jpg')],
+                    ['Superior Room', 'Elevated amenities and generous space for a superior Pangasinan experience.', 'superior', asset('images/Superior-Rooms.jpg')],
+                    ['Suite', 'Expansive suites designed for those who desire the pinnacle of comfort and style.', 'suite', asset('images/Suite-Rooms.jpg')],
                 ] as $room)
                 <article class="room-card card">
                     <div class="card-img-wrap">
@@ -152,7 +152,7 @@
         <div class="container">
             <div class="dining-grid">
                 <div class="dining-imagery">
-                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&auto=format&fit=crop" alt="Dining at Radiant Hotel" loading="lazy" class="dining-img">
+                    <img src="{{ asset('images/Food-Home.jpg') }}" alt="Dining at Radiant Hotel" loading="lazy" class="dining-img">
                 </div>
                 <div class="dining-text">
                     <div class="section-label">
@@ -266,7 +266,7 @@
     ============================================================ --}}
     <section class="cta-banner" aria-label="Book your stay">
         <div class="cta-overlay"></div>
-        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&auto=format&fit=crop" alt="" class="cta-bg" aria-hidden="true">
+        <img src="{{ asset('images/Footer-Image.png') }}" alt="" class="cta-bg" aria-hidden="true">
         <div class="container cta-content">
             <p class="eyebrow" style="color: var(--gold-light);">Your Adventure Awaits</p>
             <h2 class="display-lg" style="color: var(--white); margin-block: 1rem 1.5rem;">

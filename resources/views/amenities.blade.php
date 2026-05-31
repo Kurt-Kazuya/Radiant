@@ -6,8 +6,7 @@
     <section class="page-hero" aria-label="Amenities hero">
         <div class="page-hero-bg">
             <img
-                src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1800&auto=format&fit=crop"
-                alt="Amenities at Radiant Hotel"
+                src=asset('images/hotel-pool.jpg')alt="Amenities at Radiant Hotel"
                 class="page-hero-img"
                 fetchpriority="high"
             >
@@ -54,8 +53,7 @@
             <div class="amenity-feature-grid">
                 <div class="amenity-feature-img-wrap">
                     <img
-                        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&auto=format&fit=crop"
-                        alt="Outdoor Swimming Pool"
+                        src=asset('images/hotel-exterior.jpg')alt="Outdoor Swimming Pool"
                         class="amenity-feature-img"
                         loading="lazy"
                     >
@@ -117,8 +115,7 @@
                 </div>
                 <div class="amenity-feature-img-wrap">
                     <img
-                        src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&auto=format&fit=crop"
-                        alt="Fitness Center"
+                        src=asset('images/fitness-center.jpg')alt="Fitness Center"
                         class="amenity-feature-img"
                         loading="lazy"
                     >
@@ -136,8 +133,7 @@
             <div class="amenity-feature-grid">
                 <div class="amenity-feature-img-wrap">
                     <img
-                        src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=900&auto=format&fit=crop"
-                        alt="Spa and Wellness"
+                        src=asset('images/spa-massage.jpg')alt="Spa and Wellness"
                         class="amenity-feature-img"
                         loading="lazy"
                     >
@@ -201,8 +197,7 @@
                 </div>
                 <div class="amenity-feature-img-wrap">
                     <img
-                        src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=900&auto=format&fit=crop"
-                        alt="Events and Banquet Hall"
+                        src=asset('images/hotel-event-hall.jpg')alt="Events and Banquet Hall"
                         class="amenity-feature-img"
                         loading="lazy"
                     >
@@ -256,8 +251,7 @@
     <section class="cta-banner" aria-label="Book your stay">
         <div class="cta-overlay"></div>
         <img
-            src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&auto=format&fit=crop"
-            alt=""
+            src=asset('images/hotel-hero-bg.jpg')alt=""
             class="cta-bg"
             aria-hidden="true"
         >

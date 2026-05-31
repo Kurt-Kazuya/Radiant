@@ -6,8 +6,7 @@
     <section class="page-hero" aria-label="Reservations hero">
         <div class="page-hero-bg">
             <img
-                src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1800&auto=format&fit=crop"
-                alt="Reserve your stay at Radiant Hotel"
+                src=asset('images/hotel-room-wide.jpg')alt="Reserve your stay at Radiant Hotel"
                 class="page-hero-img"
                 fetchpriority="high"
             >
@@ -120,8 +119,7 @@
                     <article class="room-card" id="room-deluxe">
                         <div class="room-card-img-wrap">
                             <img
-                                src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&auto=format&fit=crop"
-                                alt="Deluxe Room"
+                                src=asset('images/hotel-room-wide.jpg')alt="Deluxe Room"
                                 class="room-card-img"
                                 loading="lazy"
                             >
@@ -197,8 +195,7 @@
                     <article class="room-card" id="room-superior">
                         <div class="room-card-img-wrap">
                             <img
-                                src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=700&auto=format&fit=crop"
-                                alt="Superior Room"
+                                src=asset('images/deluxe-room-2.jpg')alt="Superior Room"
                                 class="room-card-img"
                                 loading="lazy"
                             >
@@ -274,8 +271,7 @@
                     <article class="room-card" id="room-junior-suite">
                         <div class="room-card-img-wrap">
                             <img
-                                src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=700&auto=format&fit=crop"
-                                alt="Junior Suite"
+                                src=asset('images/standard-room.jpg')alt="Junior Suite"
                                 class="room-card-img"
                                 loading="lazy"
                             >
@@ -351,8 +347,7 @@
                     <article class="room-card" id="room-penthouse">
                         <div class="room-card-img-wrap">
                             <img
-                                src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=700&auto=format&fit=crop"
-                                alt="Penthouse Suite"
+                                src=asset('images/deluxe-room.jpg')alt="Penthouse Suite"
                                 class="room-card-img"
                                 loading="lazy"
                             >
@@ -547,8 +542,7 @@
     <section class="cta-banner" aria-label="Need help with your reservation?">
         <div class="cta-overlay"></div>
         <img
-            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&auto=format&fit=crop"
-            alt=""
+            src=asset('images/hotel-facade.jpg')alt=""
             class="cta-bg"
             aria-hidden="true"
         >

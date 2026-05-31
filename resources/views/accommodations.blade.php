@@ -6,8 +6,7 @@
     <section class="page-hero" aria-label="Accommodations hero">
         <div class="page-hero-bg">
             <img
-                src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1800&auto=format&fit=crop"
-                alt="Radiant Hotel Accommodations"
+                src="{{ asset('images/Accommodations.png') }}" alt="Radiant Hotel Accommodations"
                 class="page-hero-img"
                 fetchpriority="high"
             >
@@ -100,11 +99,11 @@
                 <article class="room-listing-card" data-category="standard" id="standard-room">
                     <div class="room-listing-img-wrap">
                         <img
-                            src="https://radianthotellingayen.com/wp-content/uploads/2023/09/Standard-Room-Radiant.jpg"
+                            src="{{ asset('images/Standard-Room.jpg') }}"
                             alt="Standard Room"
                             class="room-listing-img"
                             loading="lazy"
-                            onerror="this.src='https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&auto=format&fit=crop'"
+                            onerror="this.src='{{ asset('images/Standard-Room.jpg') }}'"
                         >
                         <div class="room-badge">Standard</div>
                     </div>
@@ -148,11 +147,11 @@
                 <article class="room-listing-card room-listing-card--reverse" data-category="deluxe" id="deluxe-room">
                     <div class="room-listing-img-wrap">
                         <img
-                            src="https://radianthotellingayen.com/wp-content/uploads/2023/09/Deluxe-Room-Radiant.jpg"
+                            src="{{ asset('images/Delux-Room.jpg') }}"
                             alt="Deluxe Room"
                             class="room-listing-img"
                             loading="lazy"
-                            onerror="this.src='https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=900&auto=format&fit=crop'"
+                            onerror="this.src='{{ asset('images/Delux-Room.jpg') }}'"
                         >
                         <div class="room-badge">Deluxe</div>
                     </div>
@@ -196,11 +195,11 @@
                 <article class="room-listing-card" data-category="deluxe" id="deluxe-pool-view">
                     <div class="room-listing-img-wrap">
                         <img
-                            src="https://radianthotellingayen.com/wp-content/uploads/2023/09/Deluxe-Room-with-Pool-View-Radiant.jpg"
+                            src="{{ asset('images/Delux-Room-Pool-View.jpg') }}"
                             alt="Deluxe Room Pool View"
                             class="room-listing-img"
                             loading="lazy"
-                            onerror="this.src='https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&auto=format&fit=crop'"
+                            onerror="this.src='{{ asset('images/Delux-Room-Pool-View.jpg') }}'"
                         >
                         <div class="room-badge">Deluxe</div>
                         <div class="room-badge room-badge--accent">Pool View</div>
@@ -245,11 +244,11 @@
                 <article class="room-listing-card room-listing-card--reverse" data-category="suite" id="one-bedroom-suite">
                     <div class="room-listing-img-wrap">
                         <img
-                            src="https://radianthotellingayen.com/wp-content/uploads/2023/08/One-Bedroom-Suite-1-scaled.jpg"
+                            src="{{ asset('images/One-Bedroom-Suite.jpg') }}"
                             alt="One Bedroom Suite"
                             class="room-listing-img"
                             loading="lazy"
-                            onerror="this.src='https://images.unsplash.com/photo-1591088398332-8a7791972843?w=900&auto=format&fit=crop'"
+                            onerror="this.src='{{ asset('images/One-Bedroom-Suite.jpg') }}'"
                         >
                         <div class="room-badge">Suite</div>
                     </div>
@@ -293,11 +292,11 @@
                 <article class="room-listing-card" data-category="penthouse" id="junior-penthouse">
                     <div class="room-listing-img-wrap">
                         <img
-                            src="https://radianthotellingayen.com/wp-content/uploads/2023/09/Penthouse-Radiant.jpg"
+                            src="{{ asset('images/Penthouse-Room.avif') }}"
                             alt="Junior Penthouse"
                             class="room-listing-img"
                             loading="lazy"
-                            onerror="this.src='https://images.unsplash.com/photo-1582719508461-905c673771fd?w=900&auto=format&fit=crop'"
+                            onerror="this.src='{{ asset('images/Penthouse-Room.avif') }}'"
                         >
                         <div class="room-badge">Penthouse</div>
                         <div class="room-badge room-badge--accent">Junior</div>
@@ -342,11 +341,11 @@
                 <article class="room-listing-card room-listing-card--reverse" data-category="penthouse" id="penthouse">
                     <div class="room-listing-img-wrap">
                         <img
-                            src="https://radianthotellingayen.com/wp-content/uploads/2023/09/Penthouse-Radiant-1.jpg"
+                            src="{{ asset('images/The-Penthouse-3beds-Room.avif') }}"
                             alt="Penthouse"
                             class="room-listing-img"
                             loading="lazy"
-                            onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&auto=format&fit=crop'"
+                            onerror="this.src='{{ asset('images/The-Penthouse-3beds-Room.avif') }}'"
                         >
                         <div class="room-badge">Penthouse</div>
                     </div>
@@ -390,11 +389,11 @@
                 <article class="room-listing-card" data-category="penthouse" id="grand-penthouse">
                     <div class="room-listing-img-wrap">
                         <img
-                            src="https://radianthotellingayen.com/wp-content/uploads/2023/09/Grand-Penthouse.jpg"
+                            src="{{ asset('images/The-Grand-Penthouse-Room.avif') }}"
                             alt="Grand Penthouse"
                             class="room-listing-img"
                             loading="lazy"
-                            onerror="this.src='https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=900&auto=format&fit=crop'"
+                            onerror="this.src='{{ asset('images/The-Grand-Penthouse-Room.avif') }}'"
                         >
                         <div class="room-badge">Penthouse</div>
                         <div class="room-badge room-badge--accent">Grand</div>
@@ -446,8 +445,7 @@
     <section class="accom-cta" aria-label="Book your room">
         <div class="accom-cta-overlay"></div>
         <img
-            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&auto=format&fit=crop"
-            alt=""
+            src="{{ asset('images/Ready-to-Experience-Radiant.png') }}" alt=""
             class="accom-cta-bg"
             aria-hidden="true"
         >
