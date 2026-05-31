@@ -42,3 +42,15 @@ Route::get('/contact', function () {
 Route::get('/reservations', function () {
     return view('reservations');
 })->name('reservations');
+
+
+
+
+//report
+use App\Http\Controllers\ReportController;
+
+Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+Route::get('/reports/export/pdf', [ReportController::class, 'exportPDF'])->name('reports.pdf');
+Route::get('/reports/export/excel', [ReportController::class, 'exportExcel'])->name('reports.excel');
+Route::get('/reports/export/csv', [ReportController::class, 'exportCSV'])->name('reports.csv');
+Route::post('/reports/import', [ReportController::class, 'import'])->name('reports.import');
