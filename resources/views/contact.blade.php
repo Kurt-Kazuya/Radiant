@@ -6,7 +6,7 @@
     <section class="page-hero" aria-label="Contact hero">
         <div class="page-hero-bg">
             <img
-                src=asset('images/hotel-lobby-office.jpg')alt="Contact Radiant Hotel"
+                src="{{ asset('images/Contact-us.png') }}" alt="Contact Radiant Hotel"
                 class="page-hero-img"
                 fetchpriority="high"
             >
@@ -239,7 +239,7 @@
     <section class="cta-banner" aria-label="Book your stay">
         <div class="cta-overlay"></div>
         <img
-            src=asset('images/hotel-pool-aerial.jpg')alt=""
+            src="{{ asset('images/Footer-Image-1.png') }}" alt=""
             class="cta-bg"
             aria-hidden="true"
         >

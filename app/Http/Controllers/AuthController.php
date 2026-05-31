@@ -1,75 +1,84 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Show login page
+    // ── Login ──────────────────────────────────────────────
+
     public function showLogin()
     {
+        if (Auth::check()) {
+            return redirect()->intended('/');
+        }
         return view('auth.login');
     }
 
-    // Handle login
     public function login(Request $request)
     {
-        $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required',
+        $credentials = $request->validate([
+            'email'    => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            // Redirect based on role
-            if (Auth::user()->role === 'admin') {
-                return redirect()->route('admin.dashboard');
+            // Redirect admin users to the admin dashboard
+            if (Auth::user()->is_admin) {
+                return redirect()->intended(route('admin.dashboard'));
             }
+
             return redirect()->intended('/');
         }
 
-        return back()->withErrors([
-            'email' => 'Invalid email or password.',
-        ])->onlyInput('email');
+        return back()
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => 'These credentials do not match our records.']);
     }
 
-    // Show register page
+    // ── Register ───────────────────────────────────────────
+
     public function showRegister()
     {
+        if (Auth::check()) {
+            return redirect('/');
+        }
         return view('auth.register');
     }
 
-    // Handle register
     public function register(Request $request)
     {
-        $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+        $data = $request->validate([
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
         $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password),
-            'role'     => 'guest', // default role
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
 
         Auth::login($user);
+
         return redirect('/');
     }
 
-    // Handle logout
+    // ── Logout ─────────────────────────────────────────────
+
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect('/');
     }
 }

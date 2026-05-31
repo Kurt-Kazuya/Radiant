@@ -6,7 +6,7 @@
     <section class="page-hero" aria-label="Amenities hero">
         <div class="page-hero-bg">
             <img
-                src=asset('images/hotel-pool.jpg')alt="Amenities at Radiant Hotel"
+                src="{{ asset('images/Amenities.png') }}" alt="Amenities at Radiant Hotel"
                 class="page-hero-img"
                 fetchpriority="high"
             >
@@ -53,7 +53,7 @@
             <div class="amenity-feature-grid">
                 <div class="amenity-feature-img-wrap">
                     <img
-                        src=asset('images/hotel-exterior.jpg')alt="Outdoor Swimming Pool"
+                        src="{{ asset('images/Swimming-Pool.png') }}" alt="Outdoor Swimming Pool"
                         class="amenity-feature-img"
                         loading="lazy"
                     >
@@ -115,7 +115,7 @@
                 </div>
                 <div class="amenity-feature-img-wrap">
                     <img
-                        src=asset('images/fitness-center.jpg')alt="Fitness Center"
+                        src="{{ asset('images/Fitness-Center.png') }}" alt="Fitness Center"
                         class="amenity-feature-img"
                         loading="lazy"
                     >
@@ -133,7 +133,7 @@
             <div class="amenity-feature-grid">
                 <div class="amenity-feature-img-wrap">
                     <img
-                        src=asset('images/spa-massage.jpg')alt="Spa and Wellness"
+                        src="{{ asset('images/Spa-Services.png') }}" alt="Spa and Wellness"
                         class="amenity-feature-img"
                         loading="lazy"
                     >
@@ -196,11 +196,7 @@
                     <a href="/contact" class="btn btn-gold" style="margin-top: 2rem;"><span>Inquire Now</span></a>
                 </div>
                 <div class="amenity-feature-img-wrap">
-                    <img
-                        src=asset('images/hotel-event-hall.jpg')alt="Events and Banquet Hall"
-                        class="amenity-feature-img"
-                        loading="lazy"
-                    >
+                    <img src="{{ asset('images/Events-and-Banquets.png') }}" alt="Events and Banquet Hall" class="amenity-feature-img" loading="lazy">
                 </div>
             </div>
         </div>
@@ -251,7 +247,7 @@
     <section class="cta-banner" aria-label="Book your stay">
         <div class="cta-overlay"></div>
         <img
-            src=asset('images/hotel-hero-bg.jpg')alt=""
+            src="{{ asset('images/Enjoy-Every-Amenity.png') }}" alt=""
             class="cta-bg"
             aria-hidden="true"
         >

@@ -1,65 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-</head>
-<body>
-    <h2>Admin Dashboard</h2>
-    <hr>
+{{-- resources/views/admin/dashboard.blade.php --}}
+@extends('layouts.admin')
 
-    <nav>
-        <a href="{{ route('admin.dashboard') }}">Dashboard</a> |
-        <a href="{{ route('admin.rooms.index') }}">Rooms</a> |
-        <a href="{{ route('admin.reservations.index') }}">Reservations</a> |
-        <a href="{{ route('admin.payments.index') }}">Payments</a> |
-        <a href="{{ route('reports.index') }}">Reports</a> |
-        <form action="/logout" method="POST" style="display:inline;">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
-    </nav>
-    <hr>
+@section('title', 'Dashboard')
+@section('topbar-title', 'Admin <em>Dashboard</em>')
 
-    <h3>Overview</h3>
-    <p>Total Reservations: {{ $totalReservations }}</p>
-    <p>Confirmed: {{ $confirmed }}</p>
-    <p>Pending: {{ $pending }}</p>
-    <p>Cancelled: {{ $cancelled }}</p>
-    <p>Total Revenue: &#8369;{{ number_format($totalRevenue, 2) }}</p>
-    <p>Total Rooms: {{ $totalRooms }}</p>
-    <p>Available Rooms: {{ $availableRooms }}</p>
-    <p>Total Guests: {{ $totalGuests }}</p>
-    <hr>
+@section('content')
 
-    <h3>Recent Reservations</h3>
-    <table border="1" cellpadding="5" cellspacing="0">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Guest</th>
-                <th>Room</th>
-                <th>Check In</th>
-                <th>Check Out</th>
-                <th>Total</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($recentReservations as $r)
-            <tr>
-                <td>{{ $r->id }}</td>
-                <td>{{ $r->user->name ?? 'N/A' }}</td>
-                <td>Room {{ $r->room->room_number ?? 'N/A' }}</td>
-                <td>{{ $r->check_in_date }}</td>
-                <td>{{ $r->check_out_date }}</td>
-                <td>&#8369;{{ number_format($r->total_price, 2) }}</td>
-                <td>{{ ucfirst($r->status) }}</td>
-            </tr>
-            @empty
-            <tr><td colspan="7">No reservations yet.</td></tr>
-            @endforelse
-        </tbody>
-    </table>
-</body>
-</html>
+<div class="page-header">
+    <div class="page-header-left">
+        <span class="eyebrow">Overview</span>
+        <h1 class="page-header-title">Property <em>Dashboard</em></h1>
+    </div>
+</div>
+
+{{-- Stats Grid --}}
+<div class="stats-grid">
+    <div class="stat-card stat-card--navy">
+        <div class="stat-label">Total Reservations</div>
+        <div class="stat-value">{{ $totalReservations }}</div>
+    </div>
+    <div class="stat-card stat-card--green">
+        <div class="stat-label">Confirmed</div>
+        <div class="stat-value">{{ $confirmed }}</div>
+    </div>
+    <div class="stat-card stat-card--gold">
+        <div class="stat-label">Pending</div>
+        <div class="stat-value">{{ $pending }}</div>
+    </div>
+    <div class="stat-card stat-card--red">
+        <div class="stat-label">Cancelled</div>
+        <div class="stat-value">{{ $cancelled }}</div>
+    </div>
+    <div class="stat-card stat-card--gold">
+        <div class="stat-label">Total Revenue</div>
+        <div class="stat-value mono">₱{{ number_format($totalRevenue, 2) }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Total Rooms</div>
+        <div class="stat-value">{{ $totalRooms }}</div>
+    </div>
+    <div class="stat-card stat-card--green">
+        <div class="stat-label">Available Rooms</div>
+        <div class="stat-value">{{ $availableRooms }}</div>
+    </div>
+    <div class="stat-card stat-card--navy">
+        <div class="stat-label">Total Guests</div>
+        <div class="stat-value">{{ $totalGuests }}</div>
+    </div>
+</div>
+
+{{-- Recent Reservations --}}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Recent <em>Reservations</em></div>
+        <a href="{{ route('admin.reservations.index') }}" class="btn btn-outline btn-sm">View All</a>
+    </div>
+    <div class="card-body">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Guest</th>
+                    <th>Room</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($recentReservations as $r)
+                <tr>
+                    <td style="color:var(--text-light);">{{ $r->id }}</td>
+                    <td style="font-weight:500;color:var(--text-dark);">{{ $r->user->name ?? 'N/A' }}</td>
+                    <td>Room {{ $r->room->room_number ?? 'N/A' }}</td>
+                    <td>{{ \Carbon\Carbon::parse($r->check_in_date)->format('M d, Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($r->check_out_date)->format('M d, Y') }}</td>
+                    <td style="font-weight:500;">₱{{ number_format($r->total_price, 2) }}</td>
+                    <td>
+                        <span class="badge badge--{{ strtolower($r->status) }}">
+                            {{ ucfirst($r->status) }}
+                        </span>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="7" style="text-align:center;padding:3rem;color:var(--text-light);">
+                        No reservations yet.
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@endsection

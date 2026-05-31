@@ -555,6 +555,7 @@
                             <li><a href="/amenities">Amenities</a></li>
                             <li><a href="/offers">Latest Offers</a></li>
                             <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/checkout">Checkout</a></li>
                         </ul>
                     </div>
 

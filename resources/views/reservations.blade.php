@@ -6,7 +6,7 @@
     <section class="page-hero" aria-label="Reservations hero">
         <div class="page-hero-bg">
             <img
-                src=asset('images/hotel-room-wide.jpg')alt="Reserve your stay at Radiant Hotel"
+                src="{{ asset('images/Front-Image-Home.jpg') }}" alt="Reserve your stay at Radiant Hotel"
                 class="page-hero-img"
                 fetchpriority="high"
             >
@@ -119,7 +119,7 @@
                     <article class="room-card" id="room-deluxe">
                         <div class="room-card-img-wrap">
                             <img
-                                src=asset('images/hotel-room-wide.jpg')alt="Deluxe Room"
+                                src="{{ asset('images/Delux-Rooms.jpg') }}" alt="Deluxe Room"
                                 class="room-card-img"
                                 loading="lazy"
                             >
@@ -195,7 +195,7 @@
                     <article class="room-card" id="room-superior">
                         <div class="room-card-img-wrap">
                             <img
-                                src=asset('images/deluxe-room-2.jpg')alt="Superior Room"
+                                src="{{ asset('images/Superior-Rooms.jpg') }}" alt="Superior Room"
                                 class="room-card-img"
                                 loading="lazy"
                             >
@@ -271,7 +271,7 @@
                     <article class="room-card" id="room-junior-suite">
                         <div class="room-card-img-wrap">
                             <img
-                                src=asset('images/standard-room.jpg')alt="Junior Suite"
+                                src="{{ asset('images/Junior-Suite.jpg') }}" alt="Junior Suite"
                                 class="room-card-img"
                                 loading="lazy"
                             >
@@ -347,7 +347,7 @@
                     <article class="room-card" id="room-penthouse">
                         <div class="room-card-img-wrap">
                             <img
-                                src=asset('images/deluxe-room.jpg')alt="Penthouse Suite"
+                                src="{{ asset('images/Penthouse-Suite.avif') }}" alt="Penthouse Suite"
                                 class="room-card-img"
                                 loading="lazy"
                             >
@@ -542,7 +542,7 @@
     <section class="cta-banner" aria-label="Need help with your reservation?">
         <div class="cta-overlay"></div>
         <img
-            src=asset('images/hotel-facade.jpg')alt=""
+            src="{{ asset('images/Footer-Image-1.png') }}" alt=""
             class="cta-bg"
             aria-hidden="true"
         >
@@ -1043,7 +1043,23 @@
         }
 
         function proceedToBook() {
-            alert('Booking flow coming soon. Please call or email us directly to complete your reservation.');
+            const roomName  = document.getElementById('sum-room-name').textContent;
+            const rateName  = document.getElementById('sum-rate-name').textContent;
+            const rawPrice  = document.getElementById('sum-rate-price').textContent.replace(/[^0-9.]/g, '');
+            const checkIn   = document.getElementById('check_in')  ? document.getElementById('check_in').value  : '';
+            const checkOut  = document.getElementById('check_out') ? document.getElementById('check_out').value : '';
+            const guests    = document.getElementById('guests')    ? document.getElementById('guests').value    : '2';
+            const rooms     = document.getElementById('rooms')     ? document.getElementById('rooms').value     : '1';
+            const params = new URLSearchParams({
+                room_type:  roomName,
+                rate_name:  rateName,
+                price:      rawPrice,
+                check_in:   checkIn,
+                check_out:  checkOut,
+                guests:     guests,
+                rooms:      rooms,
+            });
+            window.location.href = '/checkout?' + params.toString();
         }
 
         // Keep check-out min = check-in + 1

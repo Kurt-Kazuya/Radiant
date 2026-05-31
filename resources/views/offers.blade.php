@@ -6,7 +6,7 @@
     <section class="page-hero" aria-label="Offers hero">
         <div class="page-hero-bg">
             <img
-                src=asset('images/hotel-pool-aerial.jpg')alt="Latest Offers at Radiant Hotel"
+                src="{{ asset('images/Latest-Offers.png') }}" alt="Latest Offers at Radiant Hotel"
                 class="page-hero-img"
                 fetchpriority="high"
             >
@@ -53,7 +53,7 @@
             <div class="offer-feature-grid">
                 <div class="offer-feature-img-wrap">
                     <img
-                        src=asset('images/hotel-lobby.jpg')alt="Flash Sale Offer"
+                        src="{{ asset('images/Flash-Sale.jpg') }}" alt="Flash Sale Offer"
                         class="offer-feature-img"
                         loading="lazy"
                     >
@@ -140,7 +140,7 @@
                 </div>
                 <div class="offer-feature-img-wrap">
                     <img
-                        src=asset('images/hotel-hero-bg.jpg')alt="Mother's Day Escape"
+                        src="{{ asset('images/Mothers-Day-Escape.jpg') }}" alt="Mother's Day Escape"
                         class="offer-feature-img"
                         loading="lazy"
                     >
@@ -162,7 +162,7 @@
             <div class="offer-feature-grid">
                 <div class="offer-feature-img-wrap">
                     <img
-                        src=asset('images/beach-aerial.jpg')alt="Island Summer Package"
+                        src="{{ asset('images/Island-Summer-Package.jpg') }}" alt="Island Summer Package"
                         class="offer-feature-img"
                         loading="lazy"
                     >
@@ -228,37 +228,37 @@
                         'Signature Cocktails',
                         'From ₱380 per order',
                         'Expertly crafted cocktails using premium spirits and fresh local ingredients. The perfect way to unwind after a day of exploring Pangasinan.',
-                        asset('images/cocktail-drinks.jpg'),
+                        asset('images/Signature-Cocktails.png'),
                     ],
                     [
                         'Taste of Pangasinan',
                         'Curated local menu',
                         'A curated menu celebrating the bold and comforting flavors of Pangasinense cuisine — from bangus dishes to fresh Lingayen Gulf seafood.',
-                        asset('images/filipino-food.jpg'),
+                        asset('images/Taste-of-Pangasinan.jpg'),
                     ],
                     [
                         'New Dessert Offerings',
                         'Available now',
                         'Dessert lovers rejoice! We are now serving Mango Sticky Rice, Churros, and Burnt Cheesecake. Sweeten your stay while it lasts.',
-                        asset('images/breakfast-pastry.jpg'),
+                        asset('images/New-Dessert-Offerings.png'),
                     ],
                     [
                         'Happy Hour Deal',
                         'Select hours daily',
                         'Enjoy our curated happy hour menu featuring discounted drinks and bar bites. The perfect way to kick off your evening at Radiant Hotel.',
-                        asset('images/cocktail-bar.jpg'),
+                        asset('images/Margarita-Fiesta.png'),
                     ],
                     [
                         'Margarita Fiesta',
                         'Limited-time special',
                         'Celebrate with our festive Margarita selection — classic, frozen, and house-special variants crafted by our talented bartenders.',
-                        asset('images/seafood-platter.jpg'),
+                        asset('images/Rice-Bowl-Craze.png'),
                     ],
                     [
                         'Rice Bowl Craze',
                         'Complete set available',
                         'Our Rice Bowl sets come complete with a choice of protein, fresh toppings, and a savory sauce — a satisfying and hearty meal any time of day.',
-                        asset('images/asian-noodles.jpg'),
+                        asset('images/Happy-Hour-Deal.png'),
                     ],
                 ] as $offer)
                 <article class="dining-offer-card card">
@@ -284,7 +284,7 @@
     <section class="cta-banner" aria-label="Book now">
         <div class="cta-overlay"></div>
         <img
-            src=asset('images/hotel-hero-bg.jpg')alt=""
+            src="{{ asset('images/Book-Your-Stay-Today.png') }}" alt=""
             class="cta-bg"
             aria-hidden="true"
         >

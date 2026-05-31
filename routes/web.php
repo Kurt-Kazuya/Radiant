@@ -46,6 +46,14 @@ Route::get('/reservations', function () {
     return view('reservations');
 })->name('reservations');
 
+// Checkout
+Route::get('/checkout', function () {
+    $checkIn  = request('check_in',  date('Y-m-d'));
+    $checkOut = request('check_out', date('Y-m-d', strtotime('+1 day')));
+    $nights   = max(1, \Carbon\Carbon::parse($checkIn)->diffInDays(\Carbon\Carbon::parse($checkOut)));
+    return view('checkout', compact('nights'));
+})->name('checkout');
+
 
 
 
