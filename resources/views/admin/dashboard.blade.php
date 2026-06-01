@@ -2,7 +2,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Dashboard')
-@section('topbar-title', 'Admin <em>Dashboard</em>')
+@section('topbar-title', 'Admin Dashboard')
 
 @section('content')
 
@@ -15,37 +15,37 @@
 
 {{-- Stats Grid --}}
 <div class="stats-grid">
-    <div class="stat-card stat-card--navy">
+    <div class="stat-card">
         <div class="stat-label">Total Reservations</div>
-        <div class="stat-value">{{ $totalReservations }}</div>
+        <div class="stat-value mono">{{ $totalReservations }}</div>
     </div>
-    <div class="stat-card stat-card--green">
+    <div class="stat-card">
         <div class="stat-label">Confirmed</div>
-        <div class="stat-value">{{ $confirmed }}</div>
+        <div class="stat-value mono">{{ $confirmed }}</div>
     </div>
-    <div class="stat-card stat-card--gold">
+    <div class="stat-card">
         <div class="stat-label">Pending</div>
-        <div class="stat-value">{{ $pending }}</div>
+        <div class="stat-value mono">{{ $pending }}</div>
     </div>
-    <div class="stat-card stat-card--red">
+    <div class="stat-card">
         <div class="stat-label">Cancelled</div>
-        <div class="stat-value">{{ $cancelled }}</div>
+        <div class="stat-value mono">{{ $cancelled }}</div>
     </div>
-    <div class="stat-card stat-card--gold">
+    <div class="stat-card">
         <div class="stat-label">Total Revenue</div>
         <div class="stat-value mono">₱{{ number_format($totalRevenue, 2) }}</div>
     </div>
     <div class="stat-card">
         <div class="stat-label">Total Rooms</div>
-        <div class="stat-value">{{ $totalRooms }}</div>
+        <div class="stat-value mono">{{ $totalRooms }}</div>
     </div>
-    <div class="stat-card stat-card--green">
+    <div class="stat-card">
         <div class="stat-label">Available Rooms</div>
-        <div class="stat-value">{{ $availableRooms }}</div>
+        <div class="stat-value mono">{{ $availableRooms }}</div>
     </div>
-    <div class="stat-card stat-card--navy">
+    <div class="stat-card">
         <div class="stat-label">Total Guests</div>
-        <div class="stat-value">{{ $totalGuests }}</div>
+        <div class="stat-value mono">{{ $totalGuests }}</div>
     </div>
 </div>
 

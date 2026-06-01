@@ -61,7 +61,7 @@
                             @if($p->payment_status !== 'paid')
                                 <form action="{{ route('admin.payments.markPaid', $p->id) }}" method="POST">
                                     @csrf @method('PATCH')
-                                    <button type="submit" class="btn btn-gold btn-sm">Mark Paid</button>
+                                    <button type="submit" class="btn btn-gold btn-sm">Paid</button>
                                 </form>
                             @endif
                             <form action="{{ route('admin.payments.destroy', $p) }}" method="POST"
