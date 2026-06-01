@@ -8,23 +8,10 @@ use Illuminate\Http\Request;
 class RoomApiController extends Controller
 {
 // GET /api/rooms
-    // public function index() {
-    //     $rooms = Room::all();
-    //     return response()->json([
-    //         'success' => true,
-    //         'data' => $rooms
-    //     ], 200);
-    // }
-
-//EXAMPLE FAKE ROOM for api tetsing, remove comment to use and comment out the top index
-public function index() {
-    $fakeRooms = [
-        ['id' => 1, 'room_number' => '101', 'type' => 'single', 'price_per_night' => 1500, 'status' => 'available'],
-        ['id' => 2, 'room_number' => '102', 'type' => 'double', 'price_per_night' => 2500, 'status' => 'occupied'],
-        ['id' => 3, 'room_number' => '201', 'type' => 'suite',  'price_per_night' => 5000, 'status' => 'available'],
-    ];
-    return response()->json(['success' => true, 'data' => $fakeRooms], 200);
-}
+    public function index() {
+        $rooms = Room::all();
+        return response()->json(['success' => true, 'data' => $rooms], 200);
+    }
 
 
 

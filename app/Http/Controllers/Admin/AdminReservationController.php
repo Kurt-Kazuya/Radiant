@@ -1,21 +1,56 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
-use App\Models\Room;
 
-class ReservationController extends Controller
+class AdminReservationController extends Controller
 {
+    /**
+     * List all reservations (with guest & room data).
+     */
     public function index()
     {
-        $rooms = Room::where('status', 'available')->get();
-        return view('reservations', compact('rooms'));
+        $reservations = Reservation::with(['user', 'room'])
+            ->latest()
+            ->paginate(15);
+
+        return view('admin.reservations.index', compact('reservations'));
     }
 
-    public function myBookings()
+    /**
+     * Confirm a pending reservation.
+     */
+    public function confirm($id)
     {
-        $reservations = auth()->user()->reservations()->with('room')->latest()->get();
-        return view('my-bookings', compact('reservations'));
+        $reservation = Reservation::findOrFail($id);
+        $reservation->update(['status' => 'confirmed']);
+
+        return back()->with('success', "Reservation #{$id} has been confirmed.");
+    }
+
+    /**
+     * Cancel a reservation.
+     */
+    public function cancel($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->update(['status' => 'cancelled']);
+
+        return back()->with('success', "Reservation #{$id} has been cancelled.");
+    }
+
+    /**
+     * Delete a reservation record permanently.
+     */
+    public function destroy($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->delete();
+
+        return redirect()->route('admin.reservations.index')
+            ->with('success', "Reservation #{$id} has been deleted.");
     }
 }
