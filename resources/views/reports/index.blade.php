@@ -1,88 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Reports</title>
-</head>
-<body>
-    <h2>Reports Dashboard</h2>
-    <hr>
+@extends('layouts.admin')
 
-    <nav>
-        <a href="{{ route('admin.dashboard') }}">Dashboard</a> |
-        <a href="{{ route('admin.rooms.index') }}">Rooms</a> |
-        <a href="{{ route('admin.reservations.index') }}">Reservations</a> |
-        <a href="{{ route('admin.payments.index') }}">Payments</a> |
-        <a href="{{ route('reports.index') }}">Reports</a> |
-        <form action="/logout" method="POST" style="display:inline;">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
-    </nav>
-    <hr>
+@section('title', 'Reports')
+@section('topbar-title', 'Reports & Analytics')
 
-    @if(session('success'))
-        <p style="color:green;">{{ session('success') }}</p>
-    @endif
+@section('content')
 
-    <h3>Summary</h3>
-    <p>Total Reservations: {{ $totalReservations }}</p>
-    <p>Confirmed: {{ $confirmed }}</p>
-    <p>Pending: {{ $pending }}</p>
-    <p>Cancelled: {{ $cancelled }}</p>
-    <p>Total Revenue: &#8369;{{ number_format($totalRevenue, 2) }}</p>
-    <p>Total Rooms: {{ $totalRooms }}</p>
-    <p>Available Rooms: {{ $availableRooms }}</p>
-    <hr>
+<div class="page-header">
+    <div class="page-header-left">
+        <span class="eyebrow">Analytics</span>
+        <h1 class="page-header-title">Reports <em>Dashboard</em></h1>
+    </div>
+</div>
 
-    <h3>Export Reports</h3>
-    <a href="{{ route('reports.pdf') }}">Export PDF</a> |
-    <a href="{{ route('reports.excel') }}">Export Excel</a> |
-    <a href="{{ route('reports.csv') }}">Export CSV</a>
-    <hr>
+@if(session('success'))
+    <div class="alert alert--success">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px">
+            <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        {{ session('success') }}
+    </div>
+@endif
 
-    <h3>Import Data</h3>
-    <form action="{{ route('reports.import') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file" accept=".csv,.xlsx,.xls" required>
-        <button type="submit">Import</button>
-        <br>
-        @error('file')
-            <span style="color:red;">{{ $message }}</span>
-        @enderror
-    </form>
-    <hr>
+{{-- Stats --}}
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-label">Total Reservations</div>
+        <div class="stat-value mono">{{ $totalReservations }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Confirmed</div>
+        <div class="stat-value mono">{{ $confirmed }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Pending</div>
+        <div class="stat-value mono">{{ $pending }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Cancelled</div>
+        <div class="stat-value mono">{{ $cancelled }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Total Revenue</div>
+        <div class="stat-value mono">₱{{ number_format($totalRevenue, 2) }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Total Rooms</div>
+        <div class="stat-value mono">{{ $totalRooms }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Available Rooms</div>
+        <div class="stat-value mono">{{ $availableRooms }}</div>
+    </div>
+</div>
 
-    <h3>Recent Reservations (Last 10)</h3>
-    <table border="1" cellpadding="5" cellspacing="0">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Guest</th>
-                <th>Room</th>
-                <th>Check In</th>
-                <th>Check Out</th>
-                <th>Nights</th>
-                <th>Total</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($reservations as $r)
-            <tr>
-                <td>{{ $r->id }}</td>
-                <td>{{ $r->user->name ?? 'N/A' }}</td>
-                <td>Room {{ $r->room->room_number ?? 'N/A' }}</td>
-                <td>{{ $r->check_in_date }}</td>
-                <td>{{ $r->check_out_date }}</td>
-                <td>{{ $r->total_nights }}</td>
-                <td>&#8369;{{ number_format($r->total_price, 2) }}</td>
-                <td>{{ ucfirst($r->status) }}</td>
-            </tr>
-            @empty
-            <tr><td colspan="8">No reservations yet.</td></tr>
-            @endforelse
-        </tbody>
-    </table>
-</body>
-</html>
+{{-- Export Actions --}}
+<div class="card" style="margin-bottom: 2rem;">
+    <div class="card-header">
+        <div class="card-title">Export <em>Reports</em></div>
+    </div>
+    <div class="card-body" style="padding: 1.5rem 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+        <a href="{{ route('admin.reports.pdf') }}" class="btn btn-outline">
+            📄 Export PDF
+        </a>
+        <a href="{{ route('admin.reports.excel') }}" class="btn btn-outline">
+            📊 Export Excel
+        </a>
+        <a href="{{ route('admin.reports.csv') }}" class="btn btn-outline">
+            📋 Export CSV
+        </a>
+        <div style="margin-left: auto;">
+            <form action="{{ route('admin.reports.import') }}" method="POST" enctype="multipart/form-data"
+                  style="display: flex; gap: 0.75rem; align-items: center;">
+                @csrf
+                <input type="file" name="file" accept=".csv,.xlsx,.xls" required
+                       style="font-size: 0.85rem; color: var(--text-mid);">
+                <button type="submit" class="btn btn-gold btn-sm">Import</button>
+                @error('file')
+                    <span class="form-error">{{ $message }}</span>
+                @enderror
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- Recent Reservations --}}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Recent <em>Reservations</em> (Last 10)</div>
+        <a href="{{ route('admin.reservations.index') }}" class="btn btn-outline btn-sm">View All</a>
+    </div>
+    <div class="card-body">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Guest</th>
+                    <th>Room</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Nights</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($reservations as $r)
+                <tr>
+                    <td style="color:var(--text-light);">{{ $r->id }}</td>
+                    <td style="font-weight:500;color:var(--text-dark);">{{ $r->user->name ?? 'N/A' }}</td>
+                    <td>Room {{ $r->room->room_number ?? 'N/A' }}</td>
+                    <td>{{ \Carbon\Carbon::parse($r->check_in_date)->format('M d, Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($r->check_out_date)->format('M d, Y') }}</td>
+                    <td style="text-align:center;">{{ $r->total_nights }}</td>
+                    <td style="font-weight:500;">₱{{ number_format($r->total_price, 2) }}</td>
+                    <td>
+                        <span class="badge badge--{{ strtolower($r->status) }}">
+                            {{ ucfirst($r->status) }}
+                        </span>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="8" style="text-align:center;padding:3rem;color:var(--text-light);">
+                        No reservations yet.
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@endsection

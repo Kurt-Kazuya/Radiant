@@ -4,51 +4,46 @@
     <meta charset="UTF-8">
     <title>Reservations Report</title>
     <style>
-        body { font-family: Arial, sans-serif; font-size: 12px; color: #333; }
-        .header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px; }
-        .header h1 { margin: 0; font-size: 20px; }
-        .header p { margin: 4px 0; color: #666; }
-        .stats { display: flex; gap: 10px; margin-bottom: 20px; }
-        .stat-box { border: 1px solid #ddd; padding: 8px 14px; border-radius: 4px; text-align: center; flex: 1; }
-        .stat-box h3 { margin: 0; font-size: 18px; color: #2563eb; }
-        .stat-box p { margin: 0; font-size: 10px; color: #666; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th { background-color: #1e293b; color: white; padding: 8px; text-align: left; font-size: 11px; }
-        td { padding: 7px 8px; border-bottom: 1px solid #eee; font-size: 11px; }
-        tr:nth-child(even) { background-color: #f8fafc; }
-        .badge { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; }
-        .confirmed { background: #dcfce7; color: #166534; }
-        .pending   { background: #fef9c3; color: #854d0e; }
-        .cancelled { background: #fee2e2; color: #991b1b; }
-        .footer { margin-top: 20px; text-align: center; font-size: 10px; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; color: #334155; line-height: 1.5; }
+        .header { text-align: center; margin-bottom: 24px; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; }
+        .header h1 { margin: 0; font-size: 22px; font-weight: 600; color: #0f172a; letter-spacing: -0.5px; }
+        .header p { margin: 6px 0 0 0; color: #64748b; font-size: 11px; letter-spacing: 0.2px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+        th { background-color: #f8fafc; color: #64748b; padding: 10px 8px; text-align: left; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #cbd5e1; }
+        td { padding: 10px 8px; border-bottom: 1px solid #f1f5f9; font-size: 11px; color: #334155; }
+        .badge { font-weight: 600; font-size: 10px; letter-spacing: 0.3px; text-transform: uppercase; }
+        .confirmed { color: #059669; }
+        .pending   { color: #d97706; }
+        .cancelled { color: #dc2626; }
+        .footer { margin-top: 32px; text-align: center; font-size: 10px; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 12px; }
     </style>
 </head>
 <body>
 
     {{-- Header --}}
     <div class="header">
-        <h1>🏨 Hotel Reservation System</h1>
-        <p>Reservations Report — Generated on {{ now()->format('F d, Y h:i A') }}</p>
+        <h1>Hotel Reservation System</h1>
+        <p>Reservations Report - Generated on {{ now()->format('F d, Y h:i A') }}</p>
     </div>
 
     {{-- Summary --}}
     <table style="margin-bottom: 16px;">
         <tr>
             <td style="border:1px solid #ddd; padding:8px; text-align:center;">
-                <strong>Total</strong><br>
-                <span style="font-size:18px; color:#2563eb;">{{ $reservations->count() }}</span>
+                <span style="color:#666; font-size:10px; text-transform:uppercase;">Total</span><br>
+                <strong style="font-size:18px; color:#000000;">{{ $reservations->count() }}</strong>
             </td>
             <td style="border:1px solid #ddd; padding:8px; text-align:center;">
-                <strong>Confirmed</strong><br>
-                <span style="font-size:18px; color:#16a34a;">{{ $reservations->where('status','confirmed')->count() }}</span>
+                <span style="color:#666; font-size:10px; text-transform:uppercase;">Confirmed</span><br>
+                <strong style="font-size:18px; color:#000000;">{{ $reservations->where('status','confirmed')->count() }}</strong>
             </td>
             <td style="border:1px solid #ddd; padding:8px; text-align:center;">
-                <strong>Pending</strong><br>
-                <span style="font-size:18px; color:#d97706;">{{ $reservations->where('status','pending')->count() }}</span>
+                <span style="color:#666; font-size:10px; text-transform:uppercase;">Pending</span><br>
+                <strong style="font-size:18px; color:#000000;">{{ $reservations->where('status','pending')->count() }}</strong>
             </td>
             <td style="border:1px solid #ddd; padding:8px; text-align:center;">
-                <strong>Cancelled</strong><br>
-                <span style="font-size:18px; color:#dc2626;">{{ $reservations->where('status','cancelled')->count() }}</span>
+                <span style="color:#666; font-size:10px; text-transform:uppercase;">Cancelled</span><br>
+                <strong style="font-size:18px; color:#000000;">{{ $reservations->where('status','cancelled')->count() }}</strong>
             </td>
         </tr>
     </table>
@@ -78,7 +73,7 @@
                 <td>{{ $r->check_in_date }}</td>
                 <td>{{ $r->check_out_date }}</td>
                 <td>{{ $r->total_nights }}</td>
-                <td>₱{{ number_format($r->total_price, 2) }}</td>
+                <td>PHP {{ number_format($r->total_price, 2) }}</td>
                 <td>
                     <span class="badge {{ $r->status }}">
                         {{ ucfirst($r->status) }}
@@ -97,7 +92,7 @@
 
     {{-- Footer --}}
     <div class="footer">
-        Hotel Reservation System — Confidential Report — {{ now()->format('Y') }}
+        Hotel Reservation System - Confidential Report - {{ now()->format('Y') }}
     </div>
 
 </body>
