@@ -65,16 +65,20 @@
                             <span class="gold-line"></span>
                         </div>
 
-                        <form id="guest-form" class="checkout-form" novalidate>
+                        {{-- Real POST form that saves to the reservations table --}}
+                        <form id="guest-form" class="checkout-form" method="POST" action="{{ route('checkout.store') }}" novalidate>
                             @csrf
-                            {{-- Hidden fields passed from reservations page --}}
-                            <input type="hidden" name="room_type"    id="f_room_type"    value="{{ request('room_type', '') }}">
-                            <input type="hidden" name="rate_name"    id="f_rate_name"    value="{{ request('rate_name', '') }}">
-                            <input type="hidden" name="price"        id="f_price"        value="{{ request('price', '') }}">
-                            <input type="hidden" name="check_in"     id="f_check_in"     value="{{ request('check_in', date('Y-m-d')) }}">
-                            <input type="hidden" name="check_out"    id="f_check_out"    value="{{ request('check_out', date('Y-m-d', strtotime('+1 day'))) }}">
-                            <input type="hidden" name="guests"       id="f_guests"       value="{{ request('guests', 2) }}">
-                            <input type="hidden" name="rooms"        id="f_rooms"        value="{{ request('rooms', 1) }}">
+                            {{-- Hidden fields required by CheckoutController@store --}}
+                            <input type="hidden" name="room_id"        id="f_room_id"       value="{{ request('room_id', '') }}">
+                            <input type="hidden" name="room_type"      id="f_room_type"     value="{{ request('room_type', '') }}">
+                            <input type="hidden" name="rate_name"      id="f_rate_name"     value="{{ request('rate_name', '') }}">
+                            <input type="hidden" name="price"          id="f_price"         value="{{ request('price', '') }}">
+                            <input type="hidden" name="check_in_date"  id="f_check_in"      value="{{ request('check_in', date('Y-m-d')) }}">
+                            <input type="hidden" name="check_out_date" id="f_check_out"     value="{{ request('check_out', date('Y-m-d', strtotime('+1 day'))) }}">
+                            <input type="hidden" name="total_nights"   id="f_total_nights"  value="{{ $nights ?? 1 }}">
+                            <input type="hidden" name="total_price"    id="f_total_price"   value="{{ (int) request('price', 3500) * ($nights ?? 1) }}">
+                            <input type="hidden" name="guests"         id="f_guests"        value="{{ request('guests', 2) }}">
+                            <input type="hidden" name="rooms"          id="f_rooms"         value="{{ request('rooms', 1) }}">
 
                             <div class="form-section">
                                 <h3 class="form-section-title">Primary Guest</h3>
@@ -985,8 +989,9 @@
         };
         let selectedExtras = {};
 
-        // ── Step navigation ────────────────────────────────────────
+        // ── Step navigation (single definition) ───────────────────
         function goToStep(n) {
+            if (n === 3) buildReview();
             document.getElementById('step-' + currentStep).style.display = 'none';
             document.getElementById('step-' + n).style.display = 'block';
 
@@ -1073,22 +1078,6 @@
         }
 
         // ── Step 3: Build review summary ──────────────────────────
-        function goToStep(n) {
-            if (n === 3) buildReview();
-            document.getElementById('step-' + currentStep).style.display = 'none';
-            document.getElementById('step-' + n).style.display = 'block';
-
-            [1, 2, 3, 4].forEach(i => {
-                const el = document.getElementById('step-indicator-' + i);
-                if (!el) return;
-                el.classList.remove('step-item--active', 'step-item--done');
-                if (i < n)  el.classList.add('step-item--done');
-                if (i === n) el.classList.add('step-item--active');
-            });
-
-            currentStep = n;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
 
         function buildReview() {
             const fields = [
@@ -1128,20 +1117,28 @@
             document.getElementById('online-payment-fields').style.display = online ? 'block' : 'none';
         }
 
-        // ── Confirm booking ────────────────────────────────────────
+        // ── Confirm booking — submits the real form to the server ──
         function confirmBooking() {
             const btn = document.getElementById('confirm-btn');
             btn.disabled = true;
-            btn.innerHTML = '<span>Processing…</span>';
+            btn.innerHTML = '<span>Saving…</span>';
 
-            // Simulate async confirm
-            setTimeout(() => {
-                const refNum = 'RH-' + Math.random().toString(36).substring(2, 7).toUpperCase();
-                document.getElementById('confirm-ref').textContent = refNum;
-                document.getElementById('confirm-email-display').textContent =
-                    document.getElementById('email').value;
-                goToStep(4);
-            }, 1400);
+            // Update the hidden total_price field dynamically (including extras)
+            const extrasTotal = Object.values(selectedExtras).reduce((a, b) => a + b, 0);
+            const subtotal    = basePrice * nights;
+            const total       = subtotal + extrasTotal + (subtotal + extrasTotal) * 0.12;
+            const totalField  = document.getElementById('f_total_price');
+            if (totalField) totalField.value = Math.round(total);
+
+            // Submit the real form to CheckoutController@store
+            const form = document.getElementById('guest-form');
+            if (form) {
+                form.submit();
+            } else {
+                btn.disabled = false;
+                btn.innerHTML = '<span>Confirm Reservation</span>';
+                alert('Form not found. Please try again.');
+            }
         }
 
         // Card number formatting
