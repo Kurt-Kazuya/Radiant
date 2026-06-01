@@ -51,7 +51,7 @@ class CheckoutController extends Controller
             [
                 'name' => trim($validated['first_name'] . ' ' . $validated['last_name']),
                 'password' => bcrypt(Str::random(16)),
-                'role' => 'user'
+                'role' => 'guest'
             ]
         );
 
