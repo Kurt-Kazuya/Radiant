@@ -1133,6 +1133,13 @@
             // Submit the real form to CheckoutController@store
             const form = document.getElementById('guest-form');
             if (form) {
+                const pm = document.querySelector('input[name="payment_method"]:checked').value;
+                const pmInput = document.createElement('input');
+                pmInput.type = 'hidden';
+                pmInput.name = 'payment_method';
+                pmInput.value = pm;
+                form.appendChild(pmInput);
+                
                 form.submit();
             } else {
                 btn.disabled = false;

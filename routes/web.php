@@ -34,16 +34,12 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register',[AuthController::class, 'register'])->name('register.post');
 Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
-// ── Authenticated Guest Routes ──────────────────────────────────────────
+// ── Guest Checkout & Bookings (no login required) ─────────────────────────
 
-Route::middleware('auth')->group(function () {
-    // Checkout — show & submit
-    Route::get('/checkout',  [CheckoutController::class, 'show'])->name('checkout');
-    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/checkout',  [CheckoutController::class, 'show'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
-    // My Bookings — guest sees own reservations + admin-updated status
-    Route::get('/my-bookings', [GuestReservationController::class, 'myBookings'])->name('my-bookings');
-});
+Route::get('/my-bookings', [GuestReservationController::class, 'myBookings'])->name('my-bookings');
 
 // ── Admin Routes (auth + admin role required) ───────────────────────────
 
