@@ -20,12 +20,12 @@ class HotelSeeder extends Seeder
             'role'     => 'admin',
         ]);
 
-        // Seed 15 Rooms
+        // Seed 20 Rooms (5 per package)
         $roomTypes = [
-            ['prefix' => '1', 'name' => 'Deluxe Room',     'type' => 'single', 'price' => 3500,  'count' => 6],
+            ['prefix' => '1', 'name' => 'Deluxe Room',     'type' => 'single', 'price' => 3500,  'count' => 5],
             ['prefix' => '2', 'name' => 'Superior Room',   'type' => 'double', 'price' => 5500,  'count' => 5],
-            ['prefix' => '3', 'name' => 'Junior Suite',    'type' => 'suite',  'price' => 9000,  'count' => 3],
-            ['prefix' => '4', 'name' => 'Penthouse Suite', 'type' => 'suite',  'price' => 18000, 'count' => 1],
+            ['prefix' => '3', 'name' => 'Junior Suite',    'type' => 'suite',  'price' => 9000,  'count' => 5],
+            ['prefix' => '4', 'name' => 'Penthouse Suite', 'type' => 'suite',  'price' => 18000, 'count' => 5],
         ];
 
         foreach ($roomTypes as $category) {
