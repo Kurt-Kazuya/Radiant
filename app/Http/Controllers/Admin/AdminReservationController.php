@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class AdminReservationController extends Controller
@@ -27,12 +28,8 @@ class AdminReservationController extends Controller
     {
         $reservation = Reservation::findOrFail($id);
         $reservation->update(['status' => 'confirmed']);
-
         if ($reservation->room_id) {
-            $room = \App\Models\Room::find($reservation->room_id);
-            if ($room) {
-                $room->update(['status' => 'occupied']);
-            }
+            Room::whereKey($reservation->room_id)->update(['status' => 'occupied']);
         }
 
         return back()->with('success', "Reservation #{$id} has been confirmed.");
@@ -45,12 +42,8 @@ class AdminReservationController extends Controller
     {
         $reservation = Reservation::findOrFail($id);
         $reservation->update(['status' => 'cancelled']);
-
         if ($reservation->room_id) {
-            $room = \App\Models\Room::find($reservation->room_id);
-            if ($room) {
-                $room->update(['status' => 'available']);
-            }
+            Room::whereKey($reservation->room_id)->update(['status' => 'available']);
         }
 
         return back()->with('success', "Reservation #{$id} has been cancelled.");
@@ -62,14 +55,9 @@ class AdminReservationController extends Controller
     public function destroy($id)
     {
         $reservation = Reservation::findOrFail($id);
-        
         if ($reservation->room_id) {
-            $room = \App\Models\Room::find($reservation->room_id);
-            if ($room) {
-                $room->update(['status' => 'available']);
-            }
+            Room::whereKey($reservation->room_id)->update(['status' => 'available']);
         }
-
         $reservation->delete();
 
         return redirect()->route('admin.reservations.index')

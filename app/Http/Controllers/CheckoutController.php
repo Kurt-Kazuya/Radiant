@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\Payment;
 use App\Models\User;
+use App\Services\RoomAvailabilityService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,9 @@ use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
 {
+    public function __construct(
+        private RoomAvailabilityService $availabilityService
+    ) {}
     /**
      * Show the checkout page.
      * Requires authentication — guests must log in first.
@@ -74,38 +78,27 @@ class CheckoutController extends Controller
         ]);
 
         // find room
-        $roomId = $validated['room_id'] ?? null;
-        if ($roomId && !\App\Models\Room::where('id', $roomId)->exists()) {
-            $roomId = null;
-        }
+        $checkIn  = $validated['check_in_date'];
+        $checkOut = $validated['check_out_date'];
+        $roomType = trim($validated['room_type'] ?? '');
+        $roomId   = $validated['room_id'] ?? null;
+        $room     = null;
 
-        if (empty($roomId)) {
-            $roomType = $validated['room_type'] ?? '';
-
-            // exact room name
-            $room = Room::where('name', $roomType)->where('status', 'available')->first();
-
-            // fallback category
-            if (!$room) {
-                $typeMap = [
-                    'Deluxe Room'     => 'single',
-                    'Superior Room'   => 'double',
-                    'Junior Suite'    => 'suite',
-                    'Penthouse Suite' => 'suite',
-                ];
-                $type = $typeMap[$roomType] ?? 'double';
-                $room = Room::where('type', $type)->where('status', 'available')->first();
+        if ($roomId && ($candidate = Room::find($roomId))) {
+            if ($this->availabilityService->isRoomAssignable($candidate, $checkIn, $checkOut)) {
+                $room = $candidate;
             }
-
-            // last resort
-            if (!$room) $room = Room::first();
-            $roomId = $room ? $room->id : null;
         }
 
-
-        if (!$roomId) {
-            return back()->with('error', 'Sorry, there are no rooms available in the system to book right now.');
+        if (! $room && $roomType !== '') {
+            $room = $this->availabilityService->findBookableRoom($roomType, $checkIn, $checkOut);
         }
+
+        if (! $room) {
+            return back()->withInput()->with('error', 'Sorry, there are no rooms available for the selected dates and room type.');
+        }
+
+        $roomId = $room->id;
 
         $userId = $user->id;
 
