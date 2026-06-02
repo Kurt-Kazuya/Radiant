@@ -73,7 +73,7 @@
                             
                             @if(session('sent_data'))
                                 @php $data = session('sent_data'); @endphp
-                                <div style="text-align: left; background: var(--cream); padding: 1.5rem; border: 1px solid rgba(0,0,0,0.05); font-size: 0.9rem; margin-bottom: 2rem;">
+                                <div style="text-align: left; background: var(--cream); padding: 1.5rem; border: 1px solid rgba(0,0,0,0.05); font-size: 0.9rem; margin-bottom: 2rem; max-height: 50vh; overflow-y: auto; overflow-x: hidden; word-wrap: break-word; word-break: break-word;">
                                     <div style="margin-bottom: 0.5rem;"><strong style="color:var(--text-dark); letter-spacing:0.05em;">Name:</strong> {{ $data['name'] }}</div>
                                     <div style="margin-bottom: 0.5rem;"><strong style="color:var(--text-dark); letter-spacing:0.05em;">Email:</strong> {{ $data['email'] }}</div>
                                     @if(!empty($data['company']))
