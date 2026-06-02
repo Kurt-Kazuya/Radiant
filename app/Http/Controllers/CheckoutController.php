@@ -135,13 +135,7 @@ class CheckoutController extends Controller
             'payment_status' => $paymentMethod === 'pay_online' ? 'paid' : 'unpaid',
         ]);
 
-        // update room status to decrease available count
-        if ($roomId) {
-            $roomToUpdate = Room::find($roomId);
-            if ($roomToUpdate) {
-                $roomToUpdate->update(['status' => 'occupied']);
-            }
-        }
+
 
         return redirect()->route('reservations')
             ->with('success', "Thank you! Your reservation #{$reservation->id} has been submitted! We will confirm it within 24 hours.");

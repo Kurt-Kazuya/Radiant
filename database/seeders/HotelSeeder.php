@@ -16,15 +16,30 @@ class HotelSeeder extends Seeder
         User::create([
             'name'     => 'Admin',
             'email'    => 'admin@hotel.com',
-            'password' => Hash::make('password'),
+            'password' => bcrypt('password'),
             'role'     => 'admin',
         ]);
 
-        // rooms
-        $deluxe    = Room::create(['room_number' => '101', 'name' => 'Deluxe Room',     'type' => 'single', 'price_per_night' => 3500,  'status' => 'available']);
-        $superior  = Room::create(['room_number' => '102', 'name' => 'Superior Room',   'type' => 'double', 'price_per_night' => 5500,  'status' => 'available']);
-        $junior    = Room::create(['room_number' => '201', 'name' => 'Junior Suite',    'type' => 'suite',  'price_per_night' => 9000,  'status' => 'available']);
-        $penthouse = Room::create(['room_number' => '301', 'name' => 'Penthouse Suite', 'type' => 'suite',  'price_per_night' => 18000, 'status' => 'available']);
+        // Seed 15 Rooms
+        $roomTypes = [
+            ['prefix' => '1', 'name' => 'Deluxe Room',     'type' => 'single', 'price' => 3500,  'count' => 6],
+            ['prefix' => '2', 'name' => 'Superior Room',   'type' => 'double', 'price' => 5500,  'count' => 5],
+            ['prefix' => '3', 'name' => 'Junior Suite',    'type' => 'suite',  'price' => 9000,  'count' => 3],
+            ['prefix' => '4', 'name' => 'Penthouse Suite', 'type' => 'suite',  'price' => 18000, 'count' => 1],
+        ];
+
+        foreach ($roomTypes as $category) {
+            for ($i = 1; $i <= $category['count']; $i++) {
+                $roomNumber = $category['prefix'] . str_pad($i, 2, '0', STR_PAD_LEFT);
+                Room::create([
+                    'room_number'     => $roomNumber,
+                    'name'            => $category['name'],
+                    'type'            => $category['type'],
+                    'price_per_night' => $category['price'],
+                    'status'          => 'available'
+                ]);
+            }
+        }
 
         // // Create guest users
         // $guest1 = User::create([

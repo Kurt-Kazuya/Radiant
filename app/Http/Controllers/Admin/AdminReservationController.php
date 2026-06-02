@@ -28,6 +28,13 @@ class AdminReservationController extends Controller
         $reservation = Reservation::findOrFail($id);
         $reservation->update(['status' => 'confirmed']);
 
+        if ($reservation->room_id) {
+            $room = \App\Models\Room::find($reservation->room_id);
+            if ($room) {
+                $room->update(['status' => 'occupied']);
+            }
+        }
+
         return back()->with('success', "Reservation #{$id} has been confirmed.");
     }
 

@@ -387,6 +387,21 @@
             padding: 1.25rem 1.5rem;
             border-top: 1px solid rgba(0,0,0,0.06);
         }
+        
+        /* Fix for Laravel default Tailwind pagination SVGs */
+        .pagination-wrap svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        nav[role="navigation"] {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hidden { display: none !important; }
+        .flex { display: flex !important; }
+        .items-center { align-items: center !important; }
+        .justify-between { justify-content: space-between !important; }
 
         /* ── Form styles ── */
         .form-card { background: var(--white); padding: 2rem; max-width: 680px; }
