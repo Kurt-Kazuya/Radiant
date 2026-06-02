@@ -60,26 +60,8 @@
     </div>
     <div class="card-body" style="padding: 1.5rem 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
         <a href="{{ route('admin.reports.pdf') }}" class="btn btn-outline">
-            📄 Export PDF
+            Export PDF
         </a>
-        <a href="{{ route('admin.reports.excel') }}" class="btn btn-outline">
-            📊 Export Excel
-        </a>
-        <a href="{{ route('admin.reports.csv') }}" class="btn btn-outline">
-            📋 Export CSV
-        </a>
-        <div style="margin-left: auto;">
-            <form action="{{ route('admin.reports.import') }}" method="POST" enctype="multipart/form-data"
-                  style="display: flex; gap: 0.75rem; align-items: center;">
-                @csrf
-                <input type="file" name="file" accept=".csv,.xlsx,.xls" required
-                       style="font-size: 0.85rem; color: var(--text-mid);">
-                <button type="submit" class="btn btn-gold btn-sm">Import</button>
-                @error('file')
-                    <span class="form-error">{{ $message }}</span>
-                @enderror
-            </form>
-        </div>
     </div>
 </div>
 
