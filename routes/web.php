@@ -10,13 +10,8 @@ use App\Http\Controllers\Admin\AdminRoomController;
 use App\Http\Controllers\Admin\AdminReservationController;
 use App\Http\Controllers\Admin\AdminPaymentController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes — Radiant Hotel Pangasinan
-|--------------------------------------------------------------------------
-*/
 
-// ── Public Guest Pages ──────────────────────────────────────────────────
+// Public Guest Pages 
 
 Route::get('/', fn() => view('home'))->name('home');
 Route::get('/accommodations', fn() => view('accommodations'))->name('accommodations');
@@ -40,18 +35,20 @@ Route::post('/contact', function(\Illuminate\Http\Request $request) {
 Route::get('/reservations', fn() => view('reservations'))->name('reservations');
 
 //  Auth Routes 
-
 Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login',   [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
-//  Guest Checkout & Bookings (no login required) 
-
+//  Guest Checkout & Bookings
 Route::get('/checkout',  [CheckoutController::class, 'show'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
-// Admin Routes (auth + admin role required)
 
+
+
+
+
+// Admin Routes (auth + admin role required)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 
     // Dashboard

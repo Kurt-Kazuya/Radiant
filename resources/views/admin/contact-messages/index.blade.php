@@ -25,7 +25,7 @@
             const alert = document.getElementById('admin-success-alert');
             if (alert) {
                 alert.style.opacity = '0';
-                setTimeout(() => alert.remove(), 500);
+                setTimeout(() => alert.remove(), 300);
             }
         }, 2000);
     </script>
@@ -163,7 +163,7 @@
         document.getElementById('message-modal').style.display = 'none';
     }
 
-    // Auto-refresh the table every 10 seconds without reloading the page
+    // Auto-refresh 5s
     setInterval(() => {
         fetch(window.location.href)
             .then(response => response.text())
@@ -177,7 +177,7 @@
                 }
             })
             .catch(error => console.error('Error fetching new messages:', error));
-    }, 10000);
+    }, 5000);
 </script>
 
 @endsection

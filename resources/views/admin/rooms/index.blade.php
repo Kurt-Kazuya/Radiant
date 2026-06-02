@@ -91,7 +91,7 @@
 </div>
 
 <script>
-    // Auto-refresh the table every 10 seconds without reloading the page
+    // Auto-refresh 5s
     setInterval(() => {
         fetch(window.location.href)
             .then(response => response.text())
@@ -105,7 +105,7 @@
                 }
             })
             .catch(error => console.error('Error fetching new rooms:', error));
-    }, 10000);
+    }, 5000);
 </script>
 
 @endsection
