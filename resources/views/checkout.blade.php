@@ -1,8 +1,8 @@
 <x-layout title="Checkout – Radiant Hotel Pangasinan">
 
-    {{-- ============================================================
+    <!-- ============================================================
          PAGE HERO BANNER
-    ============================================================ --}}
+    ============================================================ -->
     <section class="page-hero" aria-label="Checkout hero">
         <div class="page-hero-bg">
             <img
@@ -28,17 +28,17 @@
     </section>
 
 
-    {{-- ============================================================
+    <!-- ============================================================
          CHECKOUT BODY
-    ============================================================ --}}
+    ============================================================ -->
     <section class="section-gap checkout-section" style="background: var(--cream);" aria-label="Checkout">
         <div class="container">
             <div class="checkout-layout">
 
-                {{-- ===== LEFT: MULTI-STEP FORM ===== --}}
+                <!-- ===== LEFT: MULTI-STEP FORM ===== -->
                 <div class="checkout-main">
 
-                    {{-- Step indicator --}}
+                    <!-- Step indicator -->
                     <div class="steps-bar">
                         <div class="step-item step-item--active" id="step-indicator-1">
                             <div class="step-num">1</div>
@@ -57,7 +57,7 @@
                     </div>
 
 
-                    {{-- ============ STEP 1: GUEST DETAILS ============ --}}
+                    <!--  STEP 1  -->
                     <div class="checkout-step" id="step-1">
                         <div class="step-heading">
                             <span class="eyebrow">Step 1 of 3</span>
@@ -79,10 +79,10 @@
                             </div>
                         @endif
 
-                        {{-- Real POST form that saves to the reservations table --}}
+                        <!-- Real POST form that saves to the reservations table -->
                         <form id="guest-form" class="checkout-form" method="POST" action="{{ route('checkout.store') }}" novalidate>
                             @csrf
-                            {{-- Hidden fields required by CheckoutController@store --}}
+                            <!-- Hidden fields required by CheckoutController@store -->
                             <input type="hidden" name="room_id"        id="f_room_id"       value="{{ request('room_id', '') }}">
                             <input type="hidden" name="room_type"      id="f_room_type"     value="{{ request('room_type', '') }}">
                             <input type="hidden" name="rate_name"      id="f_rate_name"     value="{{ request('rate_name', '') }}">
@@ -194,7 +194,7 @@
                                 <div class="form-group form-group--full">
                                     <label class="form-checkbox-label">
                                         <input type="checkbox" id="agree_terms" name="agree_terms" class="form-checkbox" required>
-                                        <span>I agree to the <a href="/privacy" style="color: var(--gold);">Privacy Policy</a> and <a href="/terms" style="color: var(--gold);">Terms of Use</a>. <span class="req">*</span></span>
+                                        <span>I agree to the <a href="/privacy" target="_blank" style="color: var(--gold);">Privacy Policy</a> and <a href="/terms" target="_blank" style="color: var(--gold);">Terms of Use</a>. <span class="req">*</span></span>
                                     </label>
                                     <span class="form-error" id="err-agree_terms"></span>
                                 </div>
@@ -207,10 +207,10 @@
                                 </button>
                             </div>
                         </form>
-                    </div>{{-- /step-1 --}}
+                    </div><!-- /step-1 -->
 
 
-                    {{-- ============ STEP 2: EXTRAS ============ --}}
+                    <!-- STEP 2  -->
                     <div class="checkout-step" id="step-2" style="display:none;">
                         <div class="step-heading">
                             <span class="eyebrow">Step 2 of 3</span>
@@ -250,10 +250,10 @@
                                 <span>Continue to Payment</span>
                             </button>
                         </div>
-                    </div>{{-- /step-2 --}}
+                    </div><!-- /step-2 -->
 
 
-                    {{-- ============ STEP 3: CONFIRM & PAY ============ --}}
+                    <!-- STEP 3 -->
                     <div class="checkout-step" id="step-3" style="display:none;">
                         <div class="step-heading">
                             <span class="eyebrow">Step 3 of 3</span>
@@ -261,7 +261,7 @@
                             <span class="gold-line"></span>
                         </div>
 
-                        {{-- Guest summary review --}}
+                        <!-- Guest summary review -->
                         <div class="review-block">
                             <div class="review-block-header">
                                 <h3 class="review-block-title">Guest Details</h3>
@@ -270,7 +270,7 @@
                             <div class="review-grid" id="review-guest"></div>
                         </div>
 
-                        {{-- Extras review --}}
+                        <!-- Extras review -->
                         <div class="review-block" id="review-extras-block">
                             <div class="review-block-header">
                                 <h3 class="review-block-title">Selected Extras</h3>
@@ -279,7 +279,7 @@
                             <div id="review-extras-content"><p class="body-sm">No extras selected.</p></div>
                         </div>
 
-                        {{-- Payment method --}}
+                        <!-- Payment method -->
                         <div class="review-block">
                             <div class="review-block-header">
                                 <h3 class="review-block-title">Payment Method</h3>
@@ -301,7 +301,7 @@
                                 </label>
                             </div>
 
-                            {{-- Online payment placeholder --}}
+                            <!-- Online payment placeholder -->
                             <div id="online-payment-fields" style="display:none;" class="online-payment-panel">
                                 <div class="secure-badge">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -334,10 +334,10 @@
                                 <span>Confirm Reservation</span>
                             </button>
                         </div>
-                    </div>{{-- /step-3 --}}
+                    </div><!-- /step-3 -->
 
 
-                    {{-- ============ STEP 4: SUCCESS ============ --}}
+                    <!--  STEP 4 -->
                     <div class="checkout-step" id="step-4" style="display:none;">
                         <div class="success-panel">
                             <div class="success-icon">✓</div>
@@ -359,12 +359,12 @@
                                 <a href="/accommodations" class="btn btn-outline">Explore More Rooms</a>
                             </div>
                         </div>
-                    </div>{{-- /step-4 --}}
+                    </div><!-- /step-4 -->
 
-                </div>{{-- /checkout-main --}}
+                </div><!-- /checkout-main -->
 
 
-                {{-- ===== RIGHT: BOOKING SUMMARY SIDEBAR ===== --}}
+                <!--  BOOKING SUMMARY SIDEBAR -->
                 <aside class="checkout-sidebar" aria-label="Booking summary">
                     <div class="sidebar-inner">
                         <div class="sidebar-header">
@@ -374,7 +374,7 @@
                             </h3>
                         </div>
 
-                        {{-- Dates --}}
+                        <!-- Dates -->
                         <div class="sidebar-dates">
                             <div class="sidebar-date-row">
                                 <span class="sidebar-date-label">Check-In</span>
@@ -454,21 +454,17 @@
                     </div>
                 </aside>
 
-            </div>{{-- /checkout-layout --}}
+            </div><!-- /checkout-layout -->
         </div>
     </section>
 
 
-    {{-- ============================================================
-         WHY BOOK DIRECT
-    ============================================================ --}}
+    <!--  WHY BOOK DIRECT  -->
     <section class="section-gap" style="background: var(--navy); display: none;" id="why-book-direct" aria-label="Book direct benefits">
     </section>
 
 
-    {{-- ============================================================
-         PAGE-SPECIFIC STYLES
-    ============================================================ --}}
+    <!--  PAGE-SPECIFIC STYLES  -->
     <x-slot name="styles">
     <style>
         /* PAGE HERO */
@@ -982,12 +978,10 @@
     </x-slot>
 
 
-    {{-- ============================================================
-         PAGE-SPECIFIC SCRIPTS
-    ============================================================ --}}
+    <!--  PAGE-SPECIFIC SCRIPTS  -->
     <x-slot name="scripts">
     <script>
-        // ── State ──────────────────────────────────────────────────
+        //  State 
         let currentStep = 1;
         const nights    = {{ $nights ?? 1 }};
         const basePrice = {{ (int) request('price', 3500) }};
@@ -1003,7 +997,7 @@
         };
         let selectedExtras = {};
 
-        // ── Step navigation (single definition) ───────────────────
+        //  Step navigation (single definition)  
         function goToStep(n) {
             if (n === 3) buildReview();
             document.getElementById('step-' + currentStep).style.display = 'none';
@@ -1022,7 +1016,7 @@
             document.querySelector('.checkout-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // ── Step 1: Validate guest form ────────────────────────────
+        //  Step 1: Validate guest form  
         document.getElementById('guest-form').addEventListener('submit', function(e) {
             e.preventDefault();
             let valid = true;
@@ -1073,7 +1067,7 @@
             }
         });
 
-        // ── Step 2: Extras toggle ──────────────────────────────────
+        //  Step 2: Extras toggle  
         function toggleExtra(checkbox, key) {
             const card = document.getElementById('extra-' + key);
             if (checkbox.checked) {
@@ -1104,7 +1098,7 @@
             }
         }
 
-        // ── Step 3: Build review summary ──────────────────────────
+        //  Step 3: Build review summary 
 
         function buildReview() {
             const fields = [
@@ -1138,7 +1132,7 @@
             }
         }
 
-        // ── Payment toggle ─────────────────────────────────────────
+        //  Payment toggle 
         function updatePaymentUI() {
             const online = document.querySelector('input[name="payment_method"][value="pay_online"]').checked;
             document.getElementById('online-payment-fields').style.display = online ? 'block' : 'none';
