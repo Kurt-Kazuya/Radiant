@@ -14,12 +14,21 @@
 </div>
 
 @if(session('success'))
-    <div class="alert alert--success">
+    <div class="alert alert--success" id="admin-success-alert" style="transition: opacity 0.5s ease;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px">
             <polyline points="20 6 9 17 4 12"/>
         </svg>
         {{ session('success') }}
     </div>
+    <script>
+        setTimeout(() => {
+            const alert = document.getElementById('admin-success-alert');
+            if (alert) {
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 500);
+            }
+        }, 2000);
+    </script>
 @endif
 
 <div class="card">
@@ -88,5 +97,23 @@
     </div>
     @endif
 </div>
+
+<script>
+    // Auto-refresh the table every 10 seconds without reloading the page
+    setInterval(() => {
+        fetch(window.location.href)
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newTable = doc.querySelector('.data-table');
+                const currentTable = document.querySelector('.data-table');
+                if (newTable && currentTable) {
+                    currentTable.innerHTML = newTable.innerHTML;
+                }
+            })
+            .catch(error => console.error('Error fetching payments:', error));
+    }, 10000);
+</script>
 
 @endsection

@@ -43,16 +43,12 @@ Route::get('/reservations', fn() => view('reservations'))->name('reservations');
 
 Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login',   [AuthController::class, 'login'])->name('login.post');
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register',[AuthController::class, 'register'])->name('register.post');
 Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
 //  Guest Checkout & Bookings (no login required) 
 
 Route::get('/checkout',  [CheckoutController::class, 'show'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
-
-Route::get('/my-bookings', [GuestReservationController::class, 'myBookings'])->name('my-bookings');
 
 // Admin Routes (auth + admin role required)
 

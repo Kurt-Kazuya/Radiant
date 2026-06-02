@@ -82,6 +82,28 @@
     {{-- MAIN BOOKING LAYOUT --}}
     <section class="section-gap booking-section" style="background: var(--cream);" aria-label="Room availability">
         <div class="container">
+
+            @if(session('success'))
+                <div style="
+                    background: #d3f9d8;
+                    color: #1a6b2d;
+                    border-left: 3px solid #2f9e44;
+                    padding: 1rem 1.25rem;
+                    margin-bottom: 2rem;
+                    font-size: 0.95rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    border-radius: 4px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+                ">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <strong>{{ session('success') }}</strong>
+                </div>
+            @endif
+
             <div class="booking-layout">
 
                 {{-- ===== LEFT: ROOM LISTINGS ===== --}}

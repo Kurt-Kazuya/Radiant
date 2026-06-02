@@ -65,6 +65,20 @@
                             <span class="gold-line"></span>
                         </div>
 
+                        @if(session('error') || $errors->any())
+                            <div class="alert alert--danger" style="background: rgba(229, 62, 62, 0.1); border: 1px solid #e53e3e; color: #e53e3e; padding: 1rem; border-radius: 4px; margin-bottom: 2rem;">
+                                <strong style="display: block; margin-bottom: 0.5rem;">There was an issue with your booking:</strong>
+                                <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.9rem;">
+                                    @if(session('error'))
+                                        <li>{{ session('error') }}</li>
+                                    @endif
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         {{-- Real POST form that saves to the reservations table --}}
                         <form id="guest-form" class="checkout-form" method="POST" action="{{ route('checkout.store') }}" novalidate>
                             @csrf
