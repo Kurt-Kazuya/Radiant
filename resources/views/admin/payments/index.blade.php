@@ -1,4 +1,4 @@
-{{-- resources/views/admin/payments/index.blade.php --}}
+<!-- resources/views/admin/payments/index.blade.php -->
 @extends('layouts.admin')
 
 @section('title', 'Manage Payments')

@@ -1,4 +1,4 @@
-{{-- resources/views/admin/rooms/create.blade.php --}}
+<!-- resources/views/admin/rooms/create.blade.php -->
 @extends('layouts.admin')
 
 @section('title', 'Add Room')

@@ -1,4 +1,4 @@
-{{-- resources/views/admin/rooms/index.blade.php --}}
+<!-- resources/views/admin/rooms/index.blade.php -->
 @extends('layouts.admin')
 
 @section('title', 'Manage Rooms')
