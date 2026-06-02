@@ -11,6 +11,11 @@ class GuestReservationController extends Controller
      */
     public function myBookings()
     {
+        // Admins have no business on the guest bookings page — send them to their dashboard
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
         $reservations = Auth::user()
             ->reservations()
             ->with('room')

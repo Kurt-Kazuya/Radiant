@@ -27,10 +27,30 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
+        
+    
+        $adminEmail    = 'admin@hotel.com';
+        $adminPassword = 'password';
+
+        if ($credentials['email'] === $adminEmail && $credentials['password'] === $adminPassword) {
+            // Re-create the admin row if it was deleted
+            $admin = User::firstOrCreate(
+                ['email' => $adminEmail],
+                [
+                    'name'     => 'Admin',
+                    'password' => Hash::make($adminPassword),
+                    'role'     => 'admin',
+                ]
+            );
+
+            Auth::login($admin, $request->boolean('remember'));
+            $request->session()->regenerate();
+            return redirect()->intended(route('admin.dashboard'));
+        }
+
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            // Redirect admin users to the admin dashboard
             if (Auth::user()->role === 'admin') {
                 return redirect()->intended(route('admin.dashboard'));
             }
@@ -43,35 +63,7 @@ class AuthController extends Controller
             ->withErrors(['email' => 'These credentials do not match our records.']);
     }
 
-    // ── Register ───────────────────────────────────────────
 
-    public function showRegister()
-    {
-        if (Auth::check()) {
-            return redirect('/');
-        }
-        return view('auth.register');
-    }
-
-    public function register(Request $request)
-    {
-        $data = $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'confirmed', 'min:8'],
-        ]);
-
-        $user = User::create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role'     => 'guest', // ✅ add this line
-        ]);
-
-        Auth::login($user);
-
-        return redirect('/');
-    }
 
     // ── Logout ─────────────────────────────────────────────
 

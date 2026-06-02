@@ -55,24 +55,72 @@ class CheckoutController extends Controller
             ]
         );
 
-        // Find a room ID if it wasn't provided directly
-        $roomId = $validated['room_id'];
-        if (empty($roomId)) {
-            $typeMap = [
-                'Deluxe Room' => 'single',
-                'Superior Room' => 'double',
-                'Junior Suite' => 'suite',
-                'Penthouse Suite' => 'suite'
-            ];
-            $type = $typeMap[$validated['room_type'] ?? ''] ?? 'double';
-            $room = Room::where('type', $type)->where('status', 'available')->first();
-            if (!$room) $room = Room::first();
-            $roomId = $room ? $room->id : 1;
+        // Find a room ID if it wasn't provided directly, or if it's invalid
+        $roomId = $validated['room_id'] ?? null;
+        if ($roomId && !\App\Models\Room::where('id', $roomId)->exists()) {
+            $roomId = null;
         }
 
-        // Create the reservation
+        if (empty($roomId)) {
+            $roomType = $validated['room_type'] ?? '';
+
+            // Try to match by exact room name first (e.g. "Deluxe Room", "Junior Suite")
+            $room = Room::where('name', $roomType)->where('status', 'available')->first();
+
+            // Fallback: match by type category
+            if (!$room) {
+                $typeMap = [
+                    'Deluxe Room'     => 'single',
+                    'Superior Room'   => 'double',
+                    'Junior Suite'    => 'suite',
+                    'Penthouse Suite' => 'suite',
+                ];
+                $type = $typeMap[$roomType] ?? 'double';
+                $room = Room::where('type', $type)->where('status', 'available')->first();
+            }
+
+            // Last resort: any room at all
+            if (!$room) $room = Room::first();
+            $roomId = $room ? $room->id : null;
+        }
+
+
+        if (!$roomId) {
+            return back()->with('error', 'Sorry, there are no rooms available in the system to book right now.');
+        }
+
+        // Always attach the reservation to the user whose email was submitted,
+        // never the currently-logged-in session (which may be a different guest).
+        $userId = $user->id;
+
+        // Exception: if an ADMIN is logged in, keep their ID so they can test bookings.
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            // Admin test booking — redirect to admin panel after saving
+            $reservation = Reservation::create([
+                'user_id'        => $userId,
+                'room_id'        => $roomId,
+                'check_in_date'  => $validated['check_in_date'],
+                'check_out_date' => $validated['check_out_date'],
+                'total_nights'   => $validated['total_nights'],
+                'total_price'    => $validated['total_price'],
+                'status'         => 'pending',
+            ]);
+
+            $paymentMethod = $validated['payment_method'] ?? 'pay_at_hotel';
+            Payment::create([
+                'reservation_id' => $reservation->id,
+                'amount'         => $validated['total_price'],
+                'payment_method' => $paymentMethod === 'pay_online' ? 'credit_card' : 'cash',
+                'payment_status' => $paymentMethod === 'pay_online' ? 'paid' : 'unpaid',
+            ]);
+
+            return redirect()->route('admin.reservations.index')
+                ->with('success', "Test reservation #{$reservation->id} created for {$user->name}.");
+        }
+
+        // Create the reservation under the submitted-email user
         $reservation = Reservation::create([
-            'user_id'        => Auth::id() ?? $user->id,
+            'user_id'        => $userId,
             'room_id'        => $roomId,
             'check_in_date'  => $validated['check_in_date'],
             'check_out_date' => $validated['check_out_date'],
@@ -85,17 +133,17 @@ class CheckoutController extends Controller
         $paymentMethod = $validated['payment_method'] ?? 'pay_at_hotel';
         Payment::create([
             'reservation_id' => $reservation->id,
-            'amount' => $validated['total_price'],
+            'amount'         => $validated['total_price'],
             'payment_method' => $paymentMethod === 'pay_online' ? 'credit_card' : 'cash',
             'payment_status' => $paymentMethod === 'pay_online' ? 'paid' : 'unpaid',
         ]);
 
-        // If guest is not logged in, we can log them in automatically so they can see their bookings
-        if (!Auth::check()) {
-            Auth::login($user);
-        }
+        // Guests do not get a login session. They just submit the form.
+        // Only admins have login sessions.
 
-        return redirect()->route('my-bookings')
-            ->with('success', "Your reservation #" . $reservation->id . " has been submitted! We will confirm it within 24 hours.");
+
+        return redirect()->route('reservations')
+            ->with('success', "Thank you! Your reservation #{$reservation->id} has been submitted! We will confirm it within 24 hours.");
     }
 }
+

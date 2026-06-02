@@ -19,7 +19,7 @@ class AdminDashboardController extends Controller
         $totalRooms        = Room::count();
         $availableRooms    = Room::where('status', 'available')->count();
         $totalRevenue      = Payment::where('payment_status', 'paid')->sum('amount');
-        $totalGuests       = User::where('role', 'guest')->count();
+        $totalGuests       = User::where('role', 'guest')->whereHas('reservations')->count();
         $recentReservations = Reservation::with(['user', 'room'])->latest()->take(5)->get();
 
         return view('admin.dashboard', compact(
