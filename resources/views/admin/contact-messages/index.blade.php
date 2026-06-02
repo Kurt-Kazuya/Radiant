@@ -163,7 +163,7 @@
         document.getElementById('message-modal').style.display = 'none';
     }
 
-    // Auto-refresh 5s
+    // Auto-refresh 3s
     setInterval(() => {
         fetch(window.location.href)
             .then(response => response.text())
@@ -177,7 +177,7 @@
                 }
             })
             .catch(error => console.error('Error fetching new messages:', error));
-    }, 5000);
+    }, 3000);
 </script>
 
 @endsection

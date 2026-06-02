@@ -5,8 +5,8 @@
 @section('topbar-title', 'Admin Dashboard')
 
 @section('head')
-    <!-- Automatically refresh the dashboard every 30 seconds -->
-    <meta http-equiv="refresh" content="30">
+    <!-- Automatically refresh the dashboard every 3 seconds -->
+    <meta http-equiv="refresh" content="3">
 @endsection
 
 @section('content')
