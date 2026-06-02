@@ -297,7 +297,7 @@
                     <article class="room-card" id="room-junior-suite">
                         <div class="room-card-img-wrap">
                             <img
-                                src="{{ asset('images/Junior-Suite.jpg') }}" alt="Junior Suite"
+                                src="{{ asset('images/Suite-Rooms.jpg') }}" alt="Junior Suite"
                                 class="room-card-img"
                                 loading="lazy"
                             >
@@ -373,7 +373,7 @@
                     <article class="room-card" id="room-penthouse">
                         <div class="room-card-img-wrap">
                             <img
-                                src="{{ asset('images/Penthouse-Suite.avif') }}" alt="Penthouse Suite"
+                                src="{{ asset('images/The-Penthouse-3beds-Room.avif') }}" alt="Penthouse Suite"
                                 class="room-card-img"
                                 loading="lazy"
                             >
