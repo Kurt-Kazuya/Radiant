@@ -20,13 +20,13 @@
 </head>
 <body>
 
-    {{-- Header --}}
+    <!-- Header -->
     <div class="header">
         <h1>Hotel Reservation System</h1>
         <p>Reservations Report - Generated on {{ now()->format('F d, Y h:i A') }}</p>
     </div>
 
-    {{-- Summary --}}
+    <!-- Summary -->
     <table style="margin-bottom: 16px;">
         <tr>
             <td style="border:1px solid #ddd; padding:8px; text-align:center;">
@@ -48,7 +48,7 @@
         </tr>
     </table>
 
-    {{-- Table --}}
+    <!-- Table -->
     <table>
         <thead>
             <tr>
@@ -90,7 +90,7 @@
         </tbody>
     </table>
 
-    {{-- Footer --}}
+    <!-- Footer -->
     <div class="footer">
         Hotel Reservation System - Confidential Report - {{ now()->format('Y') }}
     </div>

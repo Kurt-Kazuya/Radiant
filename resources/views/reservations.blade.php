@@ -1,6 +1,6 @@
 <x-layout title="Book Now – Radiant Hotel Pangasinan">
 <!-- sdf -->
-    {{-- PAGE HERO BANNER --}}
+    <!-- PAGE HERO BANNER -->
     <section class="page-hero" aria-label="Reservations hero">
         <div class="page-hero-bg">
             <img
@@ -24,7 +24,7 @@
     </section>
 
 
-    {{-- AVAILABILITY SEARCH BAR --}}
+    <!-- AVAILABILITY SEARCH BAR -->
     <section class="search-bar-section" aria-label="Check availability">
         <div class="container">
             <form class="search-bar" method="GET" action="{{ route('reservations') }}" id="availability-form">
@@ -92,7 +92,7 @@
     </section>
 
 
-    {{-- MAIN BOOKING LAYOUT --}}
+    <!-- MAIN BOOKING LAYOUT -->
     <section class="section-gap booking-section" style="background: var(--cream);" aria-label="Room availability">
         <div class="container">
 
@@ -131,10 +131,10 @@
 
             <div class="booking-layout">
 
-                {{-- ===== LEFT: ROOM LISTINGS ===== --}}
+                <!--  LEFT: ROOM LISTINGS  -->
                 <div class="rooms-column">
 
-                    {{-- Section heading --}}
+                    <!-- Section heading -->
                     <div class="rooms-heading">
                         <div class="section-label">
                             <span class="eyebrow">Available Rooms</span>
@@ -154,7 +154,7 @@
                         </p>
                     </div>
 
-                    {{-- ---- ROOM CARD: Deluxe Room ---- --}}
+                    <!--  ROOM CARD: Deluxe Room  -->
                     @php $deluxeAvail = $availability['Deluxe Room'] ?? ['is_available' => true, 'available' => 1]; @endphp
                     <article class="room-card {{ !$deluxeAvail['is_available'] ? 'room-card--unavailable' : '' }}" id="room-deluxe">
                         <div class="room-card-img-wrap">
@@ -238,7 +238,7 @@
                     </article>
 
 
-                    {{-- ---- ROOM CARD: Superior Room ---- --}}
+                    <!--  ROOM CARD: Superior Room  -->
                     @php $superiorAvail = $availability['Superior Room'] ?? ['is_available' => true, 'available' => 1]; @endphp
                     <article class="room-card {{ !$superiorAvail['is_available'] ? 'room-card--unavailable' : '' }}" id="room-superior">
                         <div class="room-card-img-wrap">
@@ -322,7 +322,7 @@
                     </article>
 
 
-                    {{-- ---- ROOM CARD: Junior Suite ---- --}}
+                    <!--  ROOM CARD: Junior Suite  -->
                     @php $juniorAvail = $availability['Junior Suite'] ?? ['is_available' => true, 'available' => 1]; @endphp
                     <article class="room-card {{ !$juniorAvail['is_available'] ? 'room-card--unavailable' : '' }}" id="room-junior-suite">
                         <div class="room-card-img-wrap">
@@ -406,7 +406,7 @@
                     </article>
 
 
-                    {{-- ---- ROOM CARD: Penthouse Suite ---- --}}
+                    <!--  ROOM CARD: Penthouse Suite  -->
                     @php $penthouseAvail = $availability['Penthouse Suite'] ?? ['is_available' => true, 'available' => 1]; @endphp
                     <article class="room-card {{ !$penthouseAvail['is_available'] ? 'room-card--unavailable' : '' }}" id="room-penthouse">
                         <div class="room-card-img-wrap">
@@ -489,10 +489,10 @@
                         </div>
                     </article>
 
-                </div>{{-- /rooms-column --}}
+                </div><!-- /rooms-column -->
 
 
-                {{-- ===== RIGHT: BOOKING SUMMARY SIDEBAR ===== --}}
+                <!--  RIGHT: BOOKING SUMMARY SIDEBAR  -->
                 <aside class="booking-summary" id="booking-summary" aria-label="Booking summary">
                     <div class="summary-inner">
                         <div class="summary-header">
@@ -531,14 +531,14 @@
                             </span>
                         </div>
 
-                        {{-- Empty state --}}
+                        <!-- Empty state -->
                         <div class="summary-empty" id="summary-empty">
                             <p class="body-sm" style="text-align: center; color: rgba(255,255,255,0.45); padding: 1.5rem 0;">
                                 Select a room and rate to continue
                             </p>
                         </div>
 
-                        {{-- Selected room (shown after selection) --}}
+                        <!-- Selected room (shown after selection) -->
                         <div class="summary-selected" id="summary-selected" style="display: none;">
                             <div class="gold-line" style="margin-block: 1rem;"></div>
                             <div class="summary-room-name" id="sum-room-name"></div>
@@ -565,19 +565,19 @@
                             <button class="summary-clear-btn" onclick="clearSelection()">Clear selection</button>
                         </div>
 
-                        {{-- Policies note --}}
+                        <!-- Policies note -->
                         <div class="summary-policy">
                             <p>Free cancellation available on most rates. Payments processed securely. By booking you agree to our <a href="/privacy">Privacy Policy</a>.</p>
                         </div>
                     </div>
                 </aside>
 
-            </div>{{-- /booking-layout --}}
+            </div><!-- /booking-layout -->
         </div>
     </section>
 
 
-    {{-- WHY BOOK DIRECT STRIP --}}
+    <!-- WHY BOOK DIRECT STRIP -->
     <section class="section-gap" style="background: var(--navy);" aria-label="Book direct benefits">
         <div class="container">
             <div style="text-align: center; margin-bottom: 3.5rem;">
@@ -605,7 +605,7 @@
     </section>
 
 
-    {{-- CTA BANNER --}}
+    <!-- CTA BANNER -->
     <section class="cta-banner" aria-label="Need help with your reservation?">
         <div class="cta-overlay"></div>
         <img
@@ -629,7 +629,7 @@
     </section>
 
 
-    {{-- PAGE-SPECIFIC STYLES --}}
+    <!-- PAGE-SPECIFIC STYLES -->
     <x-slot name="styles">
     <style>
         /* PAGE HERO */
@@ -1166,7 +1166,7 @@
     </x-slot>
 
 
-    {{-- PAGE-SPECIFIC SCRIPTS --}}
+    <!-- PAGE-SPECIFIC SCRIPTS -->
     <x-slot name="scripts">
     <script>
         const nights = {{ $nights ?? 1 }};

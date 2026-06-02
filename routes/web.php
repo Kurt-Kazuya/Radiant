@@ -34,7 +34,8 @@ Route::post('/contact', function(\Illuminate\Http\Request $request) {
                  ->with('sent_data', $validated);
 })->name('contact.post');
 Route::get('/reservations', [ReservationsController::class, 'index'])->name('reservations');
-
+Route::get('/privacy', fn() => view('privacy'))->name('privacy');
+Route::get('/terms', fn() => view('terms'))->name('terms');
 //  Auth Routes 
 Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login',   [AuthController::class, 'login'])->name('login.post');
