@@ -4,6 +4,11 @@
 @section('title', 'Manage Reservations')
 @section('topbar-title', 'Reservations')
 
+@section('head')
+    <!-- Automatically refresh -->
+    <meta http-equiv="refresh" content="10">
+@endsection
+
 @section('content')
 
 <div class="page-header">

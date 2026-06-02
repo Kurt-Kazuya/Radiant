@@ -39,6 +39,13 @@ class AdminReservationController extends Controller
         $reservation = Reservation::findOrFail($id);
         $reservation->update(['status' => 'cancelled']);
 
+        if ($reservation->room_id) {
+            $room = \App\Models\Room::find($reservation->room_id);
+            if ($room) {
+                $room->update(['status' => 'available']);
+            }
+        }
+
         return back()->with('success', "Reservation #{$id} has been cancelled.");
     }
 
@@ -48,6 +55,14 @@ class AdminReservationController extends Controller
     public function destroy($id)
     {
         $reservation = Reservation::findOrFail($id);
+        
+        if ($reservation->room_id) {
+            $room = \App\Models\Room::find($reservation->room_id);
+            if ($room) {
+                $room->update(['status' => 'available']);
+            }
+        }
+
         $reservation->delete();
 
         return redirect()->route('admin.reservations.index')

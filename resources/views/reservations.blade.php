@@ -84,7 +84,7 @@
         <div class="container">
 
             @if(session('success'))
-                <div style="
+                <div id="success-alert" style="
                     background: #d3f9d8;
                     color: #1a6b2d;
                     border-left: 3px solid #2f9e44;
@@ -96,13 +96,25 @@
                     gap: 0.75rem;
                     border-radius: 4px;
                     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+                    transition: opacity 0.6s ease, transform 0.6s ease;
                 ">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0">
                         <polyline points="20 6 9 17 4 12"/>
                     </svg>
                     <strong>{{ session('success') }}</strong>
                 </div>
+                <script>
+                    setTimeout(function () {
+                        var el = document.getElementById('success-alert');
+                        if (el) {
+                            el.style.opacity = '0';
+                            el.style.transform = 'translateY(-8px)';
+                            setTimeout(function () { el.remove(); }, 600);
+                        }
+                    }, 5000);
+                </script>
             @endif
+
 
             <div class="booking-layout">
 
