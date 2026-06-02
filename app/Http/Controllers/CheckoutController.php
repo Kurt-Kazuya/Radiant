@@ -45,7 +45,7 @@ class CheckoutController extends Controller
             'payment_method' => 'nullable|string',
         ]);
 
-        // Find or create a user account for this guest
+        // create user
         $user = User::firstOrCreate(
             ['email' => $validated['email']],
             [
@@ -55,7 +55,7 @@ class CheckoutController extends Controller
             ]
         );
 
-        // Find a room ID if it wasn't provided directly, or if it's invalid
+        // find room
         $roomId = $validated['room_id'] ?? null;
         if ($roomId && !\App\Models\Room::where('id', $roomId)->exists()) {
             $roomId = null;
@@ -64,10 +64,10 @@ class CheckoutController extends Controller
         if (empty($roomId)) {
             $roomType = $validated['room_type'] ?? '';
 
-            // Try to match by exact room name first (e.g. "Deluxe Room", "Junior Suite")
+            // exact room name
             $room = Room::where('name', $roomType)->where('status', 'available')->first();
 
-            // Fallback: match by type category
+            // fallback category
             if (!$room) {
                 $typeMap = [
                     'Deluxe Room'     => 'single',
@@ -79,7 +79,7 @@ class CheckoutController extends Controller
                 $room = Room::where('type', $type)->where('status', 'available')->first();
             }
 
-            // Last resort: any room at all
+            // last resort
             if (!$room) $room = Room::first();
             $roomId = $room ? $room->id : null;
         }
@@ -89,13 +89,10 @@ class CheckoutController extends Controller
             return back()->with('error', 'Sorry, there are no rooms available in the system to book right now.');
         }
 
-        // Always attach the reservation to the user whose email was submitted,
-        // never the currently-logged-in session (which may be a different guest).
         $userId = $user->id;
 
-        // Exception: if an ADMIN is logged in, keep their ID so they can test bookings.
+        // admin bypass
         if (Auth::check() && Auth::user()->role === 'admin') {
-            // Admin test booking — redirect to admin panel after saving
             $reservation = Reservation::create([
                 'user_id'        => $userId,
                 'room_id'        => $roomId,
@@ -118,7 +115,7 @@ class CheckoutController extends Controller
                 ->with('success', "Test reservation #{$reservation->id} created for {$user->name}.");
         }
 
-        // Create the reservation under the submitted-email user
+        // create reservation
         $reservation = Reservation::create([
             'user_id'        => $userId,
             'room_id'        => $roomId,
@@ -129,7 +126,7 @@ class CheckoutController extends Controller
             'status'         => 'pending',
         ]);
 
-        // Create the payment record
+        // payment
         $paymentMethod = $validated['payment_method'] ?? 'pay_at_hotel';
         Payment::create([
             'reservation_id' => $reservation->id,
@@ -138,8 +135,7 @@ class CheckoutController extends Controller
             'payment_status' => $paymentMethod === 'pay_online' ? 'paid' : 'unpaid',
         ]);
 
-        // Guests do not get a login session. They just submit the form.
-        // Only admins have login sessions.
+
 
 
         return redirect()->route('reservations')

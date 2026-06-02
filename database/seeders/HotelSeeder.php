@@ -16,7 +16,7 @@ class HotelSeeder extends Seeder
         User::create([
             'name'     => 'Admin',
             'email'    => 'admin@hotel.com',
-            'password' => bcrypt('password'),
+            'password' => Hash::make('password'),
             'role'     => 'admin',
         ]);
 
