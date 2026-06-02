@@ -14,6 +14,7 @@ public function up(): void
     Schema::create('rooms', function (Blueprint $table) {
         $table->id();
         $table->string('room_number')->unique();
+        $table->string('name')->nullable();          // Display name e.g. "Deluxe Room"
         $table->enum('type', ['single', 'double', 'suite']);
         $table->decimal('price_per_night', 10, 2);
         $table->enum('status', ['available', 'occupied', 'maintenance'])->default('available');
