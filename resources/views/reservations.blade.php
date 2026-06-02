@@ -109,7 +109,7 @@
                         if (el) {
                             el.style.opacity = '0';
                             el.style.transform = 'translateY(-8px)';
-                            setTimeout(function () { el.remove(); }, 600);
+                            setTimeout(function () { el.remove(); }, 500);
                         }
                     }, 5000);
                 </script>
