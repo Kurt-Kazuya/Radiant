@@ -1,8 +1,6 @@
 <x-layout title="Book Now – Radiant Hotel Pangasinan">
 <!-- sdf -->
-    {{-- ============================================================
-         PAGE HERO BANNER
-    ============================================================ --}}
+    {{-- PAGE HERO BANNER --}}
     <section class="page-hero" aria-label="Reservations hero">
         <div class="page-hero-bg">
             <img
@@ -26,9 +24,7 @@
     </section>
 
 
-    {{-- ============================================================
-         AVAILABILITY SEARCH BAR
-    ============================================================ --}}
+    {{-- AVAILABILITY SEARCH BAR --}}
     <section class="search-bar-section" aria-label="Check availability">
         <div class="container">
             <form class="search-bar" method="GET" action="{{ route('reservations') }}" id="availability-form">
@@ -83,9 +79,7 @@
     </section>
 
 
-    {{-- ============================================================
-         MAIN BOOKING LAYOUT
-    ============================================================ --}}
+    {{-- MAIN BOOKING LAYOUT --}}
     <section class="section-gap booking-section" style="background: var(--cream);" aria-label="Room availability">
         <div class="container">
             <div class="booking-layout">
@@ -504,9 +498,7 @@
     </section>
 
 
-    {{-- ============================================================
-         WHY BOOK DIRECT STRIP
-    ============================================================ --}}
+    {{-- WHY BOOK DIRECT STRIP --}}
     <section class="section-gap" style="background: var(--navy);" aria-label="Book direct benefits">
         <div class="container">
             <div style="text-align: center; margin-bottom: 3.5rem;">
@@ -534,9 +526,7 @@
     </section>
 
 
-    {{-- ============================================================
-         CTA BANNER
-    ============================================================ --}}
+    {{-- CTA BANNER --}}
     <section class="cta-banner" aria-label="Need help with your reservation?">
         <div class="cta-overlay"></div>
         <img
@@ -560,9 +550,7 @@
     </section>
 
 
-    {{-- ============================================================
-         PAGE-SPECIFIC STYLES
-    ============================================================ --}}
+    {{-- PAGE-SPECIFIC STYLES --}}
     <x-slot name="styles">
     <style>
         /* PAGE HERO */
@@ -998,9 +986,7 @@
     </x-slot>
 
 
-    {{-- ============================================================
-         PAGE-SPECIFIC SCRIPTS
-    ============================================================ --}}
+    {{-- PAGE-SPECIFIC SCRIPTS --}}
     <x-slot name="scripts">
     <script>
         const nights = {{ $nights ?? 1 }};

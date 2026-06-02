@@ -113,8 +113,8 @@
                                 <span class="eyebrow">Room Type</span>
                                 <h2 class="display-md room-listing-title">Standard Room</h2>
                             </div>
-                            <a href="https://book-directonline.com/properties/thecrownresidencesatharbourspdirect"
-                               target="_blank" class="btn btn-gold room-book-btn">
+                            <a href="/reservations"
+                               class="btn btn-gold room-book-btn">
                                 <span>Book Now</span>
                             </a>
                         </div>
@@ -161,8 +161,8 @@
                                 <span class="eyebrow">Room Type</span>
                                 <h2 class="display-md room-listing-title">Deluxe Room</h2>
                             </div>
-                            <a href="https://book-directonline.com/properties/thecrownresidencesatharbourspdirect"
-                               target="_blank" class="btn btn-gold room-book-btn">
+                            <a href="/reservations"
+                               class="btn btn-gold room-book-btn">
                                 <span>Book Now</span>
                             </a>
                         </div>
@@ -210,8 +210,8 @@
                                 <span class="eyebrow">Room Type</span>
                                 <h2 class="display-md room-listing-title">Deluxe Room<br><em>Pool View</em></h2>
                             </div>
-                            <a href="https://book-directonline.com/properties/thecrownresidencesatharbourspdirect"
-                               target="_blank" class="btn btn-gold room-book-btn">
+                            <a href="/reservations"
+                               class="btn btn-gold room-book-btn">
                                 <span>Book Now</span>
                             </a>
                         </div>
@@ -258,8 +258,8 @@
                                 <span class="eyebrow">Room Type</span>
                                 <h2 class="display-md room-listing-title">One Bedroom <em>Suite</em></h2>
                             </div>
-                            <a href="https://book-directonline.com/properties/thecrownresidencesatharbourspdirect"
-                               target="_blank" class="btn btn-gold room-book-btn">
+                            <a href="/reservations"
+                               class="btn btn-gold room-book-btn">
                                 <span>Book Now</span>
                             </a>
                         </div>
@@ -307,8 +307,8 @@
                                 <span class="eyebrow">Room Type</span>
                                 <h2 class="display-md room-listing-title">Junior <em>Penthouse</em></h2>
                             </div>
-                            <a href="https://book-directonline.com/properties/thecrownresidencesatharbourspdirect"
-                               target="_blank" class="btn btn-gold room-book-btn">
+                            <a href="/reservations"
+                               class="btn btn-gold room-book-btn">
                                 <span>Book Now</span>
                             </a>
                         </div>
@@ -355,8 +355,8 @@
                                 <span class="eyebrow">Room Type</span>
                                 <h2 class="display-md room-listing-title">The <em>Penthouse</em></h2>
                             </div>
-                            <a href="https://book-directonline.com/properties/thecrownresidencesatharbourspdirect"
-                               target="_blank" class="btn btn-gold room-book-btn">
+                            <a href="/reservations"
+                               class="btn btn-gold room-book-btn">
                                 <span>Book Now</span>
                             </a>
                         </div>
@@ -404,8 +404,8 @@
                                 <span class="eyebrow">Room Type</span>
                                 <h2 class="display-md room-listing-title">Grand <em>Penthouse</em></h2>
                             </div>
-                            <a href="https://book-directonline.com/properties/thecrownresidencesatharbourspdirect"
-                               target="_blank" class="btn btn-gold room-book-btn">
+                            <a href="/reservations"
+                               class="btn btn-gold room-book-btn">
                                 <span>Book Now</span>
                             </a>
                         </div>
@@ -458,8 +458,7 @@
                 Book directly with us for the best available rates and enjoy exclusive perks only available through our website.
             </p>
             <a
-                href="https://book-directonline.com/properties/thecrownresidencesatharbourspdirect"
-                target="_blank"
+                href="/reservations"
                 class="btn btn-gold"
             >
                 <span>Reserve Your Room</span>
