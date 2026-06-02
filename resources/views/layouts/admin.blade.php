@@ -500,12 +500,12 @@
 
 <div class="admin-layout">
 
-    {{-- ══════════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════
          SIDEBAR
-    ══════════════════════════════════════════════ --}}
+    ══════════════════════════════════════════════ -->
     <aside class="admin-sidebar">
 
-        {{-- Brand --}}
+        <!-- Brand -->
         <div class="sidebar-brand">
             <div class="sidebar-brand-mark">RH</div>
             <div class="sidebar-brand-text">
@@ -514,7 +514,7 @@
             </div>
         </div>
 
-        {{-- Navigation --}}
+        <!-- Navigation -->
         <nav class="sidebar-nav">
             <div class="sidebar-section-label">Main</div>
 
@@ -587,7 +587,7 @@
             </a>
         </nav>
 
-        {{-- Sidebar footer: logged-in user + logout --}}
+        <!-- Sidebar footer: logged-in user + logout -->
         <div class="sidebar-footer">
             <div class="sidebar-user">
                 <div class="sidebar-avatar">
@@ -605,12 +605,12 @@
         </div>
     </aside>
 
-    {{-- ══════════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════
          MAIN
-    ══════════════════════════════════════════════ --}}
+    ══════════════════════════════════════════════ -->
     <div class="admin-main">
 
-        {{-- Topbar --}}
+        <!-- Topbar -->
         <div class="admin-topbar">
             <div class="topbar-title">@yield('topbar-title', 'Admin Panel')</div>
             <div class="topbar-actions">
@@ -620,7 +620,7 @@
             </div>
         </div>
 
-        {{-- Page content --}}
+        <!-- Page content -->
         <main class="admin-content">
             @yield('content')
         </main>
