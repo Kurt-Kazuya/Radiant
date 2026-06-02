@@ -384,24 +384,86 @@
 
         /* ── Pagination ── */
         .pagination-wrap {
-            padding: 1.25rem 1.5rem;
+            padding: 1.5rem;
             border-top: 1px solid rgba(0,0,0,0.06);
+            display: flex;
+            justify-content: center;
+            background: #fafbfc;
         }
         
         /* Fix for Laravel default Tailwind pagination SVGs */
         .pagination-wrap svg {
-            width: 1.25rem;
-            height: 1.25rem;
+            width: 1.2rem;
+            height: 1.2rem;
         }
         nav[role="navigation"] {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 1rem;
+            width: 100%;
         }
+        
+        nav[role="navigation"] > div {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Pagination Links & Buttons */
+        nav[role="navigation"] a, nav[role="navigation"] span.relative {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--navy);
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 6px;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            min-height: 42px;
+        }
+
+        nav[role="navigation"] a:hover {
+            background: var(--gold);
+            color: var(--navy);
+            border-color: var(--gold);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.06);
+        }
+
+        /* Active/Disabled states */
+        nav[role="navigation"] span[aria-current="page"] > span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: var(--navy);
+            color: var(--white);
+            border: 1px solid var(--navy);
+            border-radius: 6px;
+            min-height: 42px;
+        }
+        
+        nav[role="navigation"] span[aria-disabled="true"] {
+            opacity: 0.6;
+            background: #f0f2f5;
+            cursor: not-allowed;
+            color: var(--text-light);
+        }
+
         .hidden { display: none !important; }
         .flex { display: flex !important; }
         .items-center { align-items: center !important; }
-        .justify-between { justify-content: space-between !important; }
+        .justify-between { justify-content: center !important; gap: 1rem; }
 
         /* ── Form styles ── */
         .form-card { background: var(--white); padding: 2rem; max-width: 680px; }
