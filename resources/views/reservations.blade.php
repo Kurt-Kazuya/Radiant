@@ -52,26 +52,39 @@
                     >
                 </div>
                 <div class="search-divider"></div>
-                <div class="search-field">
+                <div class="search-field search-field--select">
                     <label class="search-label" for="guests">Guests</label>
-                    <select id="guests" name="guests" class="search-input search-select">
-                        @for ($i = 1; $i <= 8; $i++)
-                            <option value="{{ $i }}" {{ request('guests', 2) == $i ? 'selected' : '' }}>
-                                {{ $i }} {{ $i === 1 ? 'Guest' : 'Guests' }}
-                            </option>
-                        @endfor
-                    </select>
+                    <div class="search-select-wrap">
+                        <select id="guests" name="guests" class="search-input search-select">
+                            @for ($i = 1; $i <= 8; $i++)
+                                <option value="{{ $i }}" {{ request('guests', 2) == $i ? 'selected' : '' }}>
+                                    {{ $i }} {{ $i === 1 ? 'Guest' : 'Guests' }}
+                                </option>
+                            @endfor
+                        </select>
+                        <svg class="search-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
                 </div>
                 <div class="search-divider"></div>
-                <div class="search-field">
+                <div class="search-field search-field--select">
                     <label class="search-label" for="rooms">Rooms</label>
-                    <select id="rooms" name="rooms" class="search-input search-select">
-                        @for ($i = 1; $i <= 5; $i++)
-                            <option value="{{ $i }}" {{ request('rooms', 1) == $i ? 'selected' : '' }}>
-                                {{ $i }} {{ $i === 1 ? 'Room' : 'Rooms' }}
-                            </option>
-                        @endfor
-                    </select>
+                    <div class="search-select-wrap">
+                        <select id="rooms" name="rooms" class="search-input search-select">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <option value="{{ $i }}" {{ request('rooms', 1) == $i ? 'selected' : '' }}>
+                                    {{ $i }} {{ $i === 1 ? 'Room' : 'Rooms' }}
+                                </option>
+                            @endfor
+                        </select>
+                        <svg class="search-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+                <div class="search-divider"></div>
+                <div class="search-field" style="flex: 0; padding-inline: 1.25rem;">
+                    <button type="submit" class="search-submit-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <span>Search</span>
+                    </button>
                 </div>
 
             </form>
@@ -111,7 +124,7 @@
                             el.style.transform = 'translateY(-8px)';
                             setTimeout(function () { el.remove(); }, 500);
                         }
-                    }, 5000);
+                    }, 3000);
                 </script>
             @endif
 
@@ -142,13 +155,19 @@
                     </div>
 
                     {{-- ---- ROOM CARD: Deluxe Room ---- --}}
-                    <article class="room-card" id="room-deluxe">
+                    @php $deluxeAvail = $availability['Deluxe Room'] ?? ['is_available' => true, 'available' => 1]; @endphp
+                    <article class="room-card {{ !$deluxeAvail['is_available'] ? 'room-card--unavailable' : '' }}" id="room-deluxe">
                         <div class="room-card-img-wrap">
                             <img
                                 src="{{ asset('images/Delux-Rooms.jpg') }}" alt="Deluxe Room"
                                 class="room-card-img"
                                 loading="lazy"
                             >
+                            @if(!$deluxeAvail['is_available'])
+                                <div class="room-booked-overlay"><span>Fully Booked</span></div>
+                            @else
+                                <div class="room-avail-badge">{{ $deluxeAvail['available'] }} room{{ $deluxeAvail['available'] > 1 ? 's' : '' }} left</div>
+                            @endif
                         </div>
                         <div class="room-card-body">
                             <div class="room-card-top">
@@ -186,10 +205,11 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Deluxe Room', 'Standard Rate', 3500)"
+                                            class="btn {{ $deluxeAvail['is_available'] ? 'btn-gold' : 'btn-unavail' }} rate-select-btn"
+                                            onclick="{{ $deluxeAvail['is_available'] ? "selectRoom('Deluxe Room', 'Standard Rate', 3500)" : '' }}"
+                                            {{ !$deluxeAvail['is_available'] ? 'disabled' : '' }}
                                         >
-                                            <span>Select</span>
+                                            <span>{{ $deluxeAvail['is_available'] ? 'Select' : 'Unavailable' }}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -205,10 +225,11 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Deluxe Room', 'Breakfast Included', 4200)"
+                                            class="btn {{ $deluxeAvail['is_available'] ? 'btn-gold' : 'btn-unavail' }} rate-select-btn"
+                                            onclick="{{ $deluxeAvail['is_available'] ? "selectRoom('Deluxe Room', 'Breakfast Included', 4200)" : '' }}"
+                                            {{ !$deluxeAvail['is_available'] ? 'disabled' : '' }}
                                         >
-                                            <span>Select</span>
+                                            <span>{{ $deluxeAvail['is_available'] ? 'Select' : 'Unavailable' }}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -218,13 +239,19 @@
 
 
                     {{-- ---- ROOM CARD: Superior Room ---- --}}
-                    <article class="room-card" id="room-superior">
+                    @php $superiorAvail = $availability['Superior Room'] ?? ['is_available' => true, 'available' => 1]; @endphp
+                    <article class="room-card {{ !$superiorAvail['is_available'] ? 'room-card--unavailable' : '' }}" id="room-superior">
                         <div class="room-card-img-wrap">
                             <img
                                 src="{{ asset('images/Superior-Rooms.jpg') }}" alt="Superior Room"
                                 class="room-card-img"
                                 loading="lazy"
                             >
+                            @if(!$superiorAvail['is_available'])
+                                <div class="room-booked-overlay"><span>Fully Booked</span></div>
+                            @else
+                                <div class="room-avail-badge">{{ $superiorAvail['available'] }} room{{ $superiorAvail['available'] > 1 ? 's' : '' }} left</div>
+                            @endif
                         </div>
                         <div class="room-card-body">
                             <div class="room-card-top">
@@ -262,10 +289,11 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Superior Room', 'Standard Rate', 5500)"
+                                            class="btn {{ $superiorAvail['is_available'] ? 'btn-gold' : 'btn-unavail' }} rate-select-btn"
+                                            onclick="{{ $superiorAvail['is_available'] ? "selectRoom('Superior Room', 'Standard Rate', 5500)" : '' }}"
+                                            {{ !$superiorAvail['is_available'] ? 'disabled' : '' }}
                                         >
-                                            <span>Select</span>
+                                            <span>{{ $superiorAvail['is_available'] ? 'Select' : 'Unavailable' }}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -281,10 +309,11 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Superior Room', 'Breakfast Included', 6500)"
+                                            class="btn {{ $superiorAvail['is_available'] ? 'btn-gold' : 'btn-unavail' }} rate-select-btn"
+                                            onclick="{{ $superiorAvail['is_available'] ? "selectRoom('Superior Room', 'Breakfast Included', 6500)" : '' }}"
+                                            {{ !$superiorAvail['is_available'] ? 'disabled' : '' }}
                                         >
-                                            <span>Select</span>
+                                            <span>{{ $superiorAvail['is_available'] ? 'Select' : 'Unavailable' }}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -294,13 +323,19 @@
 
 
                     {{-- ---- ROOM CARD: Junior Suite ---- --}}
-                    <article class="room-card" id="room-junior-suite">
+                    @php $juniorAvail = $availability['Junior Suite'] ?? ['is_available' => true, 'available' => 1]; @endphp
+                    <article class="room-card {{ !$juniorAvail['is_available'] ? 'room-card--unavailable' : '' }}" id="room-junior-suite">
                         <div class="room-card-img-wrap">
                             <img
-                                src="{{ asset('images/Junior-Suite.jpg') }}" alt="Junior Suite"
+                                src="{{ asset('images/One-Bedroom-Suite.jpg') }}" alt="Junior Suite"
                                 class="room-card-img"
                                 loading="lazy"
                             >
+                            @if(!$juniorAvail['is_available'])
+                                <div class="room-booked-overlay"><span>Fully Booked</span></div>
+                            @else
+                                <div class="room-avail-badge">{{ $juniorAvail['available'] }} room{{ $juniorAvail['available'] > 1 ? 's' : '' }} left</div>
+                            @endif
                         </div>
                         <div class="room-card-body">
                             <div class="room-card-top">
@@ -338,10 +373,11 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Junior Suite', 'Standard Rate', 9000)"
+                                            class="btn {{ $juniorAvail['is_available'] ? 'btn-gold' : 'btn-unavail' }} rate-select-btn"
+                                            onclick="{{ $juniorAvail['is_available'] ? "selectRoom('Junior Suite', 'Standard Rate', 9000)" : '' }}"
+                                            {{ !$juniorAvail['is_available'] ? 'disabled' : '' }}
                                         >
-                                            <span>Select</span>
+                                            <span>{{ $juniorAvail['is_available'] ? 'Select' : 'Unavailable' }}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -357,10 +393,11 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Junior Suite', 'Full Board', 12500)"
+                                            class="btn {{ $juniorAvail['is_available'] ? 'btn-gold' : 'btn-unavail' }} rate-select-btn"
+                                            onclick="{{ $juniorAvail['is_available'] ? "selectRoom('Junior Suite', 'Full Board', 12500)" : '' }}"
+                                            {{ !$juniorAvail['is_available'] ? 'disabled' : '' }}
                                         >
-                                            <span>Select</span>
+                                            <span>{{ $juniorAvail['is_available'] ? 'Select' : 'Unavailable' }}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -370,13 +407,19 @@
 
 
                     {{-- ---- ROOM CARD: Penthouse Suite ---- --}}
-                    <article class="room-card" id="room-penthouse">
+                    @php $penthouseAvail = $availability['Penthouse Suite'] ?? ['is_available' => true, 'available' => 1]; @endphp
+                    <article class="room-card {{ !$penthouseAvail['is_available'] ? 'room-card--unavailable' : '' }}" id="room-penthouse">
                         <div class="room-card-img-wrap">
                             <img
-                                src="{{ asset('images/Penthouse-Suite.avif') }}" alt="Penthouse Suite"
+                                src="{{ asset('images/The-Grand-Penthouse-Room.avif') }}" alt="Penthouse Suite"
                                 class="room-card-img"
                                 loading="lazy"
                             >
+                            @if(!$penthouseAvail['is_available'])
+                                <div class="room-booked-overlay"><span>Fully Booked</span></div>
+                            @else
+                                <div class="room-avail-badge">{{ $penthouseAvail['available'] }} room{{ $penthouseAvail['available'] > 1 ? 's' : '' }} left</div>
+                            @endif
                         </div>
                         <div class="room-card-body">
                             <div class="room-card-top">
@@ -414,10 +457,11 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Penthouse Suite', 'Standard Rate', 18000)"
+                                            class="btn {{ $penthouseAvail['is_available'] ? 'btn-gold' : 'btn-unavail' }} rate-select-btn"
+                                            onclick="{{ $penthouseAvail['is_available'] ? "selectRoom('Penthouse Suite', 'Standard Rate', 18000)" : '' }}"
+                                            {{ !$penthouseAvail['is_available'] ? 'disabled' : '' }}
                                         >
-                                            <span>Select</span>
+                                            <span>{{ $penthouseAvail['is_available'] ? 'Select' : 'Unavailable' }}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -433,10 +477,11 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Penthouse Suite', 'All Inclusive', 24000)"
+                                            class="btn {{ $penthouseAvail['is_available'] ? 'btn-gold' : 'btn-unavail' }} rate-select-btn"
+                                            onclick="{{ $penthouseAvail['is_available'] ? "selectRoom('Penthouse Suite', 'Exclusive Package', 22000)" : '' }}"
+                                            {{ !$penthouseAvail['is_available'] ? 'disabled' : '' }}
                                         >
-                                            <span>Select</span>
+                                            <span>{{ $penthouseAvail['is_available'] ? 'Select' : 'Unavailable' }}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -669,6 +714,7 @@
             color: var(--white);
             cursor: pointer;
             padding: 0;
+            width: 100%;
         }
         .search-input option { background: var(--navy); color: var(--white); }
         .search-select { appearance: none; -webkit-appearance: none; }
@@ -679,11 +725,61 @@
             align-self: stretch;
             margin-block: 0.5rem;
         }
-        .search-btn {
-            margin: 0.75rem 1.25rem 0.75rem 1rem;
-            white-space: nowrap;
+
+        /* Select wrapper with visible dropdown arrow */
+        .search-select-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .search-select-wrap .search-input {
+            padding-right: 1.5rem;
+        }
+        .search-chevron {
+            position: absolute;
+            right: 0;
+            pointer-events: none;
+            width: 14px;
+            height: 14px;
+            color: var(--gold);
             flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+        .search-field--select:hover .search-chevron {
+            transform: translateY(2px);
+        }
+        .search-field--select {
+            background: rgba(255,255,255,0.04);
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+        .search-field--select:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* Search submit button */
+        .search-submit-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.25rem;
+            background: var(--gold);
+            color: var(--navy);
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s ease, transform 0.15s ease;
             align-self: center;
+        }
+        .search-submit-btn:hover {
+            background: #c9a84c;
+            transform: translateY(-1px);
         }
 
         /* ---- BOOKING LAYOUT ---- */
@@ -706,6 +802,7 @@
         .room-card-img-wrap {
             overflow: hidden;
             height: 280px;
+            position: relative;
         }
         .room-card-img {
             width: 100%;
@@ -713,10 +810,59 @@
             object-fit: cover;
             transition: transform 0.7s var(--ease-out);
         }
-        .room-card:hover .room-card-img { transform: scale(1.04); }
+        .room-card:not(.room-card--unavailable):hover .room-card-img { transform: scale(1.04); }
         .room-card-body { padding: 2rem 2rem 0; }
         .room-card-title { margin-bottom: 0.5rem; }
         .room-card-title em { color: var(--gold); font-style: italic; }
+
+        /* Room Availability Styles */
+        .room-booked-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .room-booked-overlay span {
+            background: rgba(0, 0, 0, 0.85);
+            color: var(--white);
+            padding: 0.75rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .room-avail-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            color: var(--white);
+            padding: 0.4rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            z-index: 5;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .room-card--unavailable {
+            opacity: 0.7;
+            pointer-events: none;
+            filter: grayscale(0.5);
+        }
+        .btn-unavail {
+            background: #e2e8f0;
+            color: #94a3b8;
+            cursor: not-allowed;
+            border: none;
+            box-shadow: none;
+        }
 
         .room-meta {
             display: flex;

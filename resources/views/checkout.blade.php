@@ -1019,13 +1019,14 @@
             });
 
             currentStep = n;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.querySelector('.checkout-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // ── Step 1: Validate guest form ────────────────────────────
         document.getElementById('guest-form').addEventListener('submit', function(e) {
             e.preventDefault();
             let valid = true;
+            let firstErrorElement = null;
 
             ['first_name', 'last_name', 'email', 'phone'].forEach(field => {
                 const input = document.getElementById(field);
@@ -1034,6 +1035,7 @@
                     err.textContent = 'This field is required.';
                     input.classList.add('error');
                     valid = false;
+                    if (!firstErrorElement) firstErrorElement = input;
                 } else {
                     err.textContent = '';
                     input.classList.remove('error');
@@ -1046,6 +1048,7 @@
                 emailErr.textContent = 'Please enter a valid email address.';
                 emailEl.classList.add('error');
                 valid = false;
+                if (!firstErrorElement) firstErrorElement = emailEl;
             }
 
             const agree = document.getElementById('agree_terms');
@@ -1053,11 +1056,21 @@
             if (!agree.checked) {
                 agreeErr.textContent = 'You must agree to the terms to continue.';
                 valid = false;
+                if (!firstErrorElement) firstErrorElement = agree;
             } else {
                 agreeErr.textContent = '';
             }
 
-            if (valid) goToStep(2);
+            if (valid) {
+                goToStep(2);
+            } else if (firstErrorElement) {
+                // Scroll to the first field that has an error
+                firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Optional: set focus to the element so they can type immediately
+                if (typeof firstErrorElement.focus === 'function') {
+                    setTimeout(() => firstErrorElement.focus({preventScroll: true}), 300);
+                }
+            }
         });
 
         // ── Step 2: Extras toggle ──────────────────────────────────

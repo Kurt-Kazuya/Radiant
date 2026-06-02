@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\GuestReservationController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminRoomController;
 use App\Http\Controllers\Admin\AdminReservationController;
@@ -32,7 +33,7 @@ Route::post('/contact', function(\Illuminate\Http\Request $request) {
     return back()->with('success', 'Thank you for your message. We will get back to you shortly.')
                  ->with('sent_data', $validated);
 })->name('contact.post');
-Route::get('/reservations', fn() => view('reservations'))->name('reservations');
+Route::get('/reservations', [ReservationsController::class, 'index'])->name('reservations');
 
 //  Auth Routes 
 Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
