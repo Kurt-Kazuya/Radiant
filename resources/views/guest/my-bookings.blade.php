@@ -1,6 +1,6 @@
 <x-layout title="My Bookings – Radiant Hotel Pangasinan">
 
-    {{-- Page Hero --}}
+    <!-- Page Hero -->
     <section class="page-hero" aria-label="My bookings hero">
         <div class="page-hero-bg">
             <img src="{{ asset('images/Superior-Rooms.jpg') }}" alt="My Reservations"
@@ -21,7 +21,7 @@
     </section>
 
 
-    {{-- Content --}}
+    <!-- Content -->
     <section class="section-gap" style="background: var(--cream);">
         <div class="container" style="max-width: 900px;">
 
@@ -36,7 +36,7 @@
                 </p>
             </div>
 
-            {{-- Flash message --}}
+            <!-- Flash message -->
             @if(session('success'))
                 <div style="
                     background: #d3f9d8;

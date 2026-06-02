@@ -1,8 +1,8 @@
 <x-layout title="Contact Us – Radiant Hotel Pangasinan">
 
-    {{-- ============================================================
+    <!-- ============================================================
          PAGE HERO BANNER
-    ============================================================ --}}
+    ============================================================ -->
     <section class="page-hero" aria-label="Contact hero">
         <div class="page-hero-bg">
             <img
@@ -26,9 +26,9 @@
     </section>
 
 
-    {{-- ============================================================
+    <!-- ============================================================
          INTRO
-    ============================================================ --}}
+    ============================================================ -->
     <section class="section-gap" style="background: var(--white);" aria-label="Contact intro">
         <div class="container">
             <div style="text-align: center; max-width: 680px; margin-inline: auto;">
@@ -45,14 +45,14 @@
     </section>
 
 
-    {{-- ============================================================
+    <!-- ============================================================
          CONTACT FORM + INFO SIDE BY SIDE
-    ============================================================ --}}
+    ============================================================ -->
     <section class="section-gap contact-main" style="background: var(--cream); padding-top: 0;" aria-label="Contact form and info">
         <div class="container">
             <div class="contact-grid">
 
-                {{-- LEFT: Contact Form --}}
+                <!-- LEFT: Contact Form -->
                 <div class="contact-form-wrap" id="contact-form-wrap">
                     <div class="contact-form-header">
                         <div class="section-label">
@@ -181,7 +181,7 @@
                         </form>
                 </div>
 
-                {{-- RIGHT: Contact Info --}}
+                <!-- RIGHT: Contact Info -->
                 <div class="contact-info-wrap">
                     <div class="section-label">
                         <span class="eyebrow">Have a Question?</span>
@@ -225,7 +225,7 @@
 
                     </div>
 
-                    {{-- Quick CTA --}}
+                    <!-- Quick CTA -->
                     <div class="contact-cta-box">
                         <p class="eyebrow" style="color: var(--gold-light);">Best Rates Guaranteed</p>
                         <h3 class="display-md" style="color: var(--white); margin-block: 0.75rem 1rem;">
@@ -243,9 +243,9 @@
     </section>
 
 
-    {{-- ============================================================
+    <!-- ============================================================
          MAP SECTION
-    ============================================================ --}}
+    ============================================================ -->
     <section class="contact-map-section" aria-label="Hotel location map">
         <div class="contact-map-header">
             <div class="container" style="text-align: center; padding-bottom: 3rem;">
@@ -274,9 +274,9 @@
     </section>
 
 
-    {{-- ============================================================
+    <!-- ============================================================
          CTA BANNER
-    ============================================================ --}}
+    ============================================================ -->
     <section class="cta-banner" aria-label="Book your stay">
         <div class="cta-overlay"></div>
         <img
@@ -300,9 +300,9 @@
     </section>
 
 
-    {{-- ============================================================
+    <!-- ============================================================
          PAGE-SPECIFIC STYLES
-    ============================================================ --}}
+    ============================================================ -->
     <x-slot name="styles">
     <style>
         /* PAGE HERO */
