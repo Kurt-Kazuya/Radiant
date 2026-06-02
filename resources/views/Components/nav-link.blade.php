@@ -3,7 +3,7 @@
     'active' => false,
 ])
 
-<!--
+{{--
     x-nav-link
     -----------
     A styled navigation anchor that reflects the active route.
@@ -12,7 +12,7 @@
         <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
             Home
         </x-nav-link>
--->
+--}}
 
 <li style="position: relative;">
     <a

@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Vite / App CSS -->
-    <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
     <style>
         /* ============================================
@@ -468,11 +468,11 @@
 </head>
 <body>
 
-    <!-- ======= HEADER ======= -->
+    {{-- ======= HEADER ======= --}}
     <header id="site-header">
         <div class="container">
             <div class="header-inner">
-                <!-- Logo -->
+                {{-- Logo --}}
                 <a href="/" class="logo" aria-label="Radiant Hotel">
                     <div class="logo-mark">
                         <div class="logo-mark-monogram">
@@ -485,7 +485,7 @@
                     </div>
                 </a>
 
-                <!-- Desktop Navigation -->
+                {{-- Desktop Navigation --}}
                 <nav id="main-nav" aria-label="Main navigation">
                     <ul class="flex" style="gap: 0; align-items: center;">
                         <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
@@ -503,7 +503,7 @@
                 </nav>
 
                 <div class="flex" style="align-items: center; gap: 1.25rem;">
-                    <!-- Hamburger -->
+                    {{-- Hamburger --}}
                     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
                         <span></span><span></span><span></span>
                     </button>
@@ -512,17 +512,17 @@
         </div>
     </header>
 
-    <!-- ======= MAIN CONTENT ======= -->
+    {{-- ======= MAIN CONTENT ======= --}}
     <main id="main-content">
         {{ $slot }}
     </main>
 
-    <!-- ======= FOOTER ======= -->
+    {{-- ======= FOOTER ======= --}}
     <footer id="site-footer">
         <div class="footer-top">
             <div class="container">
                 <div class="footer-grid">
-                    <!-- Brand -->
+                    {{-- Brand --}}
                     <div class="footer-brand">
                         <a href="/" class="logo" aria-label="Radiant Hotel">
                             <div class="logo-mark">
@@ -545,7 +545,7 @@
                         </div>
                     </div>
 
-                    <!-- Navigate -->
+                    {{-- Navigate --}}
                     <div>
                         <h3 class="footer-heading">Navigate</h3>
                         <ul class="footer-links">
@@ -559,7 +559,7 @@
                         </ul>
                     </div>
 
-                    <!-- Contact -->
+                    {{-- Contact --}}
                     <div>
                         <h3 class="footer-heading">Contact</h3>
                         <ul class="footer-links">
@@ -593,7 +593,7 @@
         </div>
     </footer>
 
-    <!-- ======= GLOBAL SCRIPTS ======= -->
+    {{-- ======= GLOBAL SCRIPTS ======= --}}
     <script>
         // Sticky header
         const header = document.getElementById('site-header');

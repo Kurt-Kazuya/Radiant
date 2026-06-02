@@ -1,4 +1,4 @@
-<!-- resources/views/admin/rooms/edit.blade.php -->
+{{-- resources/views/admin/rooms/edit.blade.php --}}
 @extends('layouts.admin')
 
 @section('title', 'Edit Room ' . $room->room_number)

@@ -1,10 +1,12 @@
 <x-layout title="Radiant Hotel Pangasinan">
 
-
+    {{-- ============================================================
+         HERO SECTION — Full-screen with layered overlay
+    ============================================================ --}}
     <section id="hero" aria-label="Hero">
         <div class="hero-wrap">
 
-            <!-- Background visual (replace src with actual asset) -->
+            {{-- Background visual (replace src with actual asset) --}}
             <div class="hero-bg">
                 <img
                     src="{{ asset('images/Front-Image-Home.jpg') }}"
@@ -31,7 +33,7 @@
                     </div>
                 </div>
 
-                <!-- Floating stats -->
+                {{-- Floating stats --}}
                 <div class="hero-stats">
                     <div class="stat">
                         <span class="stat-num">82</span>
@@ -50,7 +52,7 @@
                 </div>
             </div>
 
-            <!-- Scroll cue -->
+            {{-- Scroll cue --}}
             <div class="scroll-cue" aria-hidden="true">
                 <span class="scroll-text">Scroll</span>
                 <div class="scroll-line"></div>
@@ -59,9 +61,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          WELCOME / ABOUT STRIP
-     -->
+    ============================================================ --}}
     <section class="section-gap" style="background: var(--white);" aria-label="About Radiant Hotel">
         <div class="container">
             <div class="about-grid">
@@ -99,9 +101,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          ACCOMMODATIONS SECTION
-     -->
+    ============================================================ --}}
     <section class="section-gap" style="background: var(--cream);" aria-label="Accommodations">
         <div class="container">
             <div style="text-align: center; margin-bottom: 3.5rem;">
@@ -143,9 +145,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          DINING SECTION — Dark background, editorial feel
-     -->
+    ============================================================ --}}
     <section class="section-gap dining-section" aria-label="Dining">
         <div class="container">
             <div class="dining-grid">
@@ -178,9 +180,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          AMENITIES SECTION
-     -->
+    ============================================================ --}}
     <section class="section-gap" style="background: var(--white);" aria-label="Amenities">
         <div class="container">
             <div style="text-align: center; margin-bottom: 3.5rem;">
@@ -217,9 +219,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          DESTINATIONS / EXPLORE SECTION
-     -->
+    ============================================================ --}}
     <section class="section-gap" style="background: var(--cream);" aria-label="Nearby Destinations">
         <div class="container">
             <div class="explore-header">
@@ -259,9 +261,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          CTA BANNER
-     -->
+    ============================================================ --}}
     <section class="cta-banner" aria-label="Book your stay">
         <div class="cta-overlay"></div>
         <img src="{{ asset('images/Footer-Image.png') }}" alt="" class="cta-bg" aria-hidden="true">
@@ -281,9 +283,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          PAGE-SPECIFIC STYLES
-     -->
+    ============================================================ --}}
     <x-slot name="styles">
     <style>
         /* HERO */

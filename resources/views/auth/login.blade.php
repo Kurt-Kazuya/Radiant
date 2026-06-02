@@ -393,7 +393,7 @@
 </head>
 <body>
 
-    <!-- ── LEFT: Image Panel ── -->
+    {{-- ── LEFT: Image Panel ── --}}
     <div class="login-image">
         <img src="{{ asset('images/Island-Summer-Package.jpg') }}"
              alt="Radiant Hotel — Island Summer Package"
@@ -414,10 +414,10 @@
         </div>
     </div>
 
-    <!-- ── RIGHT: Login Form Panel ── -->
+    {{-- ── RIGHT: Login Form Panel ── --}}
     <div class="login-panel">
 
-        <!-- Logo -->
+        {{-- Logo --}}
         <a href="{{ route('home') }}" class="login-logo" aria-label="Back to Radiant Hotel">
             <div class="login-logo-mark">
                 <div class="login-logo-monogram">RH</div>
@@ -428,7 +428,7 @@
             </div>
         </a>
 
-        <!-- Heading -->
+        {{-- Heading --}}
         <div class="login-heading">
             <span class="login-eyebrow">Admin Portal</span>
             <h1 class="login-title">Sign <em>In</em></h1>
@@ -436,7 +436,7 @@
             <span class="gold-line"></span>
         </div>
 
-        <!-- Error alert -->
+        {{-- Error alert --}}
         @if($errors->any())
             <div class="login-error">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px">
@@ -446,7 +446,7 @@
             </div>
         @endif
 
-        <!-- Form -->
+        {{-- Form --}}
         <form class="login-form" action="{{ route('login.post') }}" method="POST" novalidate>
             @csrf
 
@@ -493,7 +493,7 @@
             </button>
         </form>
 
-        <!-- Back to site -->
+        {{-- Back to site --}}
         <a href="{{ route('home') }}" class="login-back">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>

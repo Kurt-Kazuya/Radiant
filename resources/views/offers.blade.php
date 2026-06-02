@@ -1,8 +1,8 @@
 <x-layout title="Latest Offers – Radiant Hotel Pangasinan">
 
-    <!-- 
+    {{-- ============================================================
          PAGE HERO BANNER
-     -->
+    ============================================================ --}}
     <section class="page-hero" aria-label="Offers hero">
         <div class="page-hero-bg">
             <img
@@ -26,9 +26,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          INTRO
-     -->
+    ============================================================ --}}
     <section class="section-gap" style="background: var(--white);" aria-label="Offers intro">
         <div class="container">
             <div style="text-align: center; max-width: 740px; margin-inline: auto;">
@@ -45,9 +45,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          FLASH SALE — Light background
-     -->
+    ============================================================ --}}
     <section class="section-gap offers-feature" aria-label="Flash Sale">
         <div class="container">
             <div class="offer-feature-grid">
@@ -99,9 +99,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          MOTHER'S DAY ESCAPE — Dark background, reversed
-     -->
+    ============================================================ --}}
     <section class="section-gap offers-dark" aria-label="Mother's Day Escape">
         <div class="container">
             <div class="offer-feature-grid offer-feature-grid--reverse">
@@ -154,9 +154,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          ISLAND SUMMER PACKAGE — Light background
-     -->
+    ============================================================ --}}
     <section class="section-gap offers-feature" aria-label="Island Summer Package">
         <div class="container">
             <div class="offer-feature-grid">
@@ -206,9 +206,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          DINING OFFERS STRIP
-     -->
+    ============================================================ --}}
     <section class="section-gap" style="background: var(--cream);" aria-label="Dining Offers">
         <div class="container">
             <div style="text-align: center; margin-bottom: 3.5rem;">
@@ -278,9 +278,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          CTA BANNER
-     -->
+    ============================================================ --}}
     <section class="cta-banner" aria-label="Book now">
         <div class="cta-overlay"></div>
         <img
@@ -304,9 +304,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          PAGE-SPECIFIC STYLES
-     -->
+    ============================================================ --}}
     <x-slot name="styles">
     <style>
         /* PAGE HERO */

@@ -1,8 +1,8 @@
 <x-layout title="Amenities – Radiant Hotel Pangasinan">
 
-    <!-- 
+    {{-- ============================================================
          PAGE HERO BANNER
-     -->
+    ============================================================ --}}
     <section class="page-hero" aria-label="Amenities hero">
         <div class="page-hero-bg">
             <img
@@ -26,9 +26,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          INTRO
-     -->
+    ============================================================ --}}
     <section class="section-gap" style="background: var(--white);" aria-label="Amenities intro">
         <div class="container">
             <div style="text-align: center; max-width: 740px; margin-inline: auto;">
@@ -45,9 +45,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          SWIMMING POOL — Feature Section
-     -->
+    ============================================================ --}}
     <section class="section-gap amenity-feature" aria-label="Swimming Pool">
         <div class="container">
             <div class="amenity-feature-grid">
@@ -87,9 +87,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          FITNESS CENTER — Dark background
-     -->
+    ============================================================ --}}
     <section class="section-gap amenity-dark" aria-label="Fitness Center">
         <div class="container">
             <div class="amenity-feature-grid amenity-feature-grid--reverse">
@@ -125,9 +125,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          SPA SERVICES — Light background
-     -->
+    ============================================================ --}}
     <section class="section-gap amenity-feature" aria-label="Spa Services">
         <div class="container">
             <div class="amenity-feature-grid">
@@ -168,9 +168,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          EVENTS & BANQUETS — Dark background
-     -->
+    ============================================================ --}}
     <section class="section-gap amenity-dark" aria-label="Events and Banquets">
         <div class="container">
             <div class="amenity-feature-grid amenity-feature-grid--reverse">
@@ -203,9 +203,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          AMENITIES ICON GRID
-     -->
+    ============================================================ --}}
     <section class="section-gap" style="background: var(--cream);" aria-label="All Amenities">
         <div class="container">
             <div style="text-align: center; margin-bottom: 3.5rem;">
@@ -241,9 +241,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          CTA BANNER
-     -->
+    ============================================================ --}}
     <section class="cta-banner" aria-label="Book your stay">
         <div class="cta-overlay"></div>
         <img
@@ -267,9 +267,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          PAGE-SPECIFIC STYLES
-     -->
+    ============================================================ --}}
     <x-slot name="styles">
     <style>
         /* PAGE HERO */

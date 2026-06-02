@@ -21,7 +21,7 @@
     </div>
 @endif
 
-<!-- Stats -->
+{{-- Stats --}}
 <div class="stats-grid">
     <div class="stat-card">
         <div class="stat-label">Total Reservations</div>
@@ -53,7 +53,7 @@
     </div>
 </div>
 
-<!-- Export Actions -->
+{{-- Export Actions --}}
 <div class="card" style="margin-bottom: 2rem;">
     <div class="card-header">
         <div class="card-title">Export <em>Reports</em></div>
@@ -83,7 +83,7 @@
     </div>
 </div>
 
-<!-- Recent Reservations -->
+{{-- Recent Reservations --}}
 <div class="card">
     <div class="card-header">
         <div class="card-title">Recent <em>Reservations</em> (Last 10)</div>

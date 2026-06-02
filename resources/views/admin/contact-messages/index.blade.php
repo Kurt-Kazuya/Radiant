@@ -1,4 +1,4 @@
-<!-- resources/views/admin/contact-messages/index.blade.php -->
+{{-- resources/views/admin/contact-messages/index.blade.php --}}
 @extends('layouts.admin')
 
 @section('title', 'Contact Messages')

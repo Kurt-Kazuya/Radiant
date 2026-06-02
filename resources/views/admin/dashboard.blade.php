@@ -1,4 +1,4 @@
-<!-- resources/views/admin/dashboard.blade.php -->
+{{-- resources/views/admin/dashboard.blade.php --}}
 @extends('layouts.admin')
 
 @section('title', 'Dashboard')
@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<!-- Stats Grid -->
+{{-- Stats Grid --}}
 <div class="stats-grid">
     <div class="stat-card">
         <div class="stat-label">Total Reservations</div>
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<!-- Recent Reservations -->
+{{-- Recent Reservations --}}
 <div class="card">
     <div class="card-header">
         <div class="card-title">Recent <em>Reservations</em></div>

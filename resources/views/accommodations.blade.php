@@ -1,8 +1,8 @@
 <x-layout title="Accommodations – Radiant Hotel Pangasinan">
 
-    <!-- 
+    {{-- ============================================================
          PAGE HERO BANNER
-     -->
+    ============================================================ --}}
     <section class="page-hero" aria-label="Accommodations hero">
         <div class="page-hero-bg">
             <img
@@ -26,9 +26,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          INTRO + ALL ROOMS INCLUDE
-     -->
+    ============================================================ --}}
     <section class="section-gap" style="background: var(--white);" aria-label="Room overview">
         <div class="container">
             <div style="text-align: center; max-width: 740px; margin-inline: auto;">
@@ -42,7 +42,7 @@
                 </p>
             </div>
 
-            <!-- All rooms include -->
+            {{-- All rooms include --}}
             <div class="includes-wrap">
                 <h3 class="includes-title">
                     <span class="gold-line" style="display: inline-block; width: 32px; height: 1px; vertical-align: middle; margin-right: 0.75rem;"></span>
@@ -72,9 +72,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          ROOM FILTER TABS
-     -->
+    ============================================================ --}}
     <div class="room-filter-bar">
         <div class="container">
             <div class="filter-tabs" id="filter-tabs">
@@ -88,14 +88,14 @@
     </div>
 
 
-    <!-- 
+    {{-- ============================================================
          ROOMS LISTING
-     -->
+    ============================================================ --}}
     <section class="section-gap" style="background: var(--cream);" aria-label="Room listings">
         <div class="container">
             <div class="rooms-listing" id="rooms-listing">
 
-                <!-- STANDARD ROOM -->
+                {{-- STANDARD ROOM --}}
                 <article class="room-listing-card" data-category="standard" id="standard-room">
                     <div class="room-listing-img-wrap">
                         <img
@@ -143,7 +143,7 @@
                     </div>
                 </article>
 
-                <!-- DELUXE ROOM -->
+                {{-- DELUXE ROOM --}}
                 <article class="room-listing-card room-listing-card--reverse" data-category="deluxe" id="deluxe-room">
                     <div class="room-listing-img-wrap">
                         <img
@@ -191,7 +191,7 @@
                     </div>
                 </article>
 
-                <!-- DELUXE POOL VIEW -->
+                {{-- DELUXE POOL VIEW --}}
                 <article class="room-listing-card" data-category="deluxe" id="deluxe-pool-view">
                     <div class="room-listing-img-wrap">
                         <img
@@ -240,7 +240,7 @@
                     </div>
                 </article>
 
-                <!-- ONE BEDROOM SUITE -->
+                {{-- ONE BEDROOM SUITE --}}
                 <article class="room-listing-card room-listing-card--reverse" data-category="suite" id="one-bedroom-suite">
                     <div class="room-listing-img-wrap">
                         <img
@@ -288,7 +288,7 @@
                     </div>
                 </article>
 
-                <!-- JUNIOR PENTHOUSE -->
+                {{-- JUNIOR PENTHOUSE --}}
                 <article class="room-listing-card" data-category="penthouse" id="junior-penthouse">
                     <div class="room-listing-img-wrap">
                         <img
@@ -337,7 +337,7 @@
                     </div>
                 </article>
 
-                <!-- PENTHOUSE -->
+                {{-- PENTHOUSE --}}
                 <article class="room-listing-card room-listing-card--reverse" data-category="penthouse" id="penthouse">
                     <div class="room-listing-img-wrap">
                         <img
@@ -385,7 +385,7 @@
                     </div>
                 </article>
 
-                <!-- GRAND PENTHOUSE -->
+                {{-- GRAND PENTHOUSE --}}
                 <article class="room-listing-card" data-category="penthouse" id="grand-penthouse">
                     <div class="room-listing-img-wrap">
                         <img
@@ -434,14 +434,14 @@
                     </div>
                 </article>
 
-            </div><!-- end rooms-listing -->
+            </div>{{-- end rooms-listing --}}
         </div>
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          CTA BANNER
-     -->
+    ============================================================ --}}
     <section class="accom-cta" aria-label="Book your room">
         <div class="accom-cta-overlay"></div>
         <img
@@ -467,9 +467,9 @@
     </section>
 
 
-    <!-- 
+    {{-- ============================================================
          PAGE-SPECIFIC STYLES
-     -->
+    ============================================================ --}}
     <x-slot name="styles">
     <style>
         /* PAGE HERO */
@@ -743,9 +743,9 @@
     </x-slot>
 
 
-    <!-- 
+    {{-- ============================================================
          PAGE-SPECIFIC SCRIPTS
-     -->
+    ============================================================ --}}
     <x-slot name="scripts">
     <script>
         // Room filter tabs
