@@ -1,0 +1,129 @@
+/* ---- CONTACT GRID ---- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 5rem;
+    align-items: start;
+}
+
+/* ---- FORM ---- */
+.contact-form-wrap {
+    background: var(--white);
+    padding: 3rem;
+}
+.contact-form-header { margin-bottom: 2.25rem; }
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+.form-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dark);
+}
+.form-required { color: var(--gold); }
+.form-control {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    background: var(--cream);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+.form-control:focus {
+    border-color: var(--gold);
+    background: var(--white);
+}
+.form-control::placeholder { color: var(--text-light); }
+.form-textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+.form-policy {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.65;
+}
+.form-policy a { color: var(--gold); }
+.form-policy a:hover { color: var(--navy); }
+
+/* ---- INFO SIDE ---- */
+.contact-info-wrap { padding-top: 0.25rem; }
+
+.contact-details {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid rgba(0,0,0,0.08);
+}
+.contact-detail-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    align-items: start;
+}
+.contact-detail-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-top: 0.1rem;
+}
+.contact-detail-body {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+}
+.contact-detail-body a {
+    color: var(--text-mid);
+    transition: color 0.25s ease;
+}
+.contact-detail-body a:hover { color: var(--gold); }
+
+/* ---- CTA BOX inside info ---- */
+.contact-cta-box {
+    margin-top: 2.5rem;
+    background: var(--navy);
+    padding: 2.25rem;
+}
+.contact-cta-box h3 em { color: var(--gold-light); font-style: italic; }
+
+/* ---- MAP ---- */
+.contact-map-section { background: var(--white); padding-top: clamp(4rem, 10vw, 8rem); }
+.contact-map-embed { line-height: 0; }
+.contact-map-embed iframe { filter: grayscale(15%); }
+
+/* ---- CTA BANNER ---- */
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+    .contact-grid {
+grid-template-columns: 1fr;
+gap: 3rem;
+    }
+}
+@media (max-width: 640px) {
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form-wrap { padding: 2rem 1.5rem; }
+    .contact-detail-item { grid-template-columns: 1fr; gap: 0.35rem; }
+    .contact-map-embed iframe { height: 300px; }
+}

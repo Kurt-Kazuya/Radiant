@@ -1,0 +1,89 @@
+/* AMENITY FEATURE SECTIONS */
+.amenity-feature { background: var(--white); }
+.amenity-dark    { background: var(--navy); }
+
+.amenity-feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+.amenity-feature-grid--reverse .amenity-feature-img-wrap { order: 2; }
+.amenity-feature-grid--reverse .amenity-feature-body     { order: 1; }
+
+.amenity-feature-img-wrap {
+    position: relative;
+    overflow: hidden;
+}
+.amenity-feature-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease-out);
+}
+.amenity-feature-img-wrap:hover .amenity-feature-img { transform: scale(1.04); }
+
+.amenity-feature-badge {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    background: var(--gold);
+    padding: 0.85rem 1.25rem;
+}
+
+.amenity-highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+.amenity-highlight {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+}
+.highlight-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+}
+
+/* AMENITIES ICON GRID */
+.amenities-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+}
+.amenity-icon-card {
+    background: var(--white);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+}
+.amenity-icon-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(13,27,42,0.10);
+}
+.amenity-icon-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .amenity-feature-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .amenity-feature-grid--reverse .amenity-feature-img-wrap,
+    .amenity-feature-grid--reverse .amenity-feature-body { order: unset; }
+    .amenities-icon-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+    .amenities-icon-grid { grid-template-columns: 1fr; }
+    .amenity-highlights  { grid-template-columns: 1fr; }
+    .amenity-feature-img { height: 280px; }
+}

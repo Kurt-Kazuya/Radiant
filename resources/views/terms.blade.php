@@ -1,6 +1,6 @@
 <x-layout title="Terms of Use - Radiant Hotel Pangasinan">
     <!-- PAGE HERO BANNER -->
-    <section class="page-hero" aria-label="Terms of Use Hero">
+    <section class="page-hero page-hero--legal" aria-label="Terms of Use Hero">
         <div class="page-hero-bg">
             <img
                 src="{{ asset('images/Front-Image-Home.jpg') }}" alt="Radiant Hotel"
@@ -60,50 +60,6 @@
     </section>
 
     <x-slot name="styles">
-    <style>
-        .page-hero {
-            position: relative;
-            height: 40vh;
-            min-height: 350px;
-            display: flex;
-            align-items: flex-end;
-            overflow: hidden;
-        }
-        .page-hero-bg { position: absolute; inset: 0; }
-        .page-hero-img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: center 40%;
-        }
-        .page-hero-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(
-                to top,
-                rgba(13,27,42,0.85) 0%,
-                rgba(13,27,42,0.4)  60%,
-                rgba(13,27,42,0.2)  100%
-            );
-        }
-        .page-hero-content {
-            position: relative;
-            z-index: 2;
-            padding-bottom: 4rem;
-        }
-        .page-hero-title {
-            color: var(--white);
-            margin-block: 0.75rem 1.25rem;
-        }
-        .page-hero-title em { color: var(--gold-light); font-style: italic; }
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 0.78rem;
-            letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.55);
-        }
-        .breadcrumb a { color: var(--gold-light); }
-        .breadcrumb a:hover { color: var(--white); }
-    </style>
+        <link rel="stylesheet" href="{{ asset('css/site/shared/page-hero.css') }}">
     </x-slot>
 </x-layout>
