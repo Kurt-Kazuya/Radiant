@@ -53,7 +53,7 @@
             <div class="contact-grid">
 
                 {{-- LEFT: Contact Form --}}
-                <div class="contact-form-wrap">
+                <div class="contact-form-wrap" id="contact-form-wrap">
                     <div class="contact-form-header">
                         <div class="section-label">
                             <span class="eyebrow">Send a Message</span>
@@ -62,82 +62,123 @@
                         <span class="gold-line"></span>
                     </div>
 
-                    <form class="contact-form" method="POST" action="#" novalidate>
+                    @if(session('success'))
+                        <div id="contact-success-block" style="padding: 2.5rem; background: var(--white); border: 1px solid var(--gold); text-align: center; margin-bottom: 2rem; transition: opacity 0.5s ease;">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="margin-bottom: 1rem;">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <h3 class="display-md" style="color: var(--text-dark); margin-bottom: 0.75rem;">Message Sent!</h3>
+                            <p class="body-lg" style="color: var(--text-mid); margin-bottom: 2rem;">{{ session('success') }}</p>
+                            
+                            @if(session('sent_data'))
+                                @php $data = session('sent_data'); @endphp
+                                <div style="text-align: left; background: var(--cream); padding: 1.5rem; border: 1px solid rgba(0,0,0,0.05); font-size: 0.9rem; margin-bottom: 2rem;">
+                                    <div style="margin-bottom: 0.5rem;"><strong style="color:var(--text-dark); letter-spacing:0.05em;">Name:</strong> {{ $data['name'] }}</div>
+                                    <div style="margin-bottom: 0.5rem;"><strong style="color:var(--text-dark); letter-spacing:0.05em;">Email:</strong> {{ $data['email'] }}</div>
+                                    @if(!empty($data['company']))
+                                        <div style="margin-bottom: 0.5rem;"><strong style="color:var(--text-dark); letter-spacing:0.05em;">Company:</strong> {{ $data['company'] }}</div>
+                                    @endif
+                                    @if(!empty($data['phone']))
+                                        <div style="margin-bottom: 0.5rem;"><strong style="color:var(--text-dark); letter-spacing:0.05em;">Phone:</strong> {{ $data['phone'] }}</div>
+                                    @endif
+                                    @if(!empty($data['subject']))
+                                        <div style="margin-bottom: 0.5rem;"><strong style="color:var(--text-dark); letter-spacing:0.05em;">Subject:</strong> {{ $data['subject'] }}</div>
+                                    @endif
+                                    <div style="margin-top: 1rem;"><strong style="color:var(--text-dark); letter-spacing:0.05em;">Message:</strong><br><span style="white-space: pre-line; color: var(--text-mid); display:block; margin-top:0.5rem;">{{ $data['message'] }}</span></div>
+                                </div>
+                            @endif
+                            
+                            <div style="margin-top: 1rem;">
+                                <a href="/contact" class="btn btn-gold">Send Another Message</a>
+                            </div>
+                        </div>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                const formWrap = document.getElementById('contact-form-wrap');
+                                if (formWrap) {
+                                    formWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            });
+                        </script>
+                    @endif
+
+                    <form id="contact-form-element" class="contact-form" method="POST" action="/contact" novalidate style="{{ session('success') ? 'display: none;' : 'display: block;' }}">
                         @csrf
-                        <div class="form-row">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="contact_name">Name <span class="form-required">*</span></label>
+                                    <input
+                                        type="text"
+                                        id="contact_name"
+                                        name="name"
+                                        class="form-control"
+                                        placeholder="Your full name"
+                                        required
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="contact_company">Company</label>
+                                    <input
+                                        type="text"
+                                        id="contact_company"
+                                        name="company"
+                                        class="form-control"
+                                        placeholder="Company (optional)"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="contact_email">E-mail Address <span class="form-required">*</span></label>
+                                    <input
+                                        type="email"
+                                        id="contact_email"
+                                        name="email"
+                                        class="form-control"
+                                        placeholder="your@email.com"
+                                        required
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="contact_phone">Contact Number</label>
+                                    <input
+                                        type="tel"
+                                        id="contact_phone"
+                                        name="phone"
+                                        class="form-control"
+                                        placeholder="+63 XXX XXX XXXX"
+                                    >
+                                </div>
+                            </div>
                             <div class="form-group">
-                                <label class="form-label" for="contact_name">Name <span class="form-required">*</span></label>
+                                <label class="form-label" for="contact_subject">Subject</label>
                                 <input
                                     type="text"
-                                    id="contact_name"
-                                    name="name"
+                                    id="contact_subject"
+                                    name="subject"
                                     class="form-control"
-                                    placeholder="Your full name"
+                                    placeholder="How can we help you?"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="contact_message">Message <span class="form-required">*</span></label>
+                                <textarea
+                                    id="contact_message"
+                                    name="message"
+                                    class="form-control form-textarea"
+                                    placeholder="Your message up to 500 characters..."
+                                    maxlength="500"
                                     required
-                                >
+                                ></textarea>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label" for="contact_company">Company</label>
-                                <input
-                                    type="text"
-                                    id="contact_company"
-                                    name="company"
-                                    class="form-control"
-                                    placeholder="Company (optional)"
-                                >
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" for="contact_email">E-mail Address <span class="form-required">*</span></label>
-                                <input
-                                    type="email"
-                                    id="contact_email"
-                                    name="email"
-                                    class="form-control"
-                                    placeholder="your@email.com"
-                                    required
-                                >
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="contact_phone">Contact Number</label>
-                                <input
-                                    type="tel"
-                                    id="contact_phone"
-                                    name="phone"
-                                    class="form-control"
-                                    placeholder="+63 XXX XXX XXXX"
-                                >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="contact_subject">Subject</label>
-                            <input
-                                type="text"
-                                id="contact_subject"
-                                name="subject"
-                                class="form-control"
-                                placeholder="How can we help you?"
-                            >
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="contact_message">Message <span class="form-required">*</span></label>
-                            <textarea
-                                id="contact_message"
-                                name="message"
-                                class="form-control form-textarea"
-                                placeholder="Your message up to 500 characters..."
-                                maxlength="500"
-                                required
-                            ></textarea>
-                        </div>
-                        <p class="form-policy">
-                            By clicking Send Message, you agree with our <a href="/privacy">Privacy Policy</a>, including data use and Cookie use.
-                        </p>
-                        <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center;">
-                            <span>Send Message</span>
-                        </button>
-                    </form>
+                            <p class="form-policy">
+                                By clicking Send Message, you agree with our <a href="/privacy">Privacy Policy</a>, including data use and Cookie use.
+                            </p>
+                            <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center;">
+                                <span>Send Message</span>
+                            </button>
+                        </form>
                 </div>
 
                 {{-- RIGHT: Contact Info --}}

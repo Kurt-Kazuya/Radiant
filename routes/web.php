@@ -24,6 +24,19 @@ Route::get('/dining', fn() => view('dining'))->name('dining');
 Route::get('/amenities', fn() => view('amenities'))->name('amenities');
 Route::get('/offers', fn() => view('offers'))->name('offers');
 Route::get('/contact', fn() => view('contact'))->name('contact');
+Route::post('/contact', function(\Illuminate\Http\Request $request) {
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'company' => 'nullable|string|max:255',
+        'phone' => 'nullable|string|max:50',
+        'subject' => 'nullable|string|max:255',
+        'message' => 'required|string',
+    ]);
+    \App\Models\ContactMessage::create($validated);
+    return back()->with('success', 'Thank you for your message. We will get back to you shortly.')
+                 ->with('sent_data', $validated);
+})->name('contact.post');
 Route::get('/reservations', fn() => view('reservations'))->name('reservations');
 
 //  Auth Routes 
@@ -61,6 +74,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/payments',                [AdminPaymentController::class, 'index'])->name('payments.index');
     Route::patch('/payments/{id}/mark-paid',[AdminPaymentController::class, 'markPaid'])->name('payments.markPaid');
     Route::delete('/payments/{payment}',   [AdminPaymentController::class, 'destroy'])->name('payments.destroy');
+
+    // Contact Messages
+    Route::get('/contact-messages',                 [\App\Http\Controllers\Admin\AdminContactMessageController::class, 'index'])->name('contact-messages.index');
+    Route::patch('/contact-messages/{id}/mark-read',[\App\Http\Controllers\Admin\AdminContactMessageController::class, 'markRead'])->name('contact-messages.markRead');
+    Route::delete('/contact-messages/{id}',         [\App\Http\Controllers\Admin\AdminContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
 
     // Reports (admin-only)
     Route::get('/reports',            [ReportController::class, 'index'])->name('reports.index');
