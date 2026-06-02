@@ -42,6 +42,15 @@ class CheckoutController extends Controller
             'first_name'     => 'required|string|max:255',
             'last_name'      => 'required|string|max:255',
             'email'          => 'required|email|max:255',
+            'phone'          => 'nullable|string|max:255',
+            'nationality'    => 'nullable|string|max:255',
+            'address'        => 'nullable|string',
+            'city'           => 'nullable|string|max:255',
+            'country'        => 'nullable|string|max:255',
+            'arrival_time'   => 'nullable|string|max:255',
+            'special_requests'=> 'nullable|string',
+            'preferences'    => 'nullable|array',
+            'extras'         => 'nullable|array',
             'payment_method' => 'nullable|string',
         ]);
 
@@ -54,6 +63,15 @@ class CheckoutController extends Controller
                 'role' => 'guest'
             ]
         );
+
+        $addressParts = array_filter([$validated['address'] ?? null, $validated['city'] ?? null, $validated['country'] ?? null]);
+        $fullAddress = implode(', ', $addressParts);
+
+        $user->update([
+            'phone' => $validated['phone'] ?? $user->phone,
+            'nationality' => $validated['nationality'] ?? $user->nationality,
+            'address' => $fullAddress ?: $user->address,
+        ]);
 
         // find room
         $roomId = $validated['room_id'] ?? null;
@@ -100,6 +118,10 @@ class CheckoutController extends Controller
                 'check_out_date' => $validated['check_out_date'],
                 'total_nights'   => $validated['total_nights'],
                 'total_price'    => $validated['total_price'],
+                'arrival_time'   => $validated['arrival_time'] ?? null,
+                'special_requests'=> $validated['special_requests'] ?? null,
+                'preferences'    => $validated['preferences'] ?? null,
+                'extras'         => $validated['extras'] ?? null,
                 'status'         => 'pending',
             ]);
 
@@ -123,6 +145,10 @@ class CheckoutController extends Controller
             'check_out_date' => $validated['check_out_date'],
             'total_nights'   => $validated['total_nights'],
             'total_price'    => $validated['total_price'],
+            'arrival_time'   => $validated['arrival_time'] ?? null,
+            'special_requests'=> $validated['special_requests'] ?? null,
+            'preferences'    => $validated['preferences'] ?? null,
+            'extras'         => $validated['extras'] ?? null,
             'status'         => 'pending',
         ]);
 

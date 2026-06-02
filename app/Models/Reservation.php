@@ -14,6 +14,17 @@ class Reservation extends Model
         'total_nights',
         'total_price',
         'status',
+        'arrival_time',
+        'special_requests',
+        'preferences',
+        'extras',
+    ];
+
+    protected $casts = [
+        'check_in_date'  => 'date',
+        'check_out_date' => 'date',
+        'preferences'    => 'array',
+        'extras'         => 'array',
     ];
 
     public function user()

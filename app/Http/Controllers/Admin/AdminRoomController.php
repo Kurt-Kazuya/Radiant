@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AdminRoomController extends Controller
 {
     public function index() {
-        $rooms = Room::latest()->paginate(10);
+        $rooms = Room::oldest()->paginate(10);
         return view('admin.rooms.index', compact('rooms'));
     }
 

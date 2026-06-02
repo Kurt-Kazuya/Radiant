@@ -4,10 +4,7 @@
 @section('title', 'Manage Reservations')
 @section('topbar-title', 'Reservations')
 
-@section('head')
-    <!-- Automatically refresh -->
-    <meta http-equiv="refresh" content="10">
-@endsection
+
 
 @section('content')
 
@@ -78,6 +75,13 @@
                                 data-nights="{{ $r->total_nights }}"
                                 data-total="₱{{ number_format($r->total_price, 2) }}"
                                 data-status="{{ ucfirst($r->status) }}"
+                                data-phone="{{ $r->user->phone ?? 'N/A' }}"
+                                data-nationality="{{ $r->user->nationality ?? 'N/A' }}"
+                                data-address="{{ $r->user->address ?? 'N/A' }}"
+                                data-arrival="{{ $r->arrival_time ?? 'N/A' }}"
+                                data-special="{{ $r->special_requests ?? 'None' }}"
+                                data-preferences="{{ is_array($r->preferences) ? implode(', ', $r->preferences) : 'None' }}"
+                                data-extras="{{ is_array($r->extras) ? implode(', ', $r->extras) : 'None' }}"
                                 onclick="openResModal(this)"
                             >View</button>
                             @if($r->status === 'pending')
@@ -122,12 +126,25 @@
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; font-size: 0.95rem;">
             <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Guest Name:</strong><br><span id="modal-res-guest" style="color:var(--text-dark);font-weight:500;"></span></div>
+            <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Phone:</strong><br><span id="modal-res-phone" style="color:var(--text-dark);"></span></div>
+            <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Nationality:</strong><br><span id="modal-res-nationality" style="color:var(--text-dark);"></span></div>
+            <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Arrival Time:</strong><br><span id="modal-res-arrival" style="color:var(--text-dark);"></span></div>
+            <div style="grid-column: 1 / -1;"><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Address:</strong><br><span id="modal-res-address" style="color:var(--text-dark);"></span></div>
+            
+            <hr style="grid-column: 1 / -1; border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 0.5rem 0;">
+            
             <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Room:</strong><br><span id="modal-res-room" style="color:var(--text-dark);"></span></div>
+            <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Status:</strong><br><span id="modal-res-status" style="color:var(--text-dark);font-weight:500;"></span></div>
             <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Check-In:</strong><br><span id="modal-res-checkin" style="color:var(--text-dark);"></span></div>
             <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Check-Out:</strong><br><span id="modal-res-checkout" style="color:var(--text-dark);"></span></div>
             <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Nights:</strong><br><span id="modal-res-nights" style="color:var(--text-dark);"></span></div>
             <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Total Price:</strong><br><span id="modal-res-total" style="color:var(--gold);font-weight:500;"></span></div>
-            <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Status:</strong><br><span id="modal-res-status" style="color:var(--text-dark);font-weight:500;"></span></div>
+            
+            <hr style="grid-column: 1 / -1; border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 0.5rem 0;">
+
+            <div style="grid-column: 1 / -1;"><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Special Requests:</strong><br><span id="modal-res-special" style="color:var(--text-dark);"></span></div>
+            <div style="grid-column: 1 / -1;"><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Preferences:</strong><br><span id="modal-res-preferences" style="color:var(--text-dark);"></span></div>
+            <div style="grid-column: 1 / -1;"><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Extras:</strong><br><span id="modal-res-extras" style="color:var(--text-dark);"></span></div>
         </div>
         
         <div style="text-align: right;">
@@ -140,12 +157,19 @@
     function openResModal(btn) {
         document.getElementById('modal-res-id').textContent = '#' + btn.getAttribute('data-id');
         document.getElementById('modal-res-guest').textContent = btn.getAttribute('data-guest');
+        document.getElementById('modal-res-phone').textContent = btn.getAttribute('data-phone');
+        document.getElementById('modal-res-nationality').textContent = btn.getAttribute('data-nationality');
+        document.getElementById('modal-res-address').textContent = btn.getAttribute('data-address');
+        document.getElementById('modal-res-arrival').textContent = btn.getAttribute('data-arrival');
         document.getElementById('modal-res-room').textContent = btn.getAttribute('data-room');
         document.getElementById('modal-res-checkin').textContent = btn.getAttribute('data-checkin');
         document.getElementById('modal-res-checkout').textContent = btn.getAttribute('data-checkout');
         document.getElementById('modal-res-nights').textContent = btn.getAttribute('data-nights');
         document.getElementById('modal-res-total').textContent = btn.getAttribute('data-total');
         document.getElementById('modal-res-status').textContent = btn.getAttribute('data-status');
+        document.getElementById('modal-res-special').textContent = btn.getAttribute('data-special');
+        document.getElementById('modal-res-preferences').textContent = btn.getAttribute('data-preferences') || 'None';
+        document.getElementById('modal-res-extras').textContent = btn.getAttribute('data-extras') || 'None';
         
         document.getElementById('res-modal').style.display = 'flex';
     }
