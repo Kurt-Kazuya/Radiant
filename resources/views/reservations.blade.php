@@ -77,9 +77,7 @@
                         @endfor
                     </select>
                 </div>
-                <button type="submit" class="btn btn-gold search-btn">
-                    <span>Check Availability</span>
-                </button>
+
             </form>
         </div>
     </section>
