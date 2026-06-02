@@ -41,4 +41,15 @@ class Reservation extends Model
     {
         return $this->hasOne(Payment::class);
     }
+
+    public function scopeOverlapping($query, string $checkIn, string $checkOut)
+    {
+        return $query->where('check_in_date', '<', $checkOut)
+                     ->where('check_out_date', '>', $checkIn);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->whereIn('status', ['pending', 'confirmed']);
+    }
 }
