@@ -35,6 +35,7 @@ Route::post('/contact', function(\Illuminate\Http\Request $request) {
     return back()->with('success', 'Thank you for your message. We will get back to you shortly.')
                  ->with('sent_data', $validated);
 })->name('contact.post');
+Route::get('/reservations/availability', [ReservationsController::class, 'availability'])->name('reservations.availability');
 Route::get('/reservations', [ReservationsController::class, 'index'])->name('reservations');
 
 //  Auth Routes 

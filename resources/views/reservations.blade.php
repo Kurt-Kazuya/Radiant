@@ -111,7 +111,7 @@
                             el.style.transform = 'translateY(-8px)';
                             setTimeout(function () { el.remove(); }, 500);
                         }
-                    }, 5000);
+                    }, 3000);
                 </script>
             @endif
 
@@ -150,7 +150,7 @@
                     @endphp
 
                     {{-- ---- ROOM CARD: Deluxe Room ---- --}}
-                    <article class="room-card {{ !$deluxeAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-deluxe">
+                    <article class="room-card {{ !$deluxeAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-deluxe" data-package="Deluxe Room">
                         <div class="room-card-img-wrap">
                             <span class="room-availability-badge {{ $deluxeAvail['is_available'] ? 'room-availability-badge--available' : 'room-availability-badge--sold-out' }}">
                                 @if($deluxeAvail['is_available'])
@@ -233,7 +233,7 @@
 
 
                     {{-- ---- ROOM CARD: Superior Room ---- --}}
-                    <article class="room-card {{ !$superiorAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-superior">
+                    <article class="room-card {{ !$superiorAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-superior" data-package="Superior Room">
                         <div class="room-card-img-wrap">
                             <span class="room-availability-badge {{ $superiorAvail['is_available'] ? 'room-availability-badge--available' : 'room-availability-badge--sold-out' }}">
                                 @if($superiorAvail['is_available'])
@@ -316,7 +316,7 @@
 
 
                     {{-- ---- ROOM CARD: Junior Suite ---- --}}
-                    <article class="room-card {{ !$juniorAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-junior-suite">
+                    <article class="room-card {{ !$juniorAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-junior-suite" data-package="Junior Suite">
                         <div class="room-card-img-wrap">
                             <span class="room-availability-badge {{ $juniorAvail['is_available'] ? 'room-availability-badge--available' : 'room-availability-badge--sold-out' }}">
                                 @if($juniorAvail['is_available'])
@@ -399,7 +399,7 @@
 
 
                     {{-- ---- ROOM CARD: Penthouse Suite ---- --}}
-                    <article class="room-card {{ !$penthouseAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-penthouse">
+                    <article class="room-card {{ !$penthouseAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-penthouse" data-package="Penthouse Suite">
                         <div class="room-card-img-wrap">
                             <span class="room-availability-badge {{ $penthouseAvail['is_available'] ? 'room-availability-badge--available' : 'room-availability-badge--sold-out' }}">
                                 @if($penthouseAvail['is_available'])
@@ -632,7 +632,8 @@
     <x-slot name="scripts">
     <script>
         const nights = {{ $nights ?? 1 }};
-        const roomAvailability = @json($availability ?? []);
+        let roomAvailability = @json($availability ?? []);
+        const availabilityUrl = @json(route('reservations.availability'));
 
         function formatPHP(amount) {
             return 'PHP ' + amount.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -692,6 +693,60 @@
             window.location.href = '/checkout?' + params.toString();
         }
 
+        function roomsLeftLabel(count) {
+            return count + ' room' + (count === 1 ? '' : 's') + ' left';
+        }
+
+        function applyAvailability(availability) {
+            roomAvailability = availability;
+
+            document.querySelectorAll('.room-card[data-package]').forEach(function (card) {
+                const pkg = card.dataset.package;
+                const info = availability[pkg] || { available: 0, is_available: false };
+                const available = info.is_available;
+                const badge = card.querySelector('.room-availability-badge');
+
+                card.classList.toggle('room-card--sold-out', !available);
+
+                if (badge) {
+                    badge.classList.toggle('room-availability-badge--available', available);
+                    badge.classList.toggle('room-availability-badge--sold-out', !available);
+                    badge.textContent = available ? roomsLeftLabel(info.available) : 'Sold out';
+                }
+
+                card.querySelectorAll('.rate-select-btn').forEach(function (btn) {
+                    btn.disabled = !available;
+                    btn.setAttribute('aria-disabled', available ? 'false' : 'true');
+                    btn.classList.toggle('rate-select-btn--disabled', !available);
+                });
+            });
+        }
+
+        function refreshAvailability() {
+            const checkInEl  = document.getElementById('check_in');
+            const checkOutEl = document.getElementById('check_out');
+            if (!checkInEl || !checkOutEl) return;
+
+            const params = new URLSearchParams({
+                check_in:  checkInEl.value,
+                check_out: checkOutEl.value,
+            });
+
+            fetch(availabilityUrl + '?' + params.toString(), {
+                headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+            })
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                    if (data.availability) {
+                        applyAvailability(data.availability);
+                    }
+                })
+                .catch(function (err) { console.error('Availability refresh failed:', err); });
+        }
+
+        // Auto-refresh room availability every 3s
+        setInterval(refreshAvailability, 3000);
+
         // Keep check-out min = check-in + 1
         const checkIn  = document.getElementById('check_in');
         const checkOut = document.getElementById('check_out');
@@ -703,7 +758,9 @@
                 if (checkOut.value <= this.value) {
                     checkOut.value = next.toISOString().split('T')[0];
                 }
+                refreshAvailability();
             });
+            checkOut.addEventListener('change', refreshAvailability);
         }
     </script>
     </x-slot>

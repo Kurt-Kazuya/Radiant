@@ -22,4 +22,14 @@ class ReservationsController extends Controller
 
         return view('reservations', compact('availability', 'nights', 'checkIn', 'checkOut'));
     }
+
+    public function availability(Request $request)
+    {
+        $checkIn  = $request->get('check_in', date('Y-m-d'));
+        $checkOut = $request->get('check_out', date('Y-m-d', strtotime('+1 day')));
+
+        return response()->json([
+            'availability' => $this->availabilityService->getDisplayAvailability($checkIn, $checkOut),
+        ]);
+    }
 }
