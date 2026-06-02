@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\GuestReservationController;
+use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminRoomController;
@@ -19,6 +20,8 @@ Route::get('/dining', fn() => view('dining'))->name('dining');
 Route::get('/amenities', fn() => view('amenities'))->name('amenities');
 Route::get('/offers', fn() => view('offers'))->name('offers');
 Route::get('/contact', fn() => view('contact'))->name('contact');
+Route::get('/privacy', fn() => view('privacy'))->name('privacy');
+Route::get('/terms', fn() => view('terms'))->name('terms');
 Route::post('/contact', function(\Illuminate\Http\Request $request) {
     $validated = $request->validate([
         'name' => 'required|string|max:255',
@@ -32,7 +35,7 @@ Route::post('/contact', function(\Illuminate\Http\Request $request) {
     return back()->with('success', 'Thank you for your message. We will get back to you shortly.')
                  ->with('sent_data', $validated);
 })->name('contact.post');
-Route::get('/reservations', fn() => view('reservations'))->name('reservations');
+Route::get('/reservations', [ReservationsController::class, 'index'])->name('reservations');
 
 //  Auth Routes 
 Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');

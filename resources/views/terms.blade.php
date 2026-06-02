@@ -54,7 +54,7 @@
             </p>
             
             <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.1);">
-                <a href="/reservations" class="btn btn-gold">Back to Reservations</a>
+                <a href="/reservations" rel="noopener noreferrer" class="btn btn-gold">Back to Reservations</a>
             </div>
         </div>
     </section>

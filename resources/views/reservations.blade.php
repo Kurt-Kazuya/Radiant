@@ -141,9 +141,24 @@
                         </p>
                     </div>
 
+                    @php
+                        $defaultAvail = ['available' => 0, 'is_available' => false, 'total' => 0];
+                        $deluxeAvail    = $availability['Deluxe Room'] ?? $defaultAvail;
+                        $superiorAvail  = $availability['Superior Room'] ?? $defaultAvail;
+                        $juniorAvail    = $availability['Junior Suite'] ?? $defaultAvail;
+                        $penthouseAvail = $availability['Penthouse Suite'] ?? $defaultAvail;
+                    @endphp
+
                     {{-- ---- ROOM CARD: Deluxe Room ---- --}}
-                    <article class="room-card" id="room-deluxe">
+                    <article class="room-card {{ !$deluxeAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-deluxe">
                         <div class="room-card-img-wrap">
+                            <span class="room-availability-badge {{ $deluxeAvail['is_available'] ? 'room-availability-badge--available' : 'room-availability-badge--sold-out' }}">
+                                @if($deluxeAvail['is_available'])
+                                    {{ $deluxeAvail['available'] }} {{ Str::plural('room', $deluxeAvail['available']) }} left
+                                @else
+                                    Sold out
+                                @endif
+                            </span>
                             <img
                                 src="{{ asset('images/Delux-Rooms.jpg') }}" alt="Deluxe Room"
                                 class="room-card-img"
@@ -186,8 +201,8 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Deluxe Room', 'Standard Rate', 3500)"
+                                            class="btn btn-gold rate-select-btn {{ !$deluxeAvail['is_available'] ? 'rate-select-btn--disabled' : '' }}"
+                                            @if($deluxeAvail['is_available']) onclick="selectRoom('Deluxe Room', 'Standard Rate', 3500)" @else disabled aria-disabled="true" @endif
                                         >
                                             <span>Select</span>
                                         </button>
@@ -205,8 +220,8 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Deluxe Room', 'Breakfast Included', 4200)"
+                                            class="btn btn-gold rate-select-btn {{ !$deluxeAvail['is_available'] ? 'rate-select-btn--disabled' : '' }}"
+                                            @if($deluxeAvail['is_available']) onclick="selectRoom('Deluxe Room', 'Breakfast Included', 4200)" @else disabled aria-disabled="true" @endif
                                         >
                                             <span>Select</span>
                                         </button>
@@ -218,8 +233,15 @@
 
 
                     {{-- ---- ROOM CARD: Superior Room ---- --}}
-                    <article class="room-card" id="room-superior">
+                    <article class="room-card {{ !$superiorAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-superior">
                         <div class="room-card-img-wrap">
+                            <span class="room-availability-badge {{ $superiorAvail['is_available'] ? 'room-availability-badge--available' : 'room-availability-badge--sold-out' }}">
+                                @if($superiorAvail['is_available'])
+                                    {{ $superiorAvail['available'] }} {{ Str::plural('room', $superiorAvail['available']) }} left
+                                @else
+                                    Sold out
+                                @endif
+                            </span>
                             <img
                                 src="{{ asset('images/Superior-Rooms.jpg') }}" alt="Superior Room"
                                 class="room-card-img"
@@ -262,8 +284,8 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Superior Room', 'Standard Rate', 5500)"
+                                            class="btn btn-gold rate-select-btn {{ !$superiorAvail['is_available'] ? 'rate-select-btn--disabled' : '' }}"
+                                            @if($superiorAvail['is_available']) onclick="selectRoom('Superior Room', 'Standard Rate', 5500)" @else disabled aria-disabled="true" @endif
                                         >
                                             <span>Select</span>
                                         </button>
@@ -281,8 +303,8 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Superior Room', 'Breakfast Included', 6500)"
+                                            class="btn btn-gold rate-select-btn {{ !$superiorAvail['is_available'] ? 'rate-select-btn--disabled' : '' }}"
+                                            @if($superiorAvail['is_available']) onclick="selectRoom('Superior Room', 'Breakfast Included', 6500)" @else disabled aria-disabled="true" @endif
                                         >
                                             <span>Select</span>
                                         </button>
@@ -294,8 +316,15 @@
 
 
                     {{-- ---- ROOM CARD: Junior Suite ---- --}}
-                    <article class="room-card" id="room-junior-suite">
+                    <article class="room-card {{ !$juniorAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-junior-suite">
                         <div class="room-card-img-wrap">
+                            <span class="room-availability-badge {{ $juniorAvail['is_available'] ? 'room-availability-badge--available' : 'room-availability-badge--sold-out' }}">
+                                @if($juniorAvail['is_available'])
+                                    {{ $juniorAvail['available'] }} {{ Str::plural('room', $juniorAvail['available']) }} left
+                                @else
+                                    Sold out
+                                @endif
+                            </span>
                             <img
                                 src="{{ asset('images/Suite-Rooms.jpg') }}" alt="Junior Suite"
                                 class="room-card-img"
@@ -338,8 +367,8 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Junior Suite', 'Standard Rate', 9000)"
+                                            class="btn btn-gold rate-select-btn {{ !$juniorAvail['is_available'] ? 'rate-select-btn--disabled' : '' }}"
+                                            @if($juniorAvail['is_available']) onclick="selectRoom('Junior Suite', 'Standard Rate', 9000)" @else disabled aria-disabled="true" @endif
                                         >
                                             <span>Select</span>
                                         </button>
@@ -357,8 +386,8 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Junior Suite', 'Full Board', 12500)"
+                                            class="btn btn-gold rate-select-btn {{ !$juniorAvail['is_available'] ? 'rate-select-btn--disabled' : '' }}"
+                                            @if($juniorAvail['is_available']) onclick="selectRoom('Junior Suite', 'Full Board', 12500)" @else disabled aria-disabled="true" @endif
                                         >
                                             <span>Select</span>
                                         </button>
@@ -370,8 +399,15 @@
 
 
                     {{-- ---- ROOM CARD: Penthouse Suite ---- --}}
-                    <article class="room-card" id="room-penthouse">
+                    <article class="room-card {{ !$penthouseAvail['is_available'] ? 'room-card--sold-out' : '' }}" id="room-penthouse">
                         <div class="room-card-img-wrap">
+                            <span class="room-availability-badge {{ $penthouseAvail['is_available'] ? 'room-availability-badge--available' : 'room-availability-badge--sold-out' }}">
+                                @if($penthouseAvail['is_available'])
+                                    {{ $penthouseAvail['available'] }} {{ Str::plural('room', $penthouseAvail['available']) }} left
+                                @else
+                                    Sold out
+                                @endif
+                            </span>
                             <img
                                 src="{{ asset('images/The-Penthouse-3beds-Room.avif') }}" alt="Penthouse Suite"
                                 class="room-card-img"
@@ -414,8 +450,8 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Penthouse Suite', 'Standard Rate', 18000)"
+                                            class="btn btn-gold rate-select-btn {{ !$penthouseAvail['is_available'] ? 'rate-select-btn--disabled' : '' }}"
+                                            @if($penthouseAvail['is_available']) onclick="selectRoom('Penthouse Suite', 'Standard Rate', 18000)" @else disabled aria-disabled="true" @endif
                                         >
                                             <span>Select</span>
                                         </button>
@@ -433,8 +469,8 @@
                                         </div>
                                         <span class="rate-per">per night</span>
                                         <button
-                                            class="btn btn-gold rate-select-btn"
-                                            onclick="selectRoom('Penthouse Suite', 'All Inclusive', 24000)"
+                                            class="btn btn-gold rate-select-btn {{ !$penthouseAvail['is_available'] ? 'rate-select-btn--disabled' : '' }}"
+                                            @if($penthouseAvail['is_available']) onclick="selectRoom('Penthouse Suite', 'All Inclusive', 24000)" @else disabled aria-disabled="true" @endif
                                         >
                                             <span>Select</span>
                                         </button>
@@ -596,12 +632,16 @@
     <x-slot name="scripts">
     <script>
         const nights = {{ $nights ?? 1 }};
+        const roomAvailability = @json($availability ?? []);
 
         function formatPHP(amount) {
             return 'PHP ' + amount.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
         function selectRoom(roomName, rateName, pricePerNight) {
+            if (roomAvailability[roomName] && !roomAvailability[roomName].is_available) {
+                return;
+            }
             const subtotal  = pricePerNight * nights;
             const tax       = subtotal * 0.12;
             const total     = subtotal + tax;
