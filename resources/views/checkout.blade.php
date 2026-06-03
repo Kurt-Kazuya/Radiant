@@ -447,8 +447,8 @@
                         <div class="sidebar-need-help">
                             <span class="eyebrow" style="color: var(--gold);">Need Help?</span>
                             <p style="font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 0.4rem;">
-                                Call us: <a href="tel:+63930560263" style="color: var(--gold-light);">+63 930 560 2635</a><br>
-                                Email: <a href="mailto:RadiantHotel@gmail.com" style="color: var(--gold-light);">RadiantHotel@gmail.com</a>
+                                @php $hotelEmail = \App\Models\User::where('role', 'admin')->value('email') ?? 'radianthotel2026@gmail.com'; @endphp
+                                Email: <a href="mailto:{{ $hotelEmail }}" style="color: var(--gold-light);">{{ $hotelEmail }}</a>
                             </p>
                         </div>
                     </div>
@@ -519,6 +519,7 @@
         document.getElementById('guest-form').addEventListener('submit', function(e) {
             e.preventDefault();
             let valid = true;
+            let firstInvalidEl = null;
 
             ['first_name', 'last_name', 'email', 'phone'].forEach(field => {
                 const input = document.getElementById(field);
@@ -527,6 +528,7 @@
                     err.textContent = 'This field is required.';
                     input.classList.add('error');
                     valid = false;
+                    if (!firstInvalidEl) firstInvalidEl = input;
                 } else {
                     err.textContent = '';
                     input.classList.remove('error');
@@ -539,6 +541,7 @@
                 emailErr.textContent = 'Please enter a valid email address.';
                 emailEl.classList.add('error');
                 valid = false;
+                if (!firstInvalidEl) firstInvalidEl = emailEl;
             }
 
             const agree = document.getElementById('agree_terms');
@@ -546,11 +549,17 @@
             if (!agree.checked) {
                 agreeErr.textContent = 'You must agree to the terms to continue.';
                 valid = false;
+                if (!firstInvalidEl) firstInvalidEl = agree;
             } else {
                 agreeErr.textContent = '';
             }
 
-            if (valid) goToStep(2);
+            if (valid) {
+                goToStep(2);
+            } else if (firstInvalidEl) {
+                // Scroll to the first invalid element smoothly, centering it on the screen
+                firstInvalidEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         });
 
         // ── Step 2: Extras toggle ──────────────────────────────────

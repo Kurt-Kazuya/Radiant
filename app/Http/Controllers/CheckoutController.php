@@ -156,8 +156,27 @@ class CheckoutController extends Controller
 
 
 
-        return redirect()->route('reservations')
+        return redirect()->route('checkout.receipt', $reservation->id)
             ->with('success', "Thank you! Your reservation #{$reservation->id} has been submitted! We will confirm it within 24 hours.");
+    }
+
+    /**
+     * Show the receipt page after a successful booking.
+     */
+    public function receipt(Reservation $reservation)
+    {
+        $reservation->load(['user', 'room', 'payment']);
+        return view('checkout.receipt', compact('reservation'));
+    }
+
+    /**
+     * Download the receipt as a PDF.
+     */
+    public function downloadReceipt(Reservation $reservation)
+    {
+        $reservation->load(['user', 'room', 'payment']);
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('checkout.receipt_pdf', compact('reservation'));
+        return $pdf->download('reservation-' . $reservation->id . '.pdf');
     }
 }
 

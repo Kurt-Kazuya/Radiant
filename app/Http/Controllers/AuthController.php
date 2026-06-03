@@ -29,7 +29,7 @@ class AuthController extends Controller
 
         
     
-        $adminEmail    = 'admin@hotel.com';
+        $adminEmail    = 'radianthotel2026@gmail.com';
         $adminPassword = 'password';
 
         // Only allow fallback check if there are no admins in the system (e.g. database was reset)
@@ -47,7 +47,7 @@ class AuthController extends Controller
 
                 Auth::login($admin, $request->boolean('remember'));
                 $request->session()->regenerate();
-                return redirect()->intended(route('admin.dashboard'));
+                return redirect()->route('admin.dashboard');
             }
         }
 
@@ -55,7 +55,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             if (Auth::user()->role === 'admin') {
-                return redirect()->intended(route('admin.dashboard'));
+                return redirect()->route('admin.dashboard');
             }
 
             return redirect()->intended('/');

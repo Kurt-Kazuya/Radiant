@@ -80,7 +80,7 @@
                     name="email"
                     class="form-input"
                     value="{{ old('email') }}"
-                    placeholder="admin@radianthotel.com"
+                    placeholder="radianthotel.com"
                     required
                     autocomplete="email"
                     autofocus

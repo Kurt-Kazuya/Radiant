@@ -47,6 +47,8 @@ Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 //  Guest Checkout & Bookings
 Route::get('/checkout',  [CheckoutController::class, 'show'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/checkout/receipt/{reservation}', [CheckoutController::class, 'receipt'])->name('checkout.receipt');
+Route::get('/checkout/receipt/{reservation}/pdf', [CheckoutController::class, 'downloadReceipt'])->name('checkout.receipt.pdf');
 
 
 
