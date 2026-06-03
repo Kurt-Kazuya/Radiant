@@ -106,7 +106,7 @@
 
         {{-- Sidebar footer: logged-in user + logout --}}
         <div class="sidebar-footer">
-            <a href="{{ route('admin.profile.edit') }}" class="sidebar-user" style="text-decoration: none; display: flex;" title="View Profile">
+            <div class="sidebar-user">
                 <div class="sidebar-avatar">
                     {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
                 </div>
@@ -115,13 +115,6 @@
                     <div class="sidebar-user-role">Administrator</div>
                 </div>
             </div>
-            <a href="{{ route('admin.profile.edit') }}" class="sidebar-link {{ request()->routeIs('admin.profile.*') ? 'active' : '' }}" style="margin-bottom: 0.5rem; font-size: 0.8rem;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                </svg>
-                Edit Profile
-            </a>
             <form class="sidebar-logout-form" action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit">⟵ Sign Out</button>

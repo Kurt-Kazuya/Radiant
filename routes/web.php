@@ -10,8 +10,6 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminRoomController;
 use App\Http\Controllers\Admin\AdminReservationController;
 use App\Http\Controllers\Admin\AdminPaymentController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\AdminProfileController;
 
 
 // Public Guest Pages 
@@ -50,41 +48,36 @@ Route::get('/checkout',  [CheckoutController::class, 'show'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 
+
+
+
+
 // Admin Routes (auth + admin role required)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 
     // Dashboard
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-    // Profile
-    Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
-
     // Rooms CRUD
     Route::resource('rooms', AdminRoomController::class);
 
     // Reservations — list + custom confirm/cancel + delete
-    Route::get('/reservations',               [AdminReservationController::class, 'index'])->name('reservations.index');
-    Route::patch('/reservations/{id}/confirm', [AdminReservationController::class, 'confirm'])->name('reservations.confirm');
-    Route::patch('/reservations/{id}/cancel',  [AdminReservationController::class, 'cancel'])->name('reservations.cancel');
-    Route::delete('/reservations/{id}',        [AdminReservationController::class, 'destroy'])->name('reservations.destroy');
+    Route::get('/reservations',              [AdminReservationController::class, 'index'])->name('reservations.index');
+    Route::patch('/reservations/{id}/confirm',[AdminReservationController::class, 'confirm'])->name('reservations.confirm');
+    Route::patch('/reservations/{id}/cancel', [AdminReservationController::class, 'cancel'])->name('reservations.cancel');
+    Route::delete('/reservations/{id}',       [AdminReservationController::class, 'destroy'])->name('reservations.destroy');
 
     // Payments
-    Route::get('/payments',                 [AdminPaymentController::class, 'index'])->name('payments.index');
-    Route::patch('/payments/{id}/mark-paid', [AdminPaymentController::class, 'markPaid'])->name('payments.markPaid');
-    Route::delete('/payments/{payment}',    [AdminPaymentController::class, 'destroy'])->name('payments.destroy');
+    Route::get('/payments',                [AdminPaymentController::class, 'index'])->name('payments.index');
+    Route::patch('/payments/{id}/mark-paid',[AdminPaymentController::class, 'markPaid'])->name('payments.markPaid');
+    Route::delete('/payments/{payment}',   [AdminPaymentController::class, 'destroy'])->name('payments.destroy');
 
     // Contact Messages
-    Route::get('/contact-messages',                  [\App\Http\Controllers\Admin\AdminContactMessageController::class, 'index'])->name('contact-messages.index');
-    Route::patch('/contact-messages/{id}/mark-read', [\App\Http\Controllers\Admin\AdminContactMessageController::class, 'markRead'])->name('contact-messages.markRead');
-    Route::delete('/contact-messages/{id}',          [\App\Http\Controllers\Admin\AdminContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
+    Route::get('/contact-messages',                 [\App\Http\Controllers\Admin\AdminContactMessageController::class, 'index'])->name('contact-messages.index');
+    Route::patch('/contact-messages/{id}/mark-read',[\App\Http\Controllers\Admin\AdminContactMessageController::class, 'markRead'])->name('contact-messages.markRead');
+    Route::delete('/contact-messages/{id}',         [\App\Http\Controllers\Admin\AdminContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
 
     // Reports (admin-only)
-    Route::get('/reports',     [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports',            [ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/pdf', [ReportController::class, 'exportPDF'])->name('reports.pdf');
-
-    // Profile — edit name/email & change password
-    Route::get('/profile',          [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile',          [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
 });
