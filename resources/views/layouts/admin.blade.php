@@ -24,7 +24,7 @@
 
         {{-- Brand --}}
         <div class="sidebar-brand">
-            <div class="sidebar-brand-mark">RH</div>
+            <img src="{{ asset('images/Radiant-Hotels.png') }}" alt="Radiant Hotel Logo" style="height: 44px; width: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
             <div class="sidebar-brand-text">
                 Radiant Hotel
                 <span class="sidebar-brand-sub">Admin Panel</span>
@@ -106,7 +106,7 @@
 
         {{-- Sidebar footer: logged-in user + logout --}}
         <div class="sidebar-footer">
-            <a href="{{ route('admin.profile.edit') }}" class="sidebar-user" style="text-decoration: none; display: flex;" title="View Profile">
+            <div class="sidebar-user">
                 <div class="sidebar-avatar">
                     {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
                 </div>
@@ -114,7 +114,7 @@
                     <div class="sidebar-user-name">{{ Auth::user()->name ?? 'Admin' }}</div>
                     <div class="sidebar-user-role">Administrator</div>
                 </div>
-            </a>
+            </div>
             <form class="sidebar-logout-form" action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit">⟵ Sign Out</button>

@@ -295,8 +295,8 @@
                                 <label class="payment-option" id="pay-online-label">
                                     <input type="radio" name="payment_method" value="pay_online" class="payment-radio" onchange="updatePaymentUI()">
                                     <div class="payment-option-body">
-                                        <span class="payment-option-title">Pay Online (GCash / Credit Card)</span>
-                                        <span class="payment-option-desc">Secure online payment via GCash, Visa, or Mastercard. Confirmation sent instantly.</span>
+                                        <span class="payment-option-title">Pay Online (Via Credit Card)</span>
+                                        <span class="payment-option-desc">Secure online payment via Visa, or Mastercard. Confirmation sent instantly.</span>
                                     </div>
                                 </label>
                             </div>

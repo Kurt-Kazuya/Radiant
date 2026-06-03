@@ -30,11 +30,7 @@
             <div class="header-inner">
                 {{-- Logo --}}
                 <a href="/" class="logo" aria-label="Radiant Hotel">
-                    <div class="logo-mark">
-                        <div class="logo-mark-monogram">
-                            <span class="lm-R">R</span><span class="lm-H">H</span>
-                        </div>
-                    </div>
+                    <img src="{{ asset('images/Radiant-Hotels.png') }}" alt="Radiant Hotel Logo" class="logo-img" style="height: 48px; width: 48px; border-radius: 50%; object-fit: cover;">
                     <div class="logo-text">
                         Radiant Hotel
                         <span class="logo-sub">Lingayen, Pangasinan</span>
@@ -81,11 +77,7 @@
                     {{-- Brand --}}
                     <div class="footer-brand">
                         <a href="/" class="logo" aria-label="Radiant Hotel">
-                            <div class="logo-mark">
-                                <div class="logo-mark-monogram">
-                                    <span class="lm-R">R</span><span class="lm-H">H</span>
-                                </div>
-                            </div>
+                            <img src="{{ asset('images/Radiant-Hotels.png') }}" alt="Radiant Hotel Logo" class="logo-img" style="height: 48px; width: 48px; border-radius: 50%; object-fit: cover;">
                             <div class="logo-text">
                                 Radiant Hotel
                                 <span class="logo-sub">Lingayen, Pangasinan</span>
