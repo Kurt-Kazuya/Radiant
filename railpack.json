@@ -1,27 +1,11 @@
 {
   "$schema": "https://schema.railpack.com",
   "buildAptPackages": [
-    "build-essential",
-    "autoconf",
-    "libtool",
-    "bison",
-    "re2c",
-    "libcurl4-openssl-dev",
-    "libxml2-dev",
-    "libssl-dev",
-    "libsqlite3-dev",
-    "libzip-dev",
-    "zlib1g-dev",
-    "libonig-dev",
-    "libreadline-dev",
-    "libgd-dev",
-    "libicu-dev",
-    "libpq-dev",
-    "libbz2-dev",
-    "libsodium-dev",
-    "libargon2-dev",
-    "libgettext-ocaml-dev",
-    "gettext"
+    "build-essential", "autoconf", "libtool", "bison", "re2c",
+    "libcurl4-openssl-dev", "libxml2-dev", "libssl-dev", "libsqlite3-dev",
+    "libzip-dev", "zlib1g-dev", "libonig-dev", "libreadline-dev",
+    "libgd-dev", "libicu-dev", "libpq-dev", "libbz2-dev",
+    "libsodium-dev", "libargon2-dev", "libgettext-ocaml-dev", "gettext"
   ],
   "packages": {
     "php": "8.4"
@@ -31,8 +15,12 @@
       "commands": [
         "...",
         "php artisan config:cache",
-        "php artisan route:cache"
+        "php artisan route:cache",
+        "php artisan view:clear"
       ]
     }
+  },
+  "deploy": {
+    "startCommand": "php artisan view:cache && php-fpm"
   }
 }
