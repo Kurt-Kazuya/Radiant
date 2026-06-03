@@ -25,5 +25,14 @@
   ],
   "packages": {
     "php": "8.4"
+  },
+  "steps": {
+    "build": {
+      "commands": [
+        "...",
+        "php artisan config:cache",
+        "php artisan route:cache"
+      ]
+    }
   }
 }
