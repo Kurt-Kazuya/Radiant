@@ -116,7 +116,7 @@
                         <ul class="footer-links">
                             <li> Lingayen, Pangasinan</li>
                             <li style="margin-top: 0.5rem;"><a href="tel:+63905602635">+63 930 560 2635</a></li>
-                            @php $hotelEmail = \App\Models\User::where('role', 'admin')->value('email') ?? 'radianthotel2026@gmail.com'; @endphp
+                            @php $hotelEmail = config('mail.admin_email', 'radianthotel2026@gmail.com'); @endphp
                             <li><a href="mailto:{{ $hotelEmail }}">{{ $hotelEmail }}</a></li>
                         </ul>
                     </div>
