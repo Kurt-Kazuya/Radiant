@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Register - Hotel Reservation</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/Radiant-Hotels.png') }}">
 </head>
 <body>
     <h2>Hotel Reservation System - Register</h2>

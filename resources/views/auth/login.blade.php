@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
+
+    <link rel="icon" type="image/png" href="{{ asset('images/Radiant-Hotels.png') }}">
 </head>
 <body>
 
@@ -39,19 +41,20 @@
     {{-- ── RIGHT: Login Form Panel ── --}}
     <div class="login-panel">
 
+        {{-- Dark fade overlay at top --}}
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.3), transparent); pointer-events: none; z-index: 0;"></div>
+
         {{-- Logo --}}
-        <a href="{{ route('home') }}" class="login-logo" aria-label="Back to Radiant Hotel">
-            <div class="login-logo-mark">
-                <div class="login-logo-monogram">RH</div>
-            </div>
-            <div class="login-logo-text">
+        <a href="{{ route('home') }}" class="login-logo" aria-label="Back to Radiant Hotel" style="position: relative; z-index: 1;">
+            <img src="{{ asset('images/Radiant-Hotels.png') }}" alt="Radiant Hotel Logo" style="height: 48px; width: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+            <div class="login-logo-text" style="color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">
                 Radiant Hotel
-                <span class="login-logo-sub">Lingayen, Pangasinan</span>
+                <span class="login-logo-sub" style="color: #ffd700; text-shadow: 0 1px 4px rgba(0,0,0,0.5);">Lingayen, Pangasinan</span>
             </div>
         </a>
 
         {{-- Heading --}}
-        <div class="login-heading">
+        <div class="login-heading" style="position: relative; z-index: 1;">
             <span class="login-eyebrow">Admin Portal</span>
             <h1 class="login-title">Sign <em>In</em></h1>
             <p class="login-sub">Enter your credentials to access the hotel management dashboard.</p>

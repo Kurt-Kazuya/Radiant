@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Reservation Receipt - {{ $reservation->id }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/Radiant-Hotels.png') }}">
     <style>
         @page {
             margin: 0;
