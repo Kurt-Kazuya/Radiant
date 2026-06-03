@@ -106,7 +106,7 @@
 
         {{-- Sidebar footer: logged-in user + logout --}}
         <div class="sidebar-footer">
-            <div class="sidebar-user">
+            <a href="{{ route('admin.profile.edit') }}" class="sidebar-user" style="text-decoration: none; display: flex;" title="View Profile">
                 <div class="sidebar-avatar">
                     {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
                 </div>

@@ -32,20 +32,23 @@ class AuthController extends Controller
         $adminEmail    = 'admin@hotel.com';
         $adminPassword = 'password';
 
-        if ($credentials['email'] === $adminEmail && $credentials['password'] === $adminPassword) {
-            // Re-create the admin row if it was deleted
-            $admin = User::firstOrCreate(
-                ['email' => $adminEmail],
-                [
-                    'name'     => 'Admin',
-                    'password' => Hash::make($adminPassword),
-                    'role'     => 'admin',
-                ]
-            );
+        // Only allow fallback check if there are no admins in the system (e.g. database was reset)
+        if (User::where('role', 'admin')->count() === 0) {
+            if ($credentials['email'] === $adminEmail && $credentials['password'] === $adminPassword) {
+                // Re-create the admin row if it was deleted
+                $admin = User::firstOrCreate(
+                    ['email' => $adminEmail],
+                    [
+                        'name'     => 'Admin',
+                        'password' => Hash::make($adminPassword),
+                        'role'     => 'admin',
+                    ]
+                );
 
-            Auth::login($admin, $request->boolean('remember'));
-            $request->session()->regenerate();
-            return redirect()->intended(route('admin.dashboard'));
+                Auth::login($admin, $request->boolean('remember'));
+                $request->session()->regenerate();
+                return redirect()->intended(route('admin.dashboard'));
+            }
         }
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {

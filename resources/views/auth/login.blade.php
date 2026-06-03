@@ -89,15 +89,24 @@
 
             <div class="form-group">
                 <label class="form-label" for="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="form-input"
-                    placeholder="••••••••"
-                    required
-                    autocomplete="current-password"
-                >
+                <div class="password-toggle-wrapper" style="position: relative; display: flex; align-items: center; width: 100%;">
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-input"
+                        placeholder="••••••••"
+                        required
+                        autocomplete="current-password"
+                        style="padding-right: 2.75rem;"
+                    >
+                    <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('password', this)" style="position: absolute; right: 1rem; border: none; background: none; color: var(--text-light); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0.25rem;">
+                        <svg class="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             <div class="form-remember">
@@ -129,6 +138,26 @@
         </p>
 
     </div>
+
+    <script>
+        function togglePasswordVisibility(fieldId, buttonEl) {
+            const passwordInput = document.getElementById(fieldId);
+            const eyeIcon = buttonEl.querySelector('svg');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = `
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = `
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                `;
+            }
+        }
+    </script>
 
 </body>
 </html>
