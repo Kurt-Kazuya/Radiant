@@ -1,5 +1,6 @@
 {
-  "buildAptPackages": ["bison"],
+  "$schema": "https://schema.railpack.com",
+  "buildAptPackages": ["build-essential", "autoconf", "libtool", "bison", "re2c"],
   "packages": {
     "php": "8.4"
   }
