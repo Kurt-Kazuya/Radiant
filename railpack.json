@@ -15,12 +15,8 @@
       "commands": [
         "...",
         "php artisan config:cache",
-        "php artisan route:cache",
-        "php artisan view:clear"
+        "php artisan route:cache"
       ]
     }
-  },
-  "deploy": {
-    "startCommand": "php artisan view:cache && php-fpm"
   }
 }
