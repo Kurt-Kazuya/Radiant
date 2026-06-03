@@ -27,4 +27,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('pendingReservationsCount', $pendingReservationsCount);
         });
     }
+    public function boot(): void
+{
+    if (config('app.env') === 'production') {
+        \URL::forceScheme('https');
+    }
+}
 }
