@@ -286,45 +286,12 @@
                             </div>
                             <div class="payment-options">
                                 <label class="payment-option" id="pay-hotel-label">
-                                    <input type="radio" name="payment_method" value="pay_at_hotel" class="payment-radio" checked onchange="updatePaymentUI()">
+                                    <input type="radio" name="payment_method" value="pay_at_hotel" class="payment-radio" checked>
                                     <div class="payment-option-body">
                                         <span class="payment-option-title">Pay at Hotel</span>
                                         <span class="payment-option-desc">No charge now. Present a valid ID at check-in. Free cancellation up to 24 hours before arrival.</span>
                                     </div>
                                 </label>
-                                <label class="payment-option" id="pay-online-label">
-                                    <input type="radio" name="payment_method" value="pay_online" class="payment-radio" onchange="updatePaymentUI()">
-                                    <div class="payment-option-body">
-                                        <span class="payment-option-title">Pay Online (Via Credit Card)</span>
-                                        <span class="payment-option-desc">Secure online payment via Visa, or Mastercard. Confirmation sent instantly.</span>
-                                    </div>
-                                </label>
-                            </div>
-
-                            {{-- Online payment placeholder --}}
-                            <div id="online-payment-fields" style="display:none;" class="online-payment-panel">
-                                <div class="secure-badge">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                                    <span>Secure payment — your card details are encrypted and never stored on our servers.</span>
-                                </div>
-                                <div class="form-grid">
-                                    <div class="form-group form-group--full">
-                                        <label class="form-label" for="card_name">Name on Card</label>
-                                        <input type="text" id="card_name" name="card_name" class="form-input" placeholder="JUAN DELA CRUZ" autocomplete="cc-name">
-                                    </div>
-                                    <div class="form-group form-group--full">
-                                        <label class="form-label" for="card_number">Card Number</label>
-                                        <input type="text" id="card_number" name="card_number" class="form-input" placeholder="•••• •••• •••• ••••" maxlength="19" autocomplete="cc-number">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="card_expiry">Expiry</label>
-                                        <input type="text" id="card_expiry" name="card_expiry" class="form-input" placeholder="MM / YY" maxlength="7" autocomplete="cc-exp">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="card_cvv">CVV</label>
-                                        <input type="text" id="card_cvv" name="card_cvv" class="form-input" placeholder="•••" maxlength="4" autocomplete="cc-csc">
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -628,10 +595,6 @@
         }
 
         // ── Payment toggle ─────────────────────────────────────────
-        function updatePaymentUI() {
-            const online = document.querySelector('input[name="payment_method"][value="pay_online"]').checked;
-            document.getElementById('online-payment-fields').style.display = online ? 'block' : 'none';
-        }
 
         // ── Confirm booking — submits the real form to the server ──
         function confirmBooking() {
