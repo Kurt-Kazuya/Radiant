@@ -52,7 +52,10 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
                 </svg>
-                Reservations
+                <span style="flex: 1;">Reservations</span>
+                @if($pendingReservationsCount > 0)
+                    <span class="notification-badge">{{ $pendingReservationsCount }}</span>
+                @endif
             </a>
 
             <a href="{{ route('admin.payments.index') }}"
@@ -107,7 +110,7 @@
 
         {{-- Sidebar footer: logged-in user + logout --}}
         <div class="sidebar-footer">
-            <div class="sidebar-user">
+            <a href="{{ route('admin.profile.edit') }}" class="sidebar-user" style="text-decoration: none; color: inherit; display: flex; gap: 0.75rem; align-items: center; cursor: pointer;">
                 <div class="sidebar-avatar">
                     {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
                 </div>
@@ -115,7 +118,7 @@
                     <div class="sidebar-user-name">{{ Auth::user()->name ?? 'Admin' }}</div>
                     <div class="sidebar-user-role">Administrator</div>
                 </div>
-            </div>
+            </a>
             <form class="sidebar-logout-form" action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit">⟵ Sign Out</button>

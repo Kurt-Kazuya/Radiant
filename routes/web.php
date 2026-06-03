@@ -82,4 +82,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Reports (admin-only)
     Route::get('/reports',            [ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/pdf', [ReportController::class, 'exportPDF'])->name('reports.pdf');
+
+    // Profile
+    Route::get('/profile',            [\App\Http\Controllers\Admin\AdminProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile',          [\App\Http\Controllers\Admin\AdminProfileController::class, 'update'])->name('profile.update');
 });
