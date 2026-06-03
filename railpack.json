@@ -13,9 +13,10 @@
   "steps": {
     "build": {
       "commands": [
-        { "cmd": "npm run build" },
-        { "cmd": "php artisan config:cache" },
-        { "cmd": "php artisan route:cache" }
+         "...",
+      "npm run build",
+      "php artisan config:cache",
+      "php artisan route:cache"
       ]
     }
   }
