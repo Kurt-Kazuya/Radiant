@@ -19,12 +19,15 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
-        // Share pending reservations count with admin layout
-        View::composer('layouts.admin', function ($view) {
-            $pendingReservationsCount = Reservation::where('status', 'pending')->count();
-            $view->with('pendingReservationsCount', $pendingReservationsCount);
-        });
+public function boot(): void
+{
+    if (config('app.env') === 'production') {
+        \URL::forceScheme('https');
     }
+
+    View::composer('layouts.admin', function ($view) {
+        $pendingReservationsCount = Reservation::where('status', 'pending')->count();
+        $view->with('pendingReservationsCount', $pendingReservationsCount);
+    });
+}
 }
