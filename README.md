@@ -89,7 +89,7 @@ public/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Requirements
 
@@ -142,31 +142,6 @@ This creates:
 
 ---
 
-## ⚙️ Environment Configuration
-
-Copy `.env.example` to `.env` and adjust the values:
-
-```env
-APP_NAME=Laravel
-APP_ENV=local
-APP_URL=http://localhost
-
-# Default: SQLite
-DB_CONNECTION=sqlite
-
-# Switching to MySQL:
-# DB_CONNECTION=mysql
-# DB_HOST=127.0.0.1
-# DB_PORT=3306
-# DB_DATABASE=radiant_hotel
-# DB_USERNAME=root
-# DB_PASSWORD=your_password
-```
-
-> **Note:** When migrating from SQLite to MySQL, update the DB settings above and run `php artisan migrate:fresh --seed` locally to rebuild the schema.
-
----
-
 ## Authentication
 
 | Role | Access |
@@ -175,10 +150,6 @@ DB_CONNECTION=sqlite
 | **Admin** | Full admin panel at `/admin/dashboard` |
 
 The admin panel is protected by the `auth` + `admin` middleware. If no admin exists in the database (e.g., after a fresh migration), the system falls back to a hardcoded recovery credential so access is never permanently locked out.
-
-**Default Admin Credentials (seeder):**
-- Email: `admin@hotel.com`
-- Password: `password`
 
 ---
 
