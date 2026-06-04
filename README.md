@@ -222,7 +222,7 @@ Tests are written using **PestPHP** and located in `tests/Feature/` and `tests/U
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -236,6 +236,16 @@ Tests are written using **PestPHP** and located in `tests/Feature/` and `tests/U
 
 ---
 
-## 📄 License
+## License
 
 This project is for academic/educational purposes.
+---
+ 
+## Developers
+ 
+| Name |
+|---|
+| Justine Barlaan |
+| RJ Joshua Zaratan |
+| Kurt Palavino |
+ 
