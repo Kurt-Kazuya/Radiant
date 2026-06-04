@@ -303,10 +303,7 @@
                                     <input type="radio" name="payment_method" value="gcash" class="payment-radio" onchange="onPaymentChange(this.value)" style="margin-top:3px; flex-shrink:0; accent-color:#007DFF; width:16px; height:16px;">
                                     <div class="payment-option-body" style="flex:1;">
                                         <div class="payment-option-top" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.3rem;">
-                                            <span class="payment-option-title" style="font-weight:600; font-size:0.95rem; display:flex; align-items:center; gap:6px;">
-                                                <svg width="18" height="18" viewBox="0 0 40 40" fill="none" style="vertical-align:middle;flex-shrink:0;"><circle cx="20" cy="20" r="20" fill="#007DFF"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Arial">G</text></svg>
-                                                GCash
-                                            </span>
+                                            <span class="payment-option-title" style="font-weight:600; font-size:0.95rem;">GCash</span>
                                             <span class="payment-option-badge" style="background:rgba(0,125,255,0.12);color:#007DFF;font-size:0.7rem;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;">Instant</span>
                                         </div>
                                         <span class="payment-option-desc" style="font-size:0.83rem; color:#666;">Pay via GCash e-wallet. You will receive a QR code or payment link after confirming.</span>
@@ -331,15 +328,7 @@
                                     <input type="radio" name="payment_method" value="credit_card" class="payment-radio" onchange="onPaymentChange(this.value)" style="margin-top:3px; flex-shrink:0; accent-color:#1A1F36; width:16px; height:16px;">
                                     <div class="payment-option-body" style="flex:1;">
                                         <div class="payment-option-top" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.3rem;">
-                                            <span class="payment-option-title" style="font-weight:600; font-size:0.95rem; display:flex; align-items:center; gap:6px;">
-                                                <svg width="22" height="15" viewBox="0 0 40 26" fill="none" style="vertical-align:middle;flex-shrink:0;"><rect width="40" height="26" rx="3" fill="#1A1F36"/><rect y="5" width="40" height="7" fill="#E2B94B"/><rect x="3" y="17" width="10" height="4" rx="1" fill="rgba(255,255,255,0.5)"/></svg>
-                                                Credit / Debit Card
-                                            </span>
-                                            <div style="display:flex;gap:4px;align-items:center;flex-shrink:0;">
-                                                <span style="font-size:0.7rem;font-weight:700;background:#1565C0;color:#fff;padding:1px 5px;border-radius:3px;">VISA</span>
-                                                <span style="font-size:0.7rem;font-weight:700;color:#EB001B;letter-spacing:-1px;">●●<span style="color:#F79E1B;">●</span></span>
-                                            </div>
-                                        </div>
+                                            <span class="payment-option-title" style="font-weight:600; font-size:0.95rem;">Credit / Debit Card</span>
                                         <span class="payment-option-desc" style="font-size:0.83rem; color:#666;">Visa, Mastercard, or any local debit card. Your card details are encrypted and secure.</span>
                                     </div>
                                 </label>
