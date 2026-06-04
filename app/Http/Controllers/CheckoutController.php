@@ -102,33 +102,33 @@ class CheckoutController extends Controller
 
         $userId = $user->id;
 
-        // admin bypass
-        if (Auth::check() && Auth::user()->role === 'admin') {
-            $reservation = Reservation::create([
-                'user_id'        => $userId,
-                'room_id'        => $roomId,
-                'check_in_date'  => $validated['check_in_date'],
-                'check_out_date' => $validated['check_out_date'],
-                'total_nights'   => $validated['total_nights'],
-                'total_price'    => $validated['total_price'],
-                'arrival_time'   => $validated['arrival_time'] ?? null,
-                'special_requests'=> $validated['special_requests'] ?? null,
-                'preferences'    => $validated['preferences'] ?? null,
-                'extras'         => $validated['extras'] ?? null,
-                'status'         => 'pending',
-            ]);
+        // // admin bypass
+        // if (Auth::check() && Auth::user()->role === 'admin') {
+        //     $reservation = Reservation::create([
+        //         'user_id'        => $userId,
+        //         'room_id'        => $roomId,
+        //         'check_in_date'  => $validated['check_in_date'],
+        //         'check_out_date' => $validated['check_out_date'],
+        //         'total_nights'   => $validated['total_nights'],
+        //         'total_price'    => $validated['total_price'],
+        //         'arrival_time'   => $validated['arrival_time'] ?? null,
+        //         'special_requests'=> $validated['special_requests'] ?? null,
+        //         'preferences'    => $validated['preferences'] ?? null,
+        //         'extras'         => $validated['extras'] ?? null,
+        //         'status'         => 'pending',
+        //     ]);
 
-            $paymentMethod = $validated['payment_method'] ?? 'pay_at_hotel';
-            Payment::create([
-                'reservation_id' => $reservation->id,
-                'amount'         => $validated['total_price'],
-                'payment_method' => $paymentMethod === 'pay_online' ? 'credit_card' : 'cash',
-                'payment_status' => $paymentMethod === 'pay_online' ? 'paid' : 'unpaid',
-            ]);
+        //     $paymentMethod = $validated['payment_method'] ?? 'pay_at_hotel';
+        //     Payment::create([
+        //         'reservation_id' => $reservation->id,
+        //         'amount'         => $validated['total_price'],
+        //         'payment_method' => $paymentMethod === 'pay_online' ? 'credit_card' : 'cash',
+        //         'payment_status' => $paymentMethod === 'pay_online' ? 'paid' : 'unpaid',
+        //     ]);
 
-            return redirect()->route('admin.reservations.index')
-                ->with('success', "Test reservation #{$reservation->id} created for {$user->name}.");
-        }
+        //     return redirect()->route('admin.reservations.index')
+        //         ->with('success', "Test reservation #{$reservation->id} created for {$user->name}.");
+        // }
 
         // create reservation
         $reservation = Reservation::create([

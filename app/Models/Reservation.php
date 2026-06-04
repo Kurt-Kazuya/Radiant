@@ -18,11 +18,15 @@ class Reservation extends Model
         'special_requests',
         'preferences',
         'extras',
+        'completed_at',
+        'archived_at',
     ];
 
     protected $casts = [
         'check_in_date'  => 'date',
         'check_out_date' => 'date',
+        'completed_at'   => 'datetime',
+        'archived_at'    => 'datetime',
         'preferences'    => 'array',
         'extras'         => 'array',
     ];
@@ -51,5 +55,25 @@ class Reservation extends Model
     public function scopeActive($query)
     {
         return $query->whereIn('status', ['pending', 'confirmed']);
+    }
+
+    public function scopeCompleted($query)
+    {
+        return $query->whereNotNull('completed_at');
+    }
+
+    public function scopeNotCompleted($query)
+    {
+        return $query->whereNull('completed_at');
+    }
+
+    public function scopeArchived($query)
+    {
+        return $query->whereNotNull('archived_at');
+    }
+
+    public function scopeNotArchived($query)
+    {
+        return $query->whereNull('archived_at');
     }
 }

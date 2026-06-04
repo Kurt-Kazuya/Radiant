@@ -65,9 +65,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Reservations — list + custom confirm/cancel + delete
     Route::get('/reservations',              [AdminReservationController::class, 'index'])->name('reservations.index');
+    Route::get('/reservations/history',      [AdminReservationController::class, 'history'])->name('reservations.history');
     Route::patch('/reservations/{id}/confirm',[AdminReservationController::class, 'confirm'])->name('reservations.confirm');
+    Route::patch('/reservations/{id}/mark-done',[AdminReservationController::class, 'markDone'])->name('reservations.markDone');
     Route::patch('/reservations/{id}/cancel', [AdminReservationController::class, 'cancel'])->name('reservations.cancel');
     Route::delete('/reservations/{id}',       [AdminReservationController::class, 'destroy'])->name('reservations.destroy');
+    Route::delete('/reservations/history/clear-all', [AdminReservationController::class, 'clearAllHistory'])->name('reservations.clearAllHistory');
 
     // Payments
     Route::get('/payments',                [AdminPaymentController::class, 'index'])->name('payments.index');

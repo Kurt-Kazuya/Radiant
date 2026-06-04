@@ -48,7 +48,7 @@
             <div class="sidebar-section-label">Bookings</div>
 
             <a href="{{ route('admin.reservations.index') }}"
-               class="sidebar-link {{ request()->routeIs('admin.reservations.*') ? 'active' : '' }}">
+               class="sidebar-link {{ request()->routeIs('admin.reservations.index') ? 'active' : '' }}">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
                 </svg>
@@ -56,6 +56,14 @@
                 @if($pendingReservationsCount > 0)
                     <span class="notification-badge">{{ $pendingReservationsCount }}</span>
                 @endif
+            </a>
+
+            <a href="{{ route('admin.reservations.history') }}"
+               class="sidebar-link {{ request()->routeIs('admin.reservations.history') ? 'active' : '' }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                History
             </a>
 
             <a href="{{ route('admin.payments.index') }}"

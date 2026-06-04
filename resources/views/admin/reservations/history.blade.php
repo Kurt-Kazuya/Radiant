@@ -1,8 +1,8 @@
-{{-- resources/views/admin/reservations/index.blade.php --}}
+{{-- resources/views/admin/reservations/history.blade.php --}}
 @extends('layouts.admin')
 
-@section('title', 'Manage Reservations')
-@section('topbar-title', 'Reservations')
+@section('title', 'Reservation History')
+@section('topbar-title', 'History')
 
 
 
@@ -11,7 +11,7 @@
 <div class="page-header">
     <div class="page-header-left">
         <span class="eyebrow">Bookings</span>
-        <h1 class="page-header-title">Manage <em>Reservations</em></h1>
+        <h1 class="page-header-title">Reservation <em>History</em></h1>
     </div>
 </div>
 
@@ -34,6 +34,15 @@
 @endif
 
 <div class="card">
+    <div class="card-header">
+        <div class="card-title">Completed <em>Reservations</em></div>
+        @if($reservations->count() > 0)
+            <form action="{{ route('admin.reservations.clearAllHistory') }}" method="POST" style="display:inline;" onsubmit="return confirm('Clear all history? All completed reservations will be removed from history.');">
+                @csrf @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm">Clear All History</button>
+            </form>
+        @endif
+    </div>
     <div class="card-body">
         <table class="data-table">
             <thead>
@@ -45,7 +54,7 @@
                     <th>Check Out</th>
                     <th>Nights</th>
                     <th>Total</th>
-                    <th>Status</th>
+                    <th>Completed At</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -59,11 +68,7 @@
                     <td>{{ \Carbon\Carbon::parse($r->check_out_date)->format('M d, Y') }}</td>
                     <td style="text-align:center;">{{ $r->total_nights }}</td>
                     <td style="font-weight:500;">₱{{ number_format($r->total_price, 2) }}</td>
-                    <td>
-                        <span class="badge badge--{{ strtolower($r->status) }}">
-                            {{ ucfirst($r->status) }}
-                        </span>
-                    </td>
+                    <td>{{ \Carbon\Carbon::parse($r->completed_at)->format('M d, Y h:i A') }}</td>
                     <td>
                         <div class="table-actions">
                             <button type="button" class="btn btn-outline btn-sm"
@@ -74,7 +79,7 @@
                                 data-checkout="{{ \Carbon\Carbon::parse($r->check_out_date)->format('M d, Y') }}"
                                 data-nights="{{ $r->total_nights }}"
                                 data-total="₱{{ number_format($r->total_price, 2) }}"
-                                data-status="{{ ucfirst($r->status) }}"
+                                data-status="Completed"
                                 data-phone="{{ $r->user->phone ?? 'N/A' }}"
                                 data-nationality="{{ $r->user->nationality ?? 'N/A' }}"
                                 data-address="{{ $r->user->address ?? 'N/A' }}"
@@ -82,37 +87,16 @@
                                 data-special="{{ $r->special_requests ?? 'None' }}"
                                 data-preferences="{{ is_array($r->preferences) ? implode(', ', $r->preferences) : 'None' }}"
                                 data-extras="{{ is_array($r->extras) ? implode(', ', $r->extras) : 'None' }}"
+                                data-completed="{{ \Carbon\Carbon::parse($r->completed_at)->format('M d, Y h:i A') }}"
                                 onclick="openResModal(this)"
                             >View</button>
-                            @if($r->status === 'pending')
-                                <form action="{{ route('admin.reservations.confirm', $r->id) }}" method="POST">
-                                    @csrf @method('PATCH')
-                                    <button type="submit" class="btn btn-gold btn-sm">Confirm</button>
-                                </form>
-                                <form action="{{ route('admin.reservations.cancel', $r->id) }}" method="POST">
-                                    @csrf @method('PATCH')
-                                    <button type="submit" class="btn btn-outline btn-sm">Cancel</button>
-                                </form>
-                            @elseif($r->status === 'confirmed')
-                                <form action="{{ route('admin.reservations.markDone', $r->id) }}" method="POST">
-                                    @csrf @method('PATCH')
-                                    <button type="submit" class="btn btn-gold btn-sm">Done</button>
-                                </form>
-                            @endif
-                            @if($r->status === 'pending' || $r->status === 'cancelled')
-                                <form action="{{ route('admin.reservations.destroy', $r) }}" method="POST"
-                                      onsubmit="return confirm('Delete reservation #{{ $r->id }}?')" style="display:inline;">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
-                            @endif
                         </div>
                     </td>
                 </tr>
                 @empty
                 <tr>
                     <td colspan="9" style="text-align:center;padding:3rem;color:var(--text-light);">
-                        No reservations found.
+                        No completed reservations yet.
                     </td>
                 </tr>
                 @endforelse
@@ -129,7 +113,7 @@
 <!-- Reservation Modal -->
 <div id="res-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 1rem;">
     <div style="background: var(--white); padding: 2.5rem; border-radius: 8px; width: 100%; max-width: 600px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
-        <h3 style="margin-bottom: 1.5rem; font-family: var(--font-display); font-size: 1.5rem; color: var(--navy);">Reservation Details <span id="modal-res-id" style="color: var(--gold);"></span></h3>
+        <h3 style="margin-bottom: 1.5rem; font-family: var(--font-display); font-size: 1.5rem; color: var(--navy);">Guest Details <span id="modal-res-id" style="color: var(--gold);"></span></h3>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; font-size: 0.95rem;">
             <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Guest Name:</strong><br><span id="modal-res-guest" style="color:var(--text-dark);font-weight:500;"></span></div>
@@ -149,13 +133,17 @@
             
             <hr style="grid-column: 1 / -1; border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 0.5rem 0;">
 
-            <div style="grid-column: 1 / -1;"><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Special Requests:</strong><br><span id="modal-res-special" style="color:var(--text-dark);"></span></div>
-            <div style="grid-column: 1 / -1;"><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Preferences:</strong><br><span id="modal-res-preferences" style="color:var(--text-dark);"></span></div>
-            <div style="grid-column: 1 / -1;"><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Extras:</strong><br><span id="modal-res-extras" style="color:var(--text-dark);"></span></div>
+            <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Special Requests:</strong><br><span id="modal-res-special" style="color:var(--text-dark);"></span></div>
+            <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Preferences:</strong><br><span id="modal-res-preferences" style="color:var(--text-dark);"></span></div>
+            <div><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Extras:</strong><br><span id="modal-res-extras" style="color:var(--text-dark);"></span></div>
+            
+            <hr style="grid-column: 1 / -1; border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 0.5rem 0;">
+            
+            <div style="grid-column: 1 / -1;"><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Completed At:</strong><br><span id="modal-res-completed" style="color:var(--text-dark);"></span></div>
         </div>
         
         <div style="text-align: right;">
-            <button onclick="closeResModal()" class="btn btn-gold">Done</button>
+            <button onclick="closeResModal()" class="btn btn-gold">Close</button>
         </div>
     </div>
 </div>
@@ -177,6 +165,7 @@
         document.getElementById('modal-res-special').textContent = btn.getAttribute('data-special');
         document.getElementById('modal-res-preferences').textContent = btn.getAttribute('data-preferences') || 'None';
         document.getElementById('modal-res-extras').textContent = btn.getAttribute('data-extras') || 'None';
+        document.getElementById('modal-res-completed').textContent = btn.getAttribute('data-completed');
         
         document.getElementById('res-modal').style.display = 'flex';
     }
@@ -184,22 +173,6 @@
     function closeResModal() {
         document.getElementById('res-modal').style.display = 'none';
     }
-
-    // Auto-refresh 3s
-    setInterval(() => {
-        fetch(window.location.href)
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const newTable = doc.querySelector('.data-table');
-                const currentTable = document.querySelector('.data-table');
-                if (newTable && currentTable) {
-                    currentTable.innerHTML = newTable.innerHTML;
-                }
-            })
-            .catch(error => console.error('Error fetching new reservations:', error));
-    }, 3000);
 </script>
 
 @endsection
