@@ -285,13 +285,94 @@
                                 <h3 class="review-block-title">Payment Method</h3>
                             </div>
                             <div class="payment-options">
+
+                                {{-- Pay at Hotel --}}
                                 <label class="payment-option" id="pay-hotel-label">
-                                    <input type="radio" name="payment_method" value="pay_at_hotel" class="payment-radio" checked>
+                                    <input type="radio" name="payment_method" value="pay_at_hotel" class="payment-radio" checked onchange="onPaymentChange(this.value)">
                                     <div class="payment-option-body">
-                                        <span class="payment-option-title">Pay at Hotel</span>
-                                        <span class="payment-option-desc">No charge now. Present a valid ID at check-in. Free cancellation up to 24 hours before arrival.</span>
+                                        <div class="payment-option-top">
+                                            <span class="payment-option-title">Pay at Hotel</span>
+                                            <span class="payment-option-badge" style="background:rgba(180,152,90,0.15);color:var(--gold);">No charge now</span>
+                                        </div>
+                                        <span class="payment-option-desc">Present a valid ID at check-in. Free cancellation up to 24 hours before arrival.</span>
                                     </div>
                                 </label>
+
+                                {{-- GCash --}}
+                                <label class="payment-option" id="pay-gcash-label">
+                                    <input type="radio" name="payment_method" value="gcash" class="payment-radio" onchange="onPaymentChange(this.value)">
+                                    <div class="payment-option-body">
+                                        <div class="payment-option-top">
+                                            <span class="payment-option-title">
+                                                <svg width="18" height="18" viewBox="0 0 40 40" fill="none" style="vertical-align:middle;margin-right:6px;"><circle cx="20" cy="20" r="20" fill="#007DFF"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Arial">G</text></svg>
+                                                GCash
+                                            </span>
+                                            <span class="payment-option-badge" style="background:rgba(0,125,255,0.12);color:#007DFF;">Instant</span>
+                                        </div>
+                                        <span class="payment-option-desc">Pay via GCash e-wallet. You will receive a QR code or payment link after confirming.</span>
+                                    </div>
+                                </label>
+
+                                {{-- GCash details (shown when selected) --}}
+                                <div id="gcash-details" style="display:none; margin: -0.5rem 0 0.75rem; padding: 1.25rem 1.5rem; background: rgba(0,125,255,0.05); border: 1px solid rgba(0,125,255,0.2); border-radius: 6px;">
+                                    <p class="body-sm" style="margin:0 0 0.75rem; color:var(--text-dark); font-weight:500;">Enter your registered GCash mobile number:</p>
+                                    <div class="form-group" style="margin:0;">
+                                        <label class="form-label" for="gcash_number">GCash Mobile Number <span class="req">*</span></label>
+                                        <input type="tel" id="gcash_number" name="gcash_number" class="form-input" placeholder="09XX XXX XXXX" maxlength="13" autocomplete="tel">
+                                        <span class="form-error" id="err-gcash_number"></span>
+                                        <p class="body-sm" style="margin-top:0.5rem; color:var(--text-light);">
+                                            A payment request will be sent to this number upon reservation.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {{-- Credit / Debit Card --}}
+                                <label class="payment-option" id="pay-card-label">
+                                    <input type="radio" name="payment_method" value="credit_card" class="payment-radio" onchange="onPaymentChange(this.value)">
+                                    <div class="payment-option-body">
+                                        <div class="payment-option-top">
+                                            <span class="payment-option-title">
+                                                <svg width="18" height="12" viewBox="0 0 40 26" fill="none" style="vertical-align:middle;margin-right:6px;"><rect width="40" height="26" rx="3" fill="#1A1F36"/><rect y="5" width="40" height="7" fill="#E2B94B"/><rect x="3" y="17" width="10" height="4" rx="1" fill="rgba(255,255,255,0.5)"/></svg>
+                                                Credit / Debit Card
+                                            </span>
+                                            <div style="display:flex;gap:4px;align-items:center;">
+                                                <span style="font-size:0.7rem;font-weight:700;background:#1565C0;color:#fff;padding:1px 5px;border-radius:3px;">VISA</span>
+                                                <span style="font-size:0.7rem;font-weight:700;color:#EB001B;letter-spacing:-1px;">●●<span style="color:#F79E1B;">●</span></span>
+                                            </div>
+                                        </div>
+                                        <span class="payment-option-desc">Visa, Mastercard, or any local debit card. Your card details are encrypted and secure.</span>
+                                    </div>
+                                </label>
+
+                                {{-- Card fields (shown when selected) --}}
+                                <div id="card-details" style="display:none; margin: -0.5rem 0 0.75rem; padding: 1.25rem 1.5rem; background: rgba(26,31,54,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 6px;">
+                                    <div class="form-grid" style="gap:1rem;">
+                                        <div class="form-group form-group--full" style="margin:0;">
+                                            <label class="form-label" for="card_number">Card Number <span class="req">*</span></label>
+                                            <input type="text" id="card_number" name="card_number" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" autocomplete="cc-number">
+                                            <span class="form-error" id="err-card_number"></span>
+                                        </div>
+                                        <div class="form-group form-group--full" style="margin:0;">
+                                            <label class="form-label" for="card_name">Name on Card <span class="req">*</span></label>
+                                            <input type="text" id="card_name" name="card_name" class="form-input" placeholder="Juan dela Cruz" autocomplete="cc-name">
+                                            <span class="form-error" id="err-card_name"></span>
+                                        </div>
+                                        <div class="form-group" style="margin:0;">
+                                            <label class="form-label" for="card_expiry">Expiry Date <span class="req">*</span></label>
+                                            <input type="text" id="card_expiry" name="card_expiry" class="form-input" placeholder="MM / YY" maxlength="7" inputmode="numeric" autocomplete="cc-exp">
+                                            <span class="form-error" id="err-card_expiry"></span>
+                                        </div>
+                                        <div class="form-group" style="margin:0;">
+                                            <label class="form-label" for="card_cvv">CVV <span class="req">*</span></label>
+                                            <input type="text" id="card_cvv" name="card_cvv" class="form-input" placeholder="•••" maxlength="4" inputmode="numeric" autocomplete="cc-csc">
+                                            <span class="form-error" id="err-card_cvv"></span>
+                                        </div>
+                                    </div>
+                                    <p class="body-sm" style="margin-top:1rem; color:var(--text-light);">
+                                        🔒 Your payment information is encrypted. We do not store your card details.
+                                    </p>
+                                </div>
+
                             </div>
                         </div>
 
@@ -439,6 +520,30 @@
     <x-slot name="styles">
         <link rel="stylesheet" href="{{ asset('css/site/shared/page-hero.css') }}">
         <link rel="stylesheet" href="{{ asset('css/site/pages/checkout.css') }}">
+        <style>
+            .payment-option-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                margin-bottom: 0.3rem;
+            }
+            .payment-option-badge {
+                font-size: 0.7rem;
+                font-weight: 600;
+                padding: 2px 8px;
+                border-radius: 20px;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            .payment-option--active {
+                border-color: var(--gold) !important;
+                background: rgba(180,152,90,0.06) !important;
+            }
+            #gcash-details, #card-details {
+                transition: all 0.2s ease;
+            }
+        </style>
     </x-slot>
 
 
@@ -594,10 +699,65 @@
             }
         }
 
-        // ── Payment toggle ─────────────────────────────────────────
+        // ── Payment method toggle ──────────────────────────────────
+        function onPaymentChange(value) {
+            document.getElementById('card-details').style.display  = (value === 'credit_card') ? 'block' : 'none';
+            document.getElementById('gcash-details').style.display = (value === 'gcash')       ? 'block' : 'none';
+
+            // Highlight selected option label
+            ['pay-hotel-label','pay-gcash-label','pay-card-label'].forEach(id => {
+                document.getElementById(id)?.classList.remove('payment-option--active');
+            });
+            const map = { pay_at_hotel: 'pay-hotel-label', gcash: 'pay-gcash-label', credit_card: 'pay-card-label' };
+            if (map[value]) document.getElementById(map[value])?.classList.add('payment-option--active');
+        }
+        // Init highlight on load
+        onPaymentChange('pay_at_hotel');
 
         // ── Confirm booking — submits the real form to the server ──
         function confirmBooking() {
+            const pm = document.querySelector('input[name="payment_method"]:checked').value;
+
+            // Validate GCash number
+            if (pm === 'gcash') {
+                const gcash = document.getElementById('gcash_number');
+                const gcashErr = document.getElementById('err-gcash_number');
+                if (!gcash.value.trim() || !/^(09|\+639)\d{9}$/.test(gcash.value.replace(/\s/g,''))) {
+                    gcashErr.textContent = 'Please enter a valid GCash mobile number (e.g. 09XX XXX XXXX).';
+                    gcash.classList.add('error');
+                    gcash.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+                gcashErr.textContent = '';
+                gcash.classList.remove('error');
+            }
+
+            // Validate card fields
+            if (pm === 'credit_card') {
+                let cardValid = true;
+                const cardNum  = document.getElementById('card_number');
+                const cardName = document.getElementById('card_name');
+                const cardExp  = document.getElementById('card_expiry');
+                const cardCvv  = document.getElementById('card_cvv');
+                [[cardNum,  'err-card_number', /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/, 'Enter a valid 16-digit card number.'],
+                 [cardName, 'err-card_name',   /.{2,}/,                         'Enter the name on your card.'],
+                 [cardExp,  'err-card_expiry', /^\d{2}\s\/\s\d{2}$/,            'Enter a valid expiry (MM / YY).'],
+                 [cardCvv,  'err-card_cvv',    /^\d{3,4}$/,                     'Enter a valid CVV.'],
+                ].forEach(([el, errId, regex, msg]) => {
+                    const err = document.getElementById(errId);
+                    if (!el.value.trim() || !regex.test(el.value.trim())) {
+                        err.textContent = msg;
+                        el.classList.add('error');
+                        if (cardValid) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        cardValid = false;
+                    } else {
+                        err.textContent = '';
+                        el.classList.remove('error');
+                    }
+                });
+                if (!cardValid) return;
+            }
+
             const btn = document.getElementById('confirm-btn');
             btn.disabled = true;
             btn.innerHTML = '<span>Saving…</span>';
@@ -612,13 +772,11 @@
             // Submit the real form to CheckoutController@store
             const form = document.getElementById('guest-form');
             if (form) {
-                const pm = document.querySelector('input[name="payment_method"]:checked').value;
                 const pmInput = document.createElement('input');
                 pmInput.type = 'hidden';
                 pmInput.name = 'payment_method';
                 pmInput.value = pm;
                 form.appendChild(pmInput);
-                
                 form.submit();
             } else {
                 btn.disabled = false;
