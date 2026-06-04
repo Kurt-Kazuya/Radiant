@@ -1,58 +1,222 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Radiant Hotel — Reservation & Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-featured hotel reservation web application built with **Laravel 13**, enabling guests to browse accommodations, make bookings, and receive PDF receipts, while administrators manage rooms, reservations, payments, and reports from a dedicated dashboard.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Guest-Facing
+- Browse room types, amenities, dining options, and special offers
+- Check room availability by date range
+- Complete a checkout flow with personal details, preferences, and extras
+- Choose between **Pay at Hotel** (cash) or **Pay Online** (credit card / GCash)
+- Receive a booking confirmation with a downloadable **PDF receipt**
+- Look up existing reservations via the guest bookings page
+- Submit contact messages to hotel staff
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Admin Panel
+- **Dashboard** — live overview of reservations, payments, and room occupancy
+- **Rooms** — full CRUD (create, edit, delete, status management)
+- **Reservations** — confirm, mark done, cancel, delete, view history, and clear all history
+- **Payments** — mark payments as paid, delete records
+- **Contact Messages** — view, mark as read, delete guest enquiries
+- **Reports** — generate and export reports as PDF
+- **Profile** — update admin account details
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Project Structure
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   ├── Admin/          # AdminDashboard, Rooms, Reservations, Payments, Profile, ContactMessages
+│   │   ├── Api/            # REST API controllers (Room, Reservation, Payment)
+│   │   ├── AuthController.php
+│   │   ├── CheckoutController.php
+│   │   ├── GuestReservationController.php
+│   │   ├── ReportController.php
+│   │   └── ReservationsController.php
+│   └── Middleware/
+│       └── AdminMiddleware.php
+├── Models/                 # User, Room, Reservation, Payment, ContactMessage
+├── Services/
+│   └── RoomAvailabilityService.php
+database/
+├── migrations/             # 14 migration files
+├── seeders/
+│   ├── DatabaseSeeder.php
+│   └── HotelSeeder.php     # Seeds admin user + 20 rooms across 4 categories
+resources/views/
+├── admin/                  # Admin Blade templates
+├── auth/                   # Login & Register
+├── checkout/               # Checkout + PDF receipt
+├── guest/                  # My Bookings
+├── components/             # Shared layout components
+└── *.blade.php             # Public pages (home, accommodations, dining, etc.)
+routes/
+├── web.php                 # All web routes
+└── api.php                 # API routes
+public/
+├── css/                    # Per-page and shared stylesheets
+└── images/                 # Hotel photography assets
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## Data Models
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Model | Key Fields |
+|---|---|
+| **User** | `name`, `email`, `password`, `role` (admin / guest), `phone`, `nationality`, `address` |
+| **Room** | `room_number`, `name`, `type` (single / double / suite), `price_per_night`, `status` (available / occupied / maintenance) |
+| **Reservation** | `user_id`, `room_id`, `check_in_date`, `check_out_date`, `total_nights`, `total_price`, `status` (pending / confirmed / cancelled / completed), `arrival_time`, `special_requests`, `preferences`, `extras` |
+| **Payment** | `reservation_id`, `amount`, `payment_method` (cash / card / gcash), `payment_status` (paid / unpaid / refunded), `paid_at` |
+| **ContactMessage** | `name`, `email`, `company`, `phone`, `subject`, `message`, `read_at` |
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Default Room Categories (Seeded)
 
-## Security Vulnerabilities
+| Room Name | Type | Price / Night | Count |
+|---|---|---|---|
+| Deluxe Room | Single | ₱3,500 | 5 |
+| Superior Room | Double | ₱5,500 | 5 |
+| Junior Suite | Suite | ₱9,000 | 5 |
+| Penthouse Suite | Suite | ₱18,000 | 5 |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
+
+## Getting Started
+
+### Requirements
+
+- PHP **8.2+**
+- Composer
+- Node.js & npm
+- SQLite (default) or MySQL
+
+### Installation
+
+```bash
+# 1. Clone the repository
+git clone <repo-url>
+cd <project-folder>
+
+# 2. One-command setup (installs deps, generates key, runs migrations)
+composer run setup
+```
+
+The `setup` script does the following automatically:
+1. `composer install`
+2. Copies `.env.example` → `.env`
+3. `php artisan key:generate`
+4. `php artisan migrate`
+5. `npm install`
+6. `npm run build`
+
+### Run the Development Server
+
+```bash
+composer run dev
+```
+
+This starts three processes concurrently:
+- `php artisan serve` — Laravel development server
+- `php artisan queue:listen` — Background job queue
+- `npm run dev` — Vite asset watcher
+
+Then visit: **http://localhost:8000**
+
+### Seed the Database
+
+```bash
+php artisan db:seed --class=HotelSeeder
+```
+
+This creates:
+- An **admin** account (`admin@hotel.com` / `password`)
+- 20 rooms across the four categories above
+
+---
+
+## Authentication
+
+| Role | Access |
+|---|---|
+| **Guest** | Public pages, checkout, my bookings |
+| **Admin** | Full admin panel at `/admin/dashboard` |
+
+The admin panel is protected by the `auth` + `admin` middleware. If no admin exists in the database (e.g., after a fresh migration), the system falls back to a hardcoded recovery credential so access is never permanently locked out.
+
+---
+
+## Key Routes
+
+### Public
+| Method | URI | Description |
+|---|---|---|
+| GET | `/` | Home page |
+| GET | `/accommodations` | Room listings |
+| GET | `/reservations` | Availability search |
+| GET | `/checkout` | Booking form |
+| POST | `/checkout` | Submit booking |
+| GET | `/checkout/receipt/{id}` | Booking confirmation |
+| GET | `/checkout/receipt/{id}/pdf` | Download PDF receipt |
+| GET/POST | `/contact` | Contact form |
+
+### Admin (requires auth + admin role)
+| Method | URI | Description |
+|---|---|---|
+| GET | `/admin/dashboard` | Admin dashboard |
+| Resource | `/admin/rooms` | Room CRUD |
+| GET | `/admin/reservations` | Manage reservations |
+| PATCH | `/admin/reservations/{id}/confirm` | Confirm reservation |
+| PATCH | `/admin/reservations/{id}/mark-done` | Mark as completed |
+| GET | `/admin/payments` | Payments list |
+| GET | `/admin/reports` | Revenue reports |
+| GET | `/admin/reports/pdf` | Export report as PDF |
+
+---
+
+## Testing
+
+```bash
+composer run test
+# or
+php artisan test
+```
+
+Tests are written using **PestPHP** and located in `tests/Feature/` and `tests/Unit/`.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Backend | Laravel 13 (PHP 8.2+) |
+| Frontend | Blade templates, Tailwind CSS v4, Vite |
+| Database | SQLite (dev) / MySQL (production) |
+| PDF Generation | barryvdh/laravel-dompdf |
+| Auth | Laravel built-in + Sanctum (API) |
+| Testing | PestPHP |
+| Deployment | Nixpacks (Railway-compatible) |
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is for academic/educational purposes.
+---
+ 
+## Developers
+ 
+| Name |
+|---|
+| Justine Barlaan |
+| RJ Joshua Zaratan |
+| Kurt Palavino |
+ 
