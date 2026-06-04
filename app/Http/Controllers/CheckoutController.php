@@ -147,11 +147,20 @@ class CheckoutController extends Controller
 
         // payment
         $paymentMethod = $validated['payment_method'] ?? 'pay_at_hotel';
+        
+$methodMap = [
+    'credit_card' => 'card',
+    'gcash'       => 'gcash',
+    'pay_at_hotel'=> 'cash',
+];
+$mappedMethod = $methodMap[$paymentMethod] ?? 'cash';
+$isPaid = in_array($paymentMethod, ['credit_card', 'gcash']);
+
         Payment::create([
-            'reservation_id' => $reservation->id,
-            'amount'         => $validated['total_price'],
-            'payment_method' => $paymentMethod === 'pay_online' ? 'credit_card' : 'cash',
-            'payment_status' => $paymentMethod === 'pay_online' ? 'paid' : 'unpaid',
+    'reservation_id' => $reservation->id,
+    'amount'         => $validated['total_price'],
+    'payment_method' => $mappedMethod,
+    'payment_status' => $isPaid ? 'paid' : 'unpaid',
         ]);
 
 
