@@ -85,6 +85,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Reports (admin-only)
     Route::get('/reports',            [ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/pdf', [ReportController::class, 'exportPDF'])->name('reports.pdf');
+    Route::get('/reports/csv', [ReportController::class, 'exportCSV'])->name('reports.csv');
+    Route::get('/reports/xlsx', [ReportController::class, 'exportXLSX'])->name('reports.xlsx');
+    Route::get('/reports/json', [ReportController::class, 'exportJSON'])->name('reports.json');
 
     // Profile
     Route::get('/profile',            [\App\Http\Controllers\Admin\AdminProfileController::class, 'edit'])->name('profile.edit');
