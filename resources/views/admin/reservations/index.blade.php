@@ -75,6 +75,7 @@
                                 data-nights="{{ $r->total_nights }}"
                                 data-total="₱{{ number_format($r->total_price, 2) }}"
                                 data-status="{{ ucfirst($r->status) }}"
+                                data-rawstatus="{{ $r->status }}"
                                 data-phone="{{ $r->user->phone ?? 'N/A' }}"
                                 data-nationality="{{ $r->user->nationality ?? 'N/A' }}"
                                 data-address="{{ $r->user->address ?? 'N/A' }}"
@@ -82,21 +83,14 @@
                                 data-special="{{ $r->special_requests ?? 'None' }}"
                                 data-preferences="{{ is_array($r->preferences) ? implode(', ', $r->preferences) : 'None' }}"
                                 data-extras="{{ is_array($r->extras) ? implode(', ', $r->extras) : 'None' }}"
+                                data-confirm-url="{{ $r->status === 'pending' ? route('admin.reservations.confirm', $r->id) : '' }}"
+                                data-markdone-url="{{ $r->status === 'confirmed' ? route('admin.reservations.markDone', $r->id) : '' }}"
                                 onclick="openResModal(this)"
                             >View</button>
                             @if($r->status === 'pending')
-                                <form action="{{ route('admin.reservations.confirm', $r->id) }}" method="POST">
-                                    @csrf @method('PATCH')
-                                    <button type="submit" class="btn btn-gold btn-sm">Confirm</button>
-                                </form>
                                 <form action="{{ route('admin.reservations.cancel', $r->id) }}" method="POST">
                                     @csrf @method('PATCH')
                                     <button type="submit" class="btn btn-outline btn-sm">Cancel</button>
-                                </form>
-                            @elseif($r->status === 'confirmed')
-                                <form action="{{ route('admin.reservations.markDone', $r->id) }}" method="POST">
-                                    @csrf @method('PATCH')
-                                    <button type="submit" class="btn btn-gold btn-sm">Done</button>
                                 </form>
                             @endif
                             @if($r->status === 'pending' || $r->status === 'cancelled')
@@ -154,8 +148,9 @@
             <div style="grid-column: 1 / -1;"><strong style="color:var(--text-light);font-size:0.8rem;text-transform:uppercase;">Extras:</strong><br><span id="modal-res-extras" style="color:var(--text-dark);"></span></div>
         </div>
         
-        <div style="text-align: right;">
-            <button onclick="closeResModal()" class="btn btn-gold">Done</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem;">
+            <div id="modal-action-area"></div>
+            <button onclick="closeResModal()" class="btn btn-outline">Close</button>
         </div>
     </div>
 </div>
@@ -177,7 +172,31 @@
         document.getElementById('modal-res-special').textContent = btn.getAttribute('data-special');
         document.getElementById('modal-res-preferences').textContent = btn.getAttribute('data-preferences') || 'None';
         document.getElementById('modal-res-extras').textContent = btn.getAttribute('data-extras') || 'None';
-        
+
+        // Render Confirm or Done button inside modal based on status
+        const actionArea = document.getElementById('modal-action-area');
+        const rawStatus = btn.getAttribute('data-rawstatus');
+        const confirmUrl = btn.getAttribute('data-confirm-url');
+        const markdoneUrl = btn.getAttribute('data-markdone-url');
+
+        if (rawStatus === 'pending' && confirmUrl) {
+            actionArea.innerHTML = `
+                <form action="${confirmUrl}" method="POST" style="display:inline;">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <button type="submit" class="btn btn-gold">Confirm</button>
+                </form>`;
+        } else if (rawStatus === 'confirmed' && markdoneUrl) {
+            actionArea.innerHTML = `
+                <form action="${markdoneUrl}" method="POST" style="display:inline;">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <button type="submit" class="btn btn-gold">Mark as Done</button>
+                </form>`;
+        } else {
+            actionArea.innerHTML = '';
+        }
+
         document.getElementById('res-modal').style.display = 'flex';
     }
     

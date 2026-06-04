@@ -41,13 +41,13 @@ class HotelSeeder extends Seeder
             }
         }
 
-        // // Create guest users
-        // $guest1 = User::create([
-        //     'name'     => 'Maria Santos',
-        //     'email'    => 'maria@email.com',
-        //     'password' => bcrypt('password'),
-        //     'role'     => 'guest',
-        // ]);
+        // Create guest users
+        $guest1 = User::create([
+            'name'     => 'Maria Santos',
+            'email'    => 'maria@email.com',
+            'password' => bcrypt('password'),
+            'role'     => 'guest',
+        ]);
         // $guest2 = User::create([
         //     'name'     => 'Juan Dela Cruz',
         //     'email'    => 'juan@email.com',
