@@ -33,10 +33,10 @@
     ============================================================ --}}
     <section class="section-gap checkout-section" style="background: var(--cream);" aria-label="Checkout">
         <div class="container">
-            <div class="checkout-layout">
+            <div class="checkout-layout" style="display:grid; grid-template-columns: 1fr 380px; gap: 3rem; align-items: start;">
 
                 {{-- ===== LEFT: MULTI-STEP FORM ===== --}}
-                <div class="checkout-main">
+                <div class="checkout-main" style="grid-column: 1; grid-row: 1; min-width: 0;">
 
                     {{-- Step indicator --}}
                     <div class="steps-bar">
@@ -402,7 +402,7 @@
 
 
                 {{-- ===== RIGHT: BOOKING SUMMARY SIDEBAR ===== --}}
-                <aside class="checkout-sidebar" aria-label="Booking summary">
+                <aside class="checkout-sidebar" aria-label="Booking summary" style="grid-column: 2; grid-row: 1; position: sticky; top: calc(var(--header-h) + 2rem);">
                     <div class="sidebar-inner">
                         <div class="sidebar-header">
                             <span class="eyebrow" style="color: var(--gold-light);">Your Reservation</span>
@@ -534,22 +534,34 @@
             }
 
             /* ── Sidebar layout fix ── */
-            @media (min-width: 1025px) {
+            .checkout-layout {
+                display: grid !important;
+                grid-template-columns: 1fr 380px !important;
+                gap: 3rem !important;
+                align-items: start !important;
+            }
+            .checkout-main {
+                grid-column: 1 !important;
+                grid-row: 1 !important;
+                min-width: 0 !important;
+            }
+            .checkout-sidebar {
+                grid-column: 2 !important;
+                grid-row: 1 !important;
+                position: sticky !important;
+                top: calc(var(--header-h) + 2rem) !important;
+            }
+            @media (max-width: 1024px) {
                 .checkout-layout {
-                    display: grid !important;
-                    grid-template-columns: 1fr 380px !important;
-                    gap: 3rem !important;
-                    align-items: start !important;
-                }
-                .checkout-main {
-                    grid-column: 1 !important;
-                    grid-row: 1 !important;
+                    grid-template-columns: 1fr !important;
                 }
                 .checkout-sidebar {
-                    grid-column: 2 !important;
+                    grid-column: 1 !important;
                     grid-row: 1 !important;
-                    position: sticky !important;
-                    top: calc(var(--header-h) + 2rem) !important;
+                    position: static !important;
+                }
+                .checkout-main {
+                    grid-row: 2 !important;
                 }
             }
         </style>
