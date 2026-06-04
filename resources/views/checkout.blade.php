@@ -532,6 +532,26 @@
             #gcash-details, #card-details {
                 transition: all 0.2s ease;
             }
+
+            /* ── Sidebar layout fix ── */
+            @media (min-width: 1025px) {
+                .checkout-layout {
+                    display: grid !important;
+                    grid-template-columns: 1fr 380px !important;
+                    gap: 3rem !important;
+                    align-items: start !important;
+                }
+                .checkout-main {
+                    grid-column: 1 !important;
+                    grid-row: 1 !important;
+                }
+                .checkout-sidebar {
+                    grid-column: 2 !important;
+                    grid-row: 1 !important;
+                    position: sticky !important;
+                    top: calc(var(--header-h) + 2rem) !important;
+                }
+            }
         </style>
     </x-slot>
 
