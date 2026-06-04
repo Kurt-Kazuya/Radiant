@@ -62,6 +62,15 @@
         <a href="{{ route('admin.reports.pdf') }}" class="btn btn-outline">
             Export PDF
         </a>
+        <a href="{{ route('admin.reports.csv') }}" class="btn btn-outline">
+            Export CSV
+        </a>
+        <a href="{{ route('admin.reports.xlsx') }}" class="btn btn-outline">
+            Export XLSX
+        </a>
+        <a href="{{ route('admin.reports.json') }}" class="btn btn-outline">
+            Export JSON
+        </a>
     </div>
 </div>
 
