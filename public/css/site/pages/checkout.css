@@ -337,6 +337,9 @@
 
 /* SIDEBAR */
 .checkout-sidebar {
+    height: fit-content;
+}
+.checkout-sidebar .sidebar-inner {
     position: sticky;
     top: calc(var(--header-h) + 2rem);
 }

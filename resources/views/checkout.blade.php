@@ -402,7 +402,7 @@
 
 
                 {{-- ===== RIGHT: BOOKING SUMMARY SIDEBAR ===== --}}
-                <aside class="checkout-sidebar" aria-label="Booking summary" style="grid-column: 2; grid-row: 1; position: sticky; top: calc(var(--header-h) + 2rem);">
+                <aside class="checkout-sidebar" aria-label="Booking summary" style="grid-column: 2; grid-row: 1;">
                     <div class="sidebar-inner">
                         <div class="sidebar-header">
                             <span class="eyebrow" style="color: var(--gold-light);">Your Reservation</span>
@@ -545,9 +545,13 @@
                 grid-row: 1 !important;
                 min-width: 0 !important;
             }
+            
             .checkout-sidebar {
                 grid-column: 2 !important;
                 grid-row: 1 !important;
+                height: fit-content !important;
+            }
+            .checkout-sidebar .sidebar-inner {
                 position: sticky !important;
                 top: calc(var(--header-h) + 2rem) !important;
             }
@@ -555,13 +559,19 @@
                 .checkout-layout {
                     grid-template-columns: 1fr !important;
                 }
+                @media (max-width: 1024px) {
+    
                 .checkout-sidebar {
                     grid-column: 1 !important;
                     grid-row: 1 !important;
+                    height: auto !important;
+                }
+                .checkout-sidebar .sidebar-inner {
                     position: static !important;
                 }
                 .checkout-main {
                     grid-row: 2 !important;
+                }
                 }
             }
         </style>
