@@ -339,6 +339,10 @@
 .checkout-sidebar {
     height: fit-content;
 }
+.checkout-sidebar {
+    height: fit-content;
+    align-self: start;
+}
 .checkout-sidebar .sidebar-inner {
     position: sticky;
     top: calc(var(--header-h) + 2rem);

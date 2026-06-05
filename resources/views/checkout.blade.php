@@ -507,75 +507,75 @@
          PAGE-SPECIFIC STYLES
     ============================================================ --}}
     <x-slot name="styles">
-        <link rel="stylesheet" href="{{ asset('css/site/shared/page-hero.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/site/pages/checkout.css') }}">
-        <style>
-            .payment-option-top {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 0.75rem;
-                margin-bottom: 0.3rem;
-            }
-            .payment-option-badge {
-                font-size: 0.7rem;
-                font-weight: 600;
-                padding: 2px 8px;
-                border-radius: 20px;
-                white-space: nowrap;
-                flex-shrink: 0;
-            }
-            .payment-option--active {
-                border-color: var(--gold) !important;
-                background: rgba(180,152,90,0.06) !important;
-            }
-            #gcash-details, #card-details {
-                transition: all 0.2s ease;
-            }
+    <link rel="stylesheet" href="{{ asset('css/site/shared/page-hero.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/site/pages/checkout.css') }}">
+    <style>
+        .payment-option-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.3rem;
+        }
+        .payment-option-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .payment-option--active {
+            border-color: var(--gold) !important;
+            background: rgba(180,152,90,0.06) !important;
+        }
+        #gcash-details, #card-details {
+            transition: all 0.2s ease;
+        }
 
-            /* ── Sidebar layout fix ── */
+        /* ── Checkout layout ── */
+        .checkout-layout {
+            display: grid !important;
+            grid-template-columns: 1fr 380px !important;
+            grid-template-rows: auto !important;
+            gap: 3rem !important;
+            align-items: start !important;
+        }
+        .checkout-main {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            min-width: 0 !important;
+        }
+        .checkout-sidebar {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            height: fit-content !important;
+            align-self: start !important;
+        }
+        .checkout-sidebar .sidebar-inner {
+            position: sticky !important;
+            top: calc(var(--header-h) + 2rem) !important;
+        }
+
+        @media (max-width: 1024px) {
             .checkout-layout {
-                display: grid !important;
-                grid-template-columns: 1fr 380px !important;
-                gap: 3rem !important;
-                align-items: start !important;
+                grid-template-columns: 1fr !important;
+                grid-template-rows: auto auto !important;
             }
-            .checkout-main {
+            .checkout-sidebar {
                 grid-column: 1 !important;
                 grid-row: 1 !important;
-                min-width: 0 !important;
-            }
-            
-            .checkout-sidebar {
-                grid-column: 2 !important;
-                grid-row: 1 !important;
-                height: fit-content !important;
+                height: auto !important;
             }
             .checkout-sidebar .sidebar-inner {
-                position: sticky !important;
-                top: calc(var(--header-h) + 2rem) !important;
+                position: static !important;
             }
-            @media (max-width: 1024px) {
-                .checkout-layout {
-                    grid-template-columns: 1fr !important;
-                }
-                @media (max-width: 1024px) {
-    
-                .checkout-sidebar {
-                    grid-column: 1 !important;
-                    grid-row: 1 !important;
-                    height: auto !important;
-                }
-                .checkout-sidebar .sidebar-inner {
-                    position: static !important;
-                }
-                .checkout-main {
-                    grid-row: 2 !important;
-                }
-                }
+            .checkout-main {
+                grid-row: 2 !important;
             }
-        </style>
-    </x-slot>
+        }
+    </style>
+</x-slot>
 
 
     {{-- ============================================================
