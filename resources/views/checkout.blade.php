@@ -33,10 +33,10 @@
     ============================================================ --}}
     <section class="section-gap checkout-section" style="background: var(--cream);" aria-label="Checkout">
         <div class="container">
-            <div class="checkout-layout" style="display:grid; grid-template-columns: 1fr 380px; gap: 3rem; align-items: start;">
+            <div class="checkout-layout">
 
                 {{-- ===== LEFT: MULTI-STEP FORM ===== --}}
-                <div class="checkout-main" style="grid-column: 1; grid-row: 1; min-width: 0;">
+                <div class="checkout-main">
 
                     {{-- Step indicator --}}
                     <div class="steps-bar">
@@ -284,34 +284,37 @@
                             <div class="review-block-header">
                                 <h3 class="review-block-title">Payment Method</h3>
                             </div>
-                            <div class="payment-options" style="display:flex; flex-direction:column; gap:0.75rem;">
+                            <div class="payment-options">
 
                                 {{-- Pay at Hotel --}}
-                                <label class="payment-option payment-option--active" id="pay-hotel-label" style="display:flex; align-items:flex-start; gap:0.75rem; padding:1rem 1.25rem; border:2px solid var(--gold); border-radius:8px; cursor:pointer; background:rgba(180,152,90,0.06);">
-                                    <input type="radio" name="payment_method" value="pay_at_hotel" class="payment-radio" checked onchange="onPaymentChange(this.value)" style="margin-top:3px; flex-shrink:0; accent-color:var(--gold); width:16px; height:16px;">
-                                    <div class="payment-option-body" style="flex:1;">
-                                        <div class="payment-option-top" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.3rem;">
-                                            <span class="payment-option-title" style="font-weight:600; font-size:0.95rem;">Pay at Hotel</span>
-                                            <span class="payment-option-badge" style="background:rgba(180,152,90,0.15);color:var(--gold);font-size:0.7rem;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;">No charge now</span>
+                                <label class="payment-option" id="pay-hotel-label">
+                                    <input type="radio" name="payment_method" value="pay_at_hotel" class="payment-radio" checked onchange="onPaymentChange(this.value)">
+                                    <div class="payment-option-body">
+                                        <div class="payment-option-top">
+                                            <span class="payment-option-title">Pay at Hotel</span>
+                                            <span class="payment-option-badge" style="background:rgba(180,152,90,0.15);color:var(--gold);">No charge now</span>
                                         </div>
-                                        <span class="payment-option-desc" style="font-size:0.83rem; color:#666;">Present a valid ID at check-in. Free cancellation up to 24 hours before arrival.</span>
+                                        <span class="payment-option-desc">Present a valid ID at check-in. Free cancellation up to 24 hours before arrival.</span>
                                     </div>
                                 </label>
 
                                 {{-- GCash --}}
-                                <label class="payment-option" id="pay-gcash-label" style="display:flex; align-items:flex-start; gap:0.75rem; padding:1rem 1.25rem; border:2px solid #e0e0e0; border-radius:8px; cursor:pointer; background:#fff;">
-                                    <input type="radio" name="payment_method" value="gcash" class="payment-radio" onchange="onPaymentChange(this.value)" style="margin-top:3px; flex-shrink:0; accent-color:#007DFF; width:16px; height:16px;">
-                                    <div class="payment-option-body" style="flex:1;">
-                                        <div class="payment-option-top" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.3rem;">
-                                            <span class="payment-option-title" style="font-weight:600; font-size:0.95rem;">GCash</span>
-                                            <span class="payment-option-badge" style="background:rgba(0,125,255,0.12);color:#007DFF;font-size:0.7rem;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;">Instant</span>
+                                <label class="payment-option" id="pay-gcash-label">
+                                    <input type="radio" name="payment_method" value="gcash" class="payment-radio" onchange="onPaymentChange(this.value)">
+                                    <div class="payment-option-body">
+                                        <div class="payment-option-top">
+                                            <span class="payment-option-title">
+                                                <svg width="18" height="18" viewBox="0 0 40 40" fill="none" style="vertical-align:middle;margin-right:6px;"><circle cx="20" cy="20" r="20" fill="#007DFF"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Arial">G</text></svg>
+                                                GCash
+                                            </span>
+                                            <span class="payment-option-badge" style="background:rgba(0,125,255,0.12);color:#007DFF;">Instant</span>
                                         </div>
-                                        <span class="payment-option-desc" style="font-size:0.83rem; color:#666;">Pay via GCash e-wallet. You will receive a QR code or payment link after confirming.</span>
+                                        <span class="payment-option-desc">Pay via GCash e-wallet. You will receive a QR code or payment link after confirming.</span>
                                     </div>
                                 </label>
 
                                 {{-- GCash details (shown when selected) --}}
-                                <div id="gcash-details" style="display:none; margin: -0.5rem 0 0.25rem; padding: 1.25rem 1.5rem; background: rgba(0,125,255,0.05); border: 1px solid rgba(0,125,255,0.2); border-radius: 6px;">
+                                <div id="gcash-details" style="display:none; margin: -0.5rem 0 0.75rem; padding: 1.25rem 1.5rem; background: rgba(0,125,255,0.05); border: 1px solid rgba(0,125,255,0.2); border-radius: 6px;">
                                     <p class="body-sm" style="margin:0 0 0.75rem; color:var(--text-dark); font-weight:500;">Enter your registered GCash mobile number:</p>
                                     <div class="form-group" style="margin:0;">
                                         <label class="form-label" for="gcash_number">GCash Mobile Number <span class="req">*</span></label>
@@ -324,17 +327,25 @@
                                 </div>
 
                                 {{-- Credit / Debit Card --}}
-                                <label class="payment-option" id="pay-card-label" style="display:flex; align-items:flex-start; gap:0.75rem; padding:1rem 1.25rem; border:2px solid #e0e0e0; border-radius:8px; cursor:pointer; background:#fff;">
-                                    <input type="radio" name="payment_method" value="credit_card" class="payment-radio" onchange="onPaymentChange(this.value)" style="margin-top:3px; flex-shrink:0; accent-color:#1A1F36; width:16px; height:16px;">
-                                    <div class="payment-option-body" style="flex:1;">
-                                        <div class="payment-option-top" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.3rem;">
-                                            <span class="payment-option-title" style="font-weight:600; font-size:0.95rem;">Credit / Debit Card</span>
-                                        <span class="payment-option-desc" style="font-size:0.83rem; color:#666;">Visa, Mastercard, or any local debit card. Your card details are encrypted and secure.</span>
+                                <label class="payment-option" id="pay-card-label">
+                                    <input type="radio" name="payment_method" value="credit_card" class="payment-radio" onchange="onPaymentChange(this.value)">
+                                    <div class="payment-option-body">
+                                        <div class="payment-option-top">
+                                            <span class="payment-option-title">
+                                                <svg width="18" height="12" viewBox="0 0 40 26" fill="none" style="vertical-align:middle;margin-right:6px;"><rect width="40" height="26" rx="3" fill="#1A1F36"/><rect y="5" width="40" height="7" fill="#E2B94B"/><rect x="3" y="17" width="10" height="4" rx="1" fill="rgba(255,255,255,0.5)"/></svg>
+                                                Credit / Debit Card
+                                            </span>
+                                            <div style="display:flex;gap:4px;align-items:center;">
+                                                <span style="font-size:0.7rem;font-weight:700;background:#1565C0;color:#fff;padding:1px 5px;border-radius:3px;">VISA</span>
+                                                <span style="font-size:0.7rem;font-weight:700;color:#EB001B;letter-spacing:-1px;">●●<span style="color:#F79E1B;">●</span></span>
+                                            </div>
+                                        </div>
+                                        <span class="payment-option-desc">Visa, Mastercard, or any local debit card. Your card details are encrypted and secure.</span>
                                     </div>
                                 </label>
 
                                 {{-- Card fields (shown when selected) --}}
-                                <div id="card-details" style="display:none; margin: -0.5rem 0 0.25rem; padding: 1.25rem 1.5rem; background: rgba(26,31,54,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 6px;">
+                                <div id="card-details" style="display:none; margin: -0.5rem 0 0.75rem; padding: 1.25rem 1.5rem; background: rgba(26,31,54,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 6px;">
                                     <div class="form-grid" style="gap:1rem;">
                                         <div class="form-group form-group--full" style="margin:0;">
                                             <label class="form-label" for="card_number">Card Number <span class="req">*</span></label>
@@ -402,7 +413,7 @@
 
 
                 {{-- ===== RIGHT: BOOKING SUMMARY SIDEBAR ===== --}}
-                <aside class="checkout-sidebar" aria-label="Booking summary" style="grid-column: 2; grid-row: 1;">
+                <aside class="checkout-sidebar" aria-label="Booking summary">
                     <div class="sidebar-inner">
                         <div class="sidebar-header">
                             <span class="eyebrow" style="color: var(--gold-light);">Your Reservation</span>
@@ -507,75 +518,33 @@
          PAGE-SPECIFIC STYLES
     ============================================================ --}}
     <x-slot name="styles">
-    <link rel="stylesheet" href="{{ asset('css/site/shared/page-hero.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/site/pages/checkout.css') }}">
-    <style>
-        .payment-option-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-            margin-bottom: 0.3rem;
-        }
-        .payment-option-badge {
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 20px;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        .payment-option--active {
-            border-color: var(--gold) !important;
-            background: rgba(180,152,90,0.06) !important;
-        }
-        #gcash-details, #card-details {
-            transition: all 0.2s ease;
-        }
-
-        /* ── Checkout layout ── */
-        .checkout-layout {
-            display: grid !important;
-            grid-template-columns: 1fr 380px !important;
-            grid-template-rows: auto !important;
-            gap: 3rem !important;
-            align-items: start !important;
-        }
-        .checkout-main {
-            grid-column: 1 !important;
-            grid-row: 1 !important;
-            min-width: 0 !important;
-        }
-        .checkout-sidebar {
-            grid-column: 2 !important;
-            grid-row: 1 !important;
-            height: fit-content !important;
-            align-self: start !important;
-        }
-        .checkout-sidebar .sidebar-inner {
-            position: sticky !important;
-            top: calc(var(--header-h) + 2rem) !important;
-        }
-
-        @media (max-width: 1024px) {
-            .checkout-layout {
-                grid-template-columns: 1fr !important;
-                grid-template-rows: auto auto !important;
+        <link rel="stylesheet" href="{{ asset('css/site/shared/page-hero.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/site/pages/checkout.css') }}">
+        <style>
+            .payment-option-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                margin-bottom: 0.3rem;
             }
-            .checkout-sidebar {
-                grid-column: 1 !important;
-                grid-row: 1 !important;
-                height: auto !important;
+            .payment-option-badge {
+                font-size: 0.7rem;
+                font-weight: 600;
+                padding: 2px 8px;
+                border-radius: 20px;
+                white-space: nowrap;
+                flex-shrink: 0;
             }
-            .checkout-sidebar .sidebar-inner {
-                position: static !important;
+            .payment-option--active {
+                border-color: var(--gold) !important;
+                background: rgba(180,152,90,0.06) !important;
             }
-            .checkout-main {
-                grid-row: 2 !important;
+            #gcash-details, #card-details {
+                transition: all 0.2s ease;
             }
-        }
-    </style>
-</x-slot>
+        </style>
+    </x-slot>
 
 
     {{-- ============================================================
@@ -735,20 +704,12 @@
             document.getElementById('card-details').style.display  = (value === 'credit_card') ? 'block' : 'none';
             document.getElementById('gcash-details').style.display = (value === 'gcash')       ? 'block' : 'none';
 
-            // Highlight selected option label — update both class and inline border
-            const labelMap = {
-                pay_at_hotel: 'pay-hotel-label',
-                gcash:        'pay-gcash-label',
-                credit_card:  'pay-card-label',
-            };
-            Object.entries(labelMap).forEach(([val, id]) => {
-                const el = document.getElementById(id);
-                if (!el) return;
-                const isActive = (val === value);
-                el.classList.toggle('payment-option--active', isActive);
-                el.style.border          = isActive ? '2px solid var(--gold)' : '2px solid #e0e0e0';
-                el.style.background      = isActive ? 'rgba(180,152,90,0.06)' : '#fff';
+            // Highlight selected option label
+            ['pay-hotel-label','pay-gcash-label','pay-card-label'].forEach(id => {
+                document.getElementById(id)?.classList.remove('payment-option--active');
             });
+            const map = { pay_at_hotel: 'pay-hotel-label', gcash: 'pay-gcash-label', credit_card: 'pay-card-label' };
+            if (map[value]) document.getElementById(map[value])?.classList.add('payment-option--active');
         }
         // Init highlight on load
         onPaymentChange('pay_at_hotel');
