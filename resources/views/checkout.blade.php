@@ -304,7 +304,7 @@
                                     <div class="payment-option-body">
                                         <div class="payment-option-top">
                                             <span class="payment-option-title">
-                                                <svg width="18" height="18" viewBox="0 0 40 40" fill="none" style="vertical-align:middle;margin-right:6px;"><circle cx="20" cy="20" r="20" fill="#007DFF"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Arial">G</text></svg>
+                                                <svg width="18" height="18" viewBox="0 0 40 40" fill="none" style="vertical-align:middle;margin-right:6px;"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Arial"></text></svg>
                                                 GCash
                                             </span>
                                             <span class="payment-option-badge" style="background:rgba(0,125,255,0.12);color:#007DFF;">Instant</span>
@@ -332,7 +332,7 @@
                                     <div class="payment-option-body">
                                         <div class="payment-option-top">
                                             <span class="payment-option-title">
-                                                <svg width="18" height="12" viewBox="0 0 40 26" fill="none" style="vertical-align:middle;margin-right:6px;"><rect width="40" height="26" rx="3" fill="#1A1F36"/><rect y="5" width="40" height="7" fill="#E2B94B"/><rect x="3" y="17" width="10" height="4" rx="1" fill="rgba(255,255,255,0.5)"/></svg>
+                                                <svg width="18" height="12" viewBox="0 0 40 26" fill="none" style="vertical-align:middle;margin-right:6px;"></svg>
                                                 Credit / Debit Card
                                             </span>
                                             <div style="display:flex;gap:4px;align-items:center;">
